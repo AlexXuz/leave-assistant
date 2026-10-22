@@ -33,7 +33,7 @@ data/ingestion_lab/travel-policy.docx 是助教创建的虚构教学制度，文
 
 受限适配只针对普通正文段落、标题和无合并矩形表；页眉页脚不作为正文导入。修订、内容控件、文本框、正文图片等本课 helper 会拒绝；并非通用 Office 解析器，也未宣称已穷举所有复杂 Word 结构。遇到不支持的文件先记录失败，不能把残缺提取结果冒充完整导入。
 
-## 第二课 当前作业 短章节与表格事实
+## 第二课 短章节与表格事实 已验收
 
 只实现 app/docx_chunking.py 的 build_docx_chunks(document, blocks)。本课选择按一级标题组成短章节片段，把单位说明、表格和同章节的补充审批条件放在同一证据里，避免按字符机械切开表头/数据，或把表后条件独立拆走。它是当前小表样例的切分策略，不承诺一行或一章在所有文档中都是最佳粒度。
 
@@ -47,17 +47,46 @@ data/ingestion_lab/travel-policy.docx 是助教创建的虚构教学制度，文
 
 make_section_chunk 由助教提供，生成原六字段加 docx locator，包含文件名/指纹、section、block_start/block_end；无页码。样例期望三节范围：概述3–3、住宿标准4–7、申请与凭证8–11。ID按原文块范围生成。正文为总标题、章节名、parts 按换行连接；当前短章节超过400字符明确拒绝，避免直接截断。这个字符限制不等于 Token 限制，实际编码前仍需按模型容量检查。长表需要后续按行组切分并重复表头、携带公用条件，不把任意长表塞进一个向量。
 
-2026-10-22 助教在临时进程注入参考实现运行 scripts.check_docx_chunking，真实样例及边界验收均通过，未保存答案。学生 build_docx_chunks 保持 NotImplementedError。验收覆盖表头/单位/数值、表后审批条件、原始章节范围、表格前无标题、非连续块号、空章节/空输入、下级标题保留、表头/列数歧义及过长章节拒绝。不要求学生另写普通测试。
+2026-10-22 学习者完成 build_docx_chunks，助教重读函数并重跑 scripts.check_docx_chunking，全部通过，未修改学习者核心实现。验收覆盖表头/单位/数值、表后审批条件、原始章节范围、表格前无标题、非连续块号、空章节/空输入、下级标题保留、表头/列数歧义及过长章节拒绝。不要求学生另写普通测试。
 
-本轮仅生成 Word 片段，不编码/写库/调用聊天模型；source_locations 的定位校验尚未支持 docx，存储与真实问答在学生切分完成后接入。
+切分验收脚本仅生成 Word 片段；编码、数据库及聊天模型由下一节独立运行器执行。
+
+## 第三课 Word 真实问答 已验证样例
+
+助教将 source_locations.validate_locator 扩展为 PDF/DOCX 分支，DOCX 严格验证 section/block_start/block_end 和文件指纹，沿用已有同步执行、权限 SQL、定位传递及引用映射。章节范围指原正文块号，不是 Word 页码。PDF 引用和数据库授权问答回归通过。
+
+scripts.ask_docx_rag 对本地 Word 解析并切分，检查实际 Token 长度后编码，写入独立临时来源，然后经授权检索、DeepSeek 和引用映射生成报告，结束清理临时来源。现有 policy-dev 与 PDF 样例未被替换。默认只预览；--run 才调用聊天模型。
+
+2026-10-22 实际运行 --suite --run：三个片段 Token 长度为55、112、94，三题各调用一次 deepseek-flash，无自动重试。北京/上海520元、其他城市380元，单位每人每晚；组合题包含上海金额、预订前部门经理书面批准及住宿发票和订单记录，引用住宿标准与申请凭证两章；餐费标准拒答且 sources/citations 为空。助教已逐题对照正文完成语义复核。证据：reports/docx-rag-live-20261022-150821-956417.json 及同名 -review.json。临时教学来源清理成功。仅此短文档三题验证，不代表通用 Office 解析或大库检索评估。
+
+## 第四课 当前练习 独立修改 Word 后重跑
+
+不再写 Python 核心函数。自行复制 data/ingestion_lab/travel-policy.docx 为同目录 travel-policy-v2.docx，保留原件。用 Word 修改副本：其他城市的380元改为460元，计量单位保持每人每晚；正文登记行的版本改为2026-10-22-v2，其余内容保持。保存后关闭文件，避免尚未保存的编辑与实际读取的磁盘内容不一致。
+
+助教已准备 data/ingestion_lab/docx_profile_v2.json，稳定文档 ID 不变、版本和源文件改为新版。清理规则匹配新版登记行，source_file 相对配置文件所在目录解析。
+
+先预览，核对检索正文中出现460元、版本为v2、locator.source_file 为 travel-policy-v2.docx，章节块范围仍是4–7：
+
+```powershell
+.\.venv\Scripts\python.exe -X utf8 -m scripts.ask_docx_rag --profile data/ingestion_lab/docx_profile_v2.json --case city_limits
+```
+
+确认后实际问答（一次 API 调用）：
+
+```powershell
+.\.venv\Scripts\python.exe -X utf8 -m scripts.ask_docx_rag --profile data/ingestion_lab/docx_profile_v2.json --case city_limits --run
+```
+
+预期北京/上海仍520元，其他城市460元，均为每人每晚；引用版本v2，文件名为新版，source_sha256 应与基线不同。运行器的自动检查只检查可回答性与必要章节，不替代对金额的人工核对。固定切分验收仍针对原版，不需改其380元断言。
+
+每次运行使用新的临时来源，因此本练习验证独立文档变更后的重新导入和问答，不宣称验证同一来源的增量更新；后者的事务、指纹和过期批次行为见Day7。
 
 ## 后续步骤
 
-1. 完成当前短章节分组，再将 Word 章节/块范围定位接入已有同步、授权检索和引用映射；当前整节包含小表，不单独提供每行坐标。
-2. 用真实 Word 问答核对数值、单位、适用范围及表后审批条件；做一次独立文档变化验证。
-3. 单页扫描图片 OCR 实验，检查金额等关键字段的识别错误；不将 OCR 文字天然当作准确业务事实。
+1. 完成上述独立 Word 变更验证，回看新版正文、答案与来源指纹是否一致。
+2. 单页扫描图片 OCR 实验，检查金额等关键字段的识别错误；不将 OCR 文字天然当作准确业务事实。
 
-当前 source_locations.validate_locator 仍只支持 PDF；Word 位置字段与数据库传递尚未接入，不把当前读取作业视为 Word 问答全链路完成。
+当前 Word 读取、章节切分、数据库定位传递与三题真实问答已验证；独立变更练习和 OCR 尚未完成，因此 Day9 仍进行中。
 
 参考：
 - https://python-docx.readthedocs.io/en/latest/api/document.html#docx.document.Document.iter_inner_content
