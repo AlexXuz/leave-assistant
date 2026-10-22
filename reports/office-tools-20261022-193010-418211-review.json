@@ -1,0 +1,13 @@
+{
+  "report": "office-tools-20261022-193010-418211.json",
+  "reviewer": "assistant",
+  "review": "passed_for_learner_combined_case",
+  "checks": [
+    "两个工具调用ID及结果对应",
+    "后端b身份查得2026年余额3天",
+    "四天假审批人与提前申请条件来自本次制度片段",
+    "制度引用不包含业务余额数据；无越界来源",
+    "没有提交申请或伪称获批，教学知识源已清理"
+  ],
+  "scope": "只读工具与制度RAG的受限教学联调，不是实际HR或生产认证"
+}

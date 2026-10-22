@@ -1,0 +1,15 @@
+{
+  "report": "office-tools-20261022-192802-368565.json",
+  "reviewer": "assistant",
+  "review": "passed_for_three_teaching_cases",
+  "model_requests": 6,
+  "checks": [
+    "制度题只检索授权制度，四天共同审批及两工作日条件均有证据",
+    "余额题只调用业务接口，2026余额9天，制度引用为空",
+    "组合题同时调用两个工具，9天来自业务接口，审批人与提前申请来自制度",
+    "所有tool_call_id对应原调用；引用限于本次制度命中",
+    "独立来源已清理，原policy-dev不在写入范围"
+  ],
+  "learner_combined_case_review": "pending",
+  "limitations": "三题一次运行；虚构余额/模拟身份；一轮选择最多两工具，非开放循环或完整生产认证"
+}

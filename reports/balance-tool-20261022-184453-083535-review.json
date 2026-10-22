@@ -1,0 +1,12 @@
+{
+  "report": "balance-tool-20261022-184453-083535.json",
+  "reviewer": "assistant",
+  "review": "passed_for_injected_business_timeout",
+  "checks": [
+    "本地业务接口主动抛TimeoutError；不是实际网络故障",
+    "执行器原样传播，编排层映射为error/BUSINESS_TIMEOUT",
+    "两次真实模型请求，业务尝试一次，无自动重试",
+    "模型说明未获得结果，不判断余额0或无记录"
+  ],
+  "status_note": "completed只代表对话流程完成；business_status=error表示查询失败"
+}

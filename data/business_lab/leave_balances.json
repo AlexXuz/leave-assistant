@@ -1,0 +1,7 @@
+{
+  "note": "虚构教学数据，不是真实人事余额。没有记录不代表余额为0。",
+  "records": [
+    {"user_id": "employee-demo-a", "year": 2026, "remaining_days": 9},
+    {"user_id": "employee-demo-b", "year": 2026, "remaining_days": 3}
+  ]
+}

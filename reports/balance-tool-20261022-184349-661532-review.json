@@ -1,0 +1,11 @@
+{
+  "report": "balance-tool-20261022-184349-661532.json",
+  "reviewer": "assistant",
+  "review": "core_semantics_passed_with_wording_issue",
+  "checks": [
+    "查询2025年",
+    "业务返回not_found/null",
+    "回答明确无记录不等于0，没有沿用2026余额"
+  ],
+  "wording_issue": "开头查询未能完成不精确；应说查询完成但无记录。新提示v2明确状态区别，尚未重跑此场景。"
+}
