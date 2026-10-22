@@ -1,0 +1,246 @@
+{
+  "run_time": "2026-10-17T17:03:56.205773+08:00",
+  "dataset_version": "policy-retrieval-dev-v1",
+  "dataset_sha256": "582a4f7a84e25c746a3aa2bae34441f36fe552b19b46bd5f331c576b9226d9c4",
+  "index_manifest": {
+    "built_at": "2026-10-16T15:34:39.614717+08:00",
+    "embedding": {
+      "model": "BAAI/bge-small-zh-v1.5",
+      "revision": "7999e1d3359715c523056ef9478215996d62a620",
+      "dimension": 512,
+      "normalized": true,
+      "max_seq_length": 512,
+      "weights_sha256": "354763b9b1357bc9c44f62c6be2276321081ed2567773608c0d0785b61d5a026",
+      "query_instruction": "为这个句子生成表示以用于检索相关文章："
+    },
+    "chunk_count": 7,
+    "chunks_sha256": "6a582e7306f42f42e64b8c040fba7d9db3009095d75333663fc2ead83161e37b",
+    "format_version": 1,
+    "sources_sha256": "1bd780462c8a6bf9eff8e91110f8713110196f30349a34bf78a47f575f92f078",
+    "vectors_sha256": "e2c6e13da05fd51c901fbbc0cd3d661b2d53212afc84f118caad6def48cee1d5",
+    "ordered_chunk_ids": [
+      "leave-policy:2026-10-15-v1:1",
+      "leave-policy:2026-10-15-v1:2",
+      "leave-policy:2026-10-15-v1:3",
+      "remote-policy:2026-10-15-v1:1",
+      "remote-policy:2026-10-15-v1:2",
+      "travel-policy:2026-10-15-v1:1",
+      "travel-policy:2026-10-15-v1:2"
+    ]
+  },
+  "case_count": 1,
+  "candidate_k": 4,
+  "top_k": 2,
+  "rank_constant": 60,
+  "retrieval_backend": "pgvector+in-memory-bm25",
+  "keyword_config": {
+    "tokenizer": "jieba.lcut_for_search",
+    "HMM": false,
+    "filter": "casefold+isalnum",
+    "k1": 1.5,
+    "b": 0.75,
+    "epsilon": 0.25
+  },
+  "packages": {
+    "jieba": "0.42.1",
+    "rank-bm25": "0.2.2"
+  },
+  "summary": {
+    "vector": {
+      "mean_evidence_recall": 0.5,
+      "all_required_found_rate": 0.0
+    },
+    "bm25": {
+      "mean_evidence_recall": 1.0,
+      "all_required_found_rate": 1.0
+    }
+  },
+  "cases": [
+    {
+      "id": "leave_and_remote",
+      "question": "我分别申请四天连续年假、周一和周二两天远程办公，各由谁审批？",
+      "required_ids": [
+        "leave-policy:2026-10-15-v1:2",
+        "remote-policy:2026-10-15-v1:1"
+      ],
+      "routes": {
+        "vector": [
+          {
+            "chunk": {
+              "id": "remote-policy:2026-10-15-v1:1",
+              "document_id": "remote-policy",
+              "title": "青禾实验室远程办公制度",
+              "version": "2026-10-15-v1",
+              "heading": "频率与审批",
+              "content": "青禾实验室远程办公制度\n频率与审批\n员工每周最多申请两天远程办公，由直属主管审批。\n远程办公申请最晚在前一个工作日提交。"
+            },
+            "score": 0.6351307251971539
+          },
+          {
+            "chunk": {
+              "id": "remote-policy:2026-10-15-v1:2",
+              "document_id": "remote-policy",
+              "title": "青禾实验室远程办公制度",
+              "version": "2026-10-15-v1",
+              "heading": "固定现场日",
+              "content": "青禾实验室远程办公制度\n固定现场日\n每周三是团队固定现场协作日，原则上不安排远程办公。\n确有特殊原因需要在周三远程办公的，必须额外获得部门经理批准。"
+            },
+            "score": 0.5851275572104728
+          },
+          {
+            "chunk": {
+              "id": "leave-policy:2026-10-15-v1:2",
+              "document_id": "leave-policy",
+              "title": "青禾实验室请假制度",
+              "version": "2026-10-15-v1",
+              "heading": "年假审批",
+              "content": "青禾实验室请假制度\n年假审批\n单次连续年假不超过三天，由直属主管审批。\n单次连续年假超过三天，需要直属主管和部门经理共同审批。\n这里的天数是本次申请的请假天数，不涉及周末和节假日计算。"
+            },
+            "score": 0.5718270795448385
+          },
+          {
+            "chunk": {
+              "id": "leave-policy:2026-10-15-v1:1",
+              "document_id": "leave-policy",
+              "title": "青禾实验室请假制度",
+              "version": "2026-10-15-v1",
+              "heading": "申请时间",
+              "content": "青禾实验室请假制度\n申请时间\n年假原则上提前两个工作日申请。突发病假可以先通知直属主管，返岗后补交申请。"
+            },
+            "score": 0.5105257617800519
+          }
+        ],
+        "bm25": [
+          {
+            "chunk": {
+              "id": "remote-policy:2026-10-15-v1:1",
+              "document_id": "remote-policy",
+              "title": "青禾实验室远程办公制度",
+              "version": "2026-10-15-v1",
+              "heading": "频率与审批",
+              "content": "青禾实验室远程办公制度\n频率与审批\n员工每周最多申请两天远程办公，由直属主管审批。\n远程办公申请最晚在前一个工作日提交。"
+            },
+            "score": 5.275043985483418
+          },
+          {
+            "chunk": {
+              "id": "leave-policy:2026-10-15-v1:2",
+              "document_id": "leave-policy",
+              "title": "青禾实验室请假制度",
+              "version": "2026-10-15-v1",
+              "heading": "年假审批",
+              "content": "青禾实验室请假制度\n年假审批\n单次连续年假不超过三天，由直属主管审批。\n单次连续年假超过三天，需要直属主管和部门经理共同审批。\n这里的天数是本次申请的请假天数，不涉及周末和节假日计算。"
+            },
+            "score": 3.706297041243214
+          },
+          {
+            "chunk": {
+              "id": "remote-policy:2026-10-15-v1:2",
+              "document_id": "remote-policy",
+              "title": "青禾实验室远程办公制度",
+              "version": "2026-10-15-v1",
+              "heading": "固定现场日",
+              "content": "青禾实验室远程办公制度\n固定现场日\n每周三是团队固定现场协作日，原则上不安排远程办公。\n确有特殊原因需要在周三远程办公的，必须额外获得部门经理批准。"
+            },
+            "score": 2.572168589881586
+          },
+          {
+            "chunk": {
+              "id": "travel-policy:2026-10-15-v1:2",
+              "document_id": "travel-policy",
+              "title": "青禾实验室差旅制度",
+              "version": "2026-10-15-v1",
+              "heading": "申请与凭证",
+              "content": "青禾实验室差旅制度\n申请与凭证\n员工应在出差前提交差旅申请，并由直属主管审批。\n报销住宿费用时，需要提交对应的住宿发票和订单记录。"
+            },
+            "score": 1.1157970155070207
+          }
+        ],
+        "query_tokens": [
+          "我",
+          "分别",
+          "申请",
+          "四天",
+          "连续",
+          "年",
+          "假",
+          "周一",
+          "和",
+          "周二",
+          "两天",
+          "远程",
+          "办公",
+          "各",
+          "由",
+          "谁",
+          "审批"
+        ]
+      },
+      "methods": {
+        "vector": {
+          "evidence_recall": 0.5,
+          "all_required_found": false,
+          "missing_ids": [
+            "leave-policy:2026-10-15-v1:2"
+          ],
+          "hits": [
+            {
+              "chunk": {
+                "id": "remote-policy:2026-10-15-v1:1",
+                "document_id": "remote-policy",
+                "title": "青禾实验室远程办公制度",
+                "version": "2026-10-15-v1",
+                "heading": "频率与审批",
+                "content": "青禾实验室远程办公制度\n频率与审批\n员工每周最多申请两天远程办公，由直属主管审批。\n远程办公申请最晚在前一个工作日提交。"
+              },
+              "score": 0.6351307251971539
+            },
+            {
+              "chunk": {
+                "id": "remote-policy:2026-10-15-v1:2",
+                "document_id": "remote-policy",
+                "title": "青禾实验室远程办公制度",
+                "version": "2026-10-15-v1",
+                "heading": "固定现场日",
+                "content": "青禾实验室远程办公制度\n固定现场日\n每周三是团队固定现场协作日，原则上不安排远程办公。\n确有特殊原因需要在周三远程办公的，必须额外获得部门经理批准。"
+              },
+              "score": 0.5851275572104728
+            }
+          ],
+          "context_chars": 134
+        },
+        "bm25": {
+          "evidence_recall": 1.0,
+          "all_required_found": true,
+          "missing_ids": [],
+          "hits": [
+            {
+              "chunk": {
+                "id": "remote-policy:2026-10-15-v1:1",
+                "document_id": "remote-policy",
+                "title": "青禾实验室远程办公制度",
+                "version": "2026-10-15-v1",
+                "heading": "频率与审批",
+                "content": "青禾实验室远程办公制度\n频率与审批\n员工每周最多申请两天远程办公，由直属主管审批。\n远程办公申请最晚在前一个工作日提交。"
+              },
+              "score": 5.275043985483418
+            },
+            {
+              "chunk": {
+                "id": "leave-policy:2026-10-15-v1:2",
+                "document_id": "leave-policy",
+                "title": "青禾实验室请假制度",
+                "version": "2026-10-15-v1",
+                "heading": "年假审批",
+                "content": "青禾实验室请假制度\n年假审批\n单次连续年假不超过三天，由直属主管审批。\n单次连续年假超过三天，需要直属主管和部门经理共同审批。\n这里的天数是本次申请的请假天数，不涉及周末和节假日计算。"
+              },
+              "score": 3.706297041243214
+            }
+          ],
+          "context_chars": 152
+        }
+      }
+    }
+  ],
+  "note": "公开的七片段小语料调试实验，非保留集；只评必要证据召回，不评回答质量或生产性能。BM25 从同一数据库快照全量读取正文，在内存中建立教学索引。未调用聊天模型，未修改数据库或现有问答入口。"
+}

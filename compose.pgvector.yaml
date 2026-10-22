@@ -1,0 +1,19 @@
+name: leave-assistant-lab
+services:
+  postgres:
+    image: pgvector/pgvector:0.8.7-pg17
+    environment:
+      POSTGRES_DB: ${PGDATABASE:?Set PGDATABASE in .env.pgvector}
+      POSTGRES_USER: ${PGUSER:?Set PGUSER in .env.pgvector}
+      POSTGRES_PASSWORD: ${PGPASSWORD:?Set PGPASSWORD in .env.pgvector}
+    ports:
+      - "127.0.0.1:55432:5432"
+    volumes:
+      - policy_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB"]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+volumes:
+  policy_pgdata:

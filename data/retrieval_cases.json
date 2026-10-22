@@ -1,0 +1,18 @@
+{
+  "dataset_version": "policy-retrieval-dev-v1",
+  "purpose": "12 条公开调试题，仅评有答案问题的必要证据召回，不是独立测试集或回答质量评测。",
+  "cases": [
+    {"id": "annual_four_days", "question": "休四天年假要找谁批准？", "required_ids": ["leave-policy:2026-10-15-v1:2"]},
+    {"id": "annual_three_days", "question": "连续请三天年假，需要部门经理也审批吗？", "required_ids": ["leave-policy:2026-10-15-v1:2"]},
+    {"id": "annual_notice", "question": "年假原则上要提前几个工作日申请？", "required_ids": ["leave-policy:2026-10-15-v1:1"]},
+    {"id": "sick_notice", "question": "突然生病来不及提交申请，可以先通知谁，什么时候补申请？", "required_ids": ["leave-policy:2026-10-15-v1:1"]},
+    {"id": "remote_frequency", "question": "远程办公一周最多几天，由谁审批？", "required_ids": ["remote-policy:2026-10-15-v1:1"]},
+    {"id": "wednesday_exception", "question": "周三确有特殊原因要远程办公，除了直属主管外还需要谁额外批准？", "required_ids": ["remote-policy:2026-10-15-v1:2"]},
+    {"id": "shanghai_hotel", "question": "上海出差住酒店一晚能报多少？超过上限要提前取得什么批准？", "required_ids": ["travel-policy:2026-10-15-v1:1"]},
+    {"id": "travel_receipts", "question": "差旅申请由谁审批，住宿报销需要提交什么材料？", "required_ids": ["travel-policy:2026-10-15-v1:2"]},
+    {"id": "leave_and_remote", "question": "我分别申请四天连续年假、周一和周二两天远程办公，各由谁审批？", "required_ids": ["leave-policy:2026-10-15-v1:2", "remote-policy:2026-10-15-v1:1"]},
+    {"id": "hotel_and_receipts", "question": "去上海出差，酒店每人每晚报销上限是多少，报销时需要哪些凭证？", "required_ids": ["travel-policy:2026-10-15-v1:1", "travel-policy:2026-10-15-v1:2"]},
+    {"id": "annual_notice_and_approval", "question": "连续休四天年假，要提前多久申请，需要哪些人审批？", "required_ids": ["leave-policy:2026-10-15-v1:1", "leave-policy:2026-10-15-v1:2"]},
+    {"id": "remote_wednesday_and_deadline", "question": "想在周三特殊申请远程办公，最晚什么时候提交，除了直属主管还需谁批准？", "required_ids": ["remote-policy:2026-10-15-v1:1", "remote-policy:2026-10-15-v1:2"]}
+  ]
+}

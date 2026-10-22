@@ -1,0 +1,45 @@
+{
+  "run_time": "2026-10-21T18:53:54.683256+08:00",
+  "source_id": "day8-citation-54cc62ea972043269df8f890a8386f15",
+  "database_verified": true,
+  "real_embedding": false,
+  "real_chat_model": false,
+  "citations": [
+    {
+      "chunk_id": "travel-policy:2026-10-21-v1:p2:c1",
+      "document_id": "travel-policy",
+      "title": "青禾实验室差旅制度",
+      "version": "2026-10-21-v1",
+      "locator": {
+        "end": 92,
+        "kind": "pdf",
+        "page": 2,
+        "start": 0,
+        "source_file": "travel-policy.pdf",
+        "source_sha256": "298a916cf87cb8c2399b92e863b1e106e71faf1923bd50174a34a167858f935f"
+      }
+    },
+    {
+      "chunk_id": "travel-policy:2026-10-21-v1:p1:c1",
+      "document_id": "travel-policy",
+      "title": "青禾实验室差旅制度",
+      "version": "2026-10-21-v1",
+      "locator": {
+        "end": 126,
+        "kind": "pdf",
+        "page": 1,
+        "start": 0,
+        "source_file": "travel-policy.pdf",
+        "source_sha256": "298a916cf87cb8c2399b92e863b1e106e71faf1923bd50174a34a167858f935f"
+      }
+    }
+  ],
+  "checks": {
+    "locator_round_trip": true,
+    "authorized_retrieval": true,
+    "citation_mapping": true,
+    "unretrieved_id_rejected": true
+  },
+  "note": "固定向量及固定模型响应；未评估生成质量、真实 Embedding 排名或文件打开授权。",
+  "teaching_data_cleaned": true
+}

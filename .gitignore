@@ -1,0 +1,23 @@
+.venv/
+__pycache__/
+*.py[cod]
+.env
+.env.*
+!.env.example
+!.env.pgvector.example
+.pytest_cache/
+.models/
+data/indexes/
+.installers/
+
+# Local editor settings, render previews, and diagnostic logs.
+.idea/
+.vscode/
+tmp/
+*.log
+
+# Credentials and private key material.
+*.pem
+*.key
+*.p12
+*.pfx

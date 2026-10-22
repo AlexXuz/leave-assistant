@@ -1,0 +1,3 @@
+# Day 5：在现有虚拟环境中增加 LangChain；pgvector/Embedding 继续使用原有依赖。
+langchain-core==1.6.12
+langchain-deepseek==1.1.1

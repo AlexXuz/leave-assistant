@@ -1,0 +1,25 @@
+{
+  "report": "pdf-rag-live-20261021-220555-640930.json",
+  "reviewer": "assistant",
+  "review_method": "对照报告保存的清理后原页文字、模型原文及后端引用逐项阅读，未重复调用 API。",
+  "cases": [
+    {
+      "case_id": "lodging",
+      "assessment": "本次回答与引用相符",
+      "reason": "完整给出上海每人每晚520元，以及预订前取得部门经理书面批准；这些要求均在第1页，引用第1页正确。"
+    },
+    {
+      "case_id": "combined",
+      "assessment": "本次回答与引用相符",
+      "reason": "住宿金额来自第1页，住宿发票和订单记录来自第2页；两类事实均回答且引用同时覆盖两页。"
+    },
+    {
+      "case_id": "unknown",
+      "assessment": "本次拒答符合资料范围",
+      "reason": "文档明确未说明每日餐费标准；回答资料不足，没有给出虚构金额，sources及citations均为空。"
+    }
+  ],
+  "learner_review": "completed",
+  "learner_explanation": "第一题的住宿上限和超标审批均由第1页支持；第二题还询问报销凭证，证据在第2页，因此需同时引用两页。",
+  "limits": "单次三道已知教学题；语料仅两页两片段，Top-2取回全部可见资料。未测大库召回、重复调用波动或文件下载授权。"
+}

@@ -1,0 +1,3 @@
+# Day 8: pinned PDF text extraction dependency.
+pypdf==6.10.0
+python-docx==1.2.0

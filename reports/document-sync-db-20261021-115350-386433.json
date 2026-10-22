@@ -1,0 +1,73 @@
+{
+  "run_time": "2026-10-21T11:53:50.386433+08:00",
+  "source_id": "day7-check-b0c723d404b54f9d9cf8f0327755269a",
+  "database_verified": true,
+  "seed_preparation": {
+    "encoded_chunks": 8,
+    "reused_chunks": 0
+  },
+  "preparation": {
+    "encoded_chunks": 3,
+    "reused_chunks": 3
+  },
+  "operations": [
+    {
+      "document_id": "leave-policy",
+      "action": "METADATA_ONLY"
+    },
+    {
+      "document_id": "remote-policy",
+      "action": "REINDEX"
+    },
+    {
+      "document_id": "equipment-policy",
+      "action": "UNCHANGED"
+    },
+    {
+      "document_id": "training-policy",
+      "action": "REINDEX"
+    },
+    {
+      "document_id": "travel-policy",
+      "action": "DELETE"
+    }
+  ],
+  "result": {
+    "generation": 2,
+    "counts": {
+      "REINDEX": 2,
+      "METADATA_ONLY": 1,
+      "DELETE": 1,
+      "UNCHANGED": 1
+    }
+  },
+  "repeated_result": {
+    "generation": 2,
+    "counts": {
+      "REINDEX": 0,
+      "METADATA_ONLY": 0,
+      "DELETE": 0,
+      "UNCHANGED": 4
+    }
+  },
+  "before": {
+    "generation": 1,
+    "documents": 4,
+    "chunks": 8
+  },
+  "after": {
+    "generation": 2,
+    "documents": 4,
+    "chunks": 7
+  },
+  "checks": {
+    "sql_failure_rollback": true,
+    "metadata_vectors_unchanged": true,
+    "old_references_removed": true,
+    "deleted_document_removed": true,
+    "stale_batch_rejected": true,
+    "repeat_snapshot_noop": true,
+    "original_policy_dev_unchanged": true
+  },
+  "limitations": "单进程真实数据库验收；未做两个并发写入者竞争行锁的实验，未调用聊天模型。"
+}

@@ -1,0 +1,56 @@
+[
+  {
+    "id": "annual_four_days",
+    "question": "在青禾实验室，一次申请四天连续年假，需要谁审批？",
+    "expected": {
+      "canAnswer": true,
+      "sources": ["leave-policy"],
+      "answer_points": ["直属主管", "部门经理", "共同审批"]
+    }
+  },
+  {
+    "id": "annual_three_days",
+    "question": "在青禾实验室，一次申请三天连续年假，需要部门经理审批吗？",
+    "expected": {
+      "canAnswer": true,
+      "sources": ["leave-policy"],
+      "answer_points": ["只需直属主管审批", "不需要部门经理审批"]
+    }
+  },
+  {
+    "id": "shanghai_hotel",
+    "question": "在青禾实验室，去上海出差的住宿报销上限是多少？",
+    "expected": {
+      "canAnswer": true,
+      "sources": ["travel-policy"],
+      "answer_points": ["每人每晚520元"]
+    }
+  },
+  {
+    "id": "two_policies",
+    "question": "在青禾实验室，我分别申请四天连续年假、周一和周二两天远程办公，各由谁审批？",
+    "expected": {
+      "canAnswer": true,
+      "sources": ["leave-policy", "remote-policy"],
+      "answer_points": ["年假需要直属主管和部门经理共同审批", "两天远程办公由直属主管审批"]
+    }
+  },
+  {
+    "id": "unknown_marriage_leave",
+    "question": "在青禾实验室，员工婚假有多少天？",
+    "expected": {
+      "canAnswer": false,
+      "sources": [],
+      "answer_points": ["现有资料未提供婚假天数", "不能猜测天数"]
+    }
+  },
+  {
+    "id": "personal_balance",
+    "question": "我在青禾实验室今年还剩多少天年假？",
+    "expected": {
+      "canAnswer": false,
+      "sources": [],
+      "answer_points": ["现有资料没有个人年假余额", "需要查询员工业务数据，不能由制度推算"]
+    }
+  }
+]

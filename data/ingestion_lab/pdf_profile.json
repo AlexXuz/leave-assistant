@@ -1,0 +1,20 @@
+{
+  "profile_version": "travel-pdf-clean-v1",
+  "document": {
+    "id": "travel-policy",
+    "title": "青禾实验室差旅制度",
+    "version": "2026-10-21-v1",
+    "source_file": "travel-policy.pdf"
+  },
+  "remove_lines": [
+    "虚构教学资料",
+    "第 1 页",
+    "第 2 页",
+    "青禾实验室差旅制度",
+    "差旅申请与报销",
+    "文档 ID：travel-policy",
+    "版本：2026-10-21-v1",
+    "阅读示例：查询上海出差的住宿上限时，应能追溯到本页。",
+    "阅读示例：查询住宿报销所需凭证时，应能追溯到本页；缺少的制度规定不能自行推断。"
+  ]
+}

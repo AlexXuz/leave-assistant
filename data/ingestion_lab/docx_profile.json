@@ -1,0 +1,12 @@
+{
+  "profile_version": "travel-docx-sections-v1",
+  "document": {
+    "id": "travel-policy",
+    "title": "青禾实验室差旅制度",
+    "version": "2026-10-22-v1",
+    "source_file": "travel-policy.docx"
+  },
+  "remove_paragraph_texts": [
+    "文档 ID：travel-policy　版本：2026-10-22-v1"
+  ]
+}

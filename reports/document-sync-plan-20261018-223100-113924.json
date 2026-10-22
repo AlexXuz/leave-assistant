@@ -1,0 +1,80 @@
+{
+  "run_time": "2026-10-18T22:31:00.113924+08:00",
+  "source_id": "day7-policy-source",
+  "current": [
+    {
+      "id": "leave-policy",
+      "version": "2026-10-15-v1",
+      "vector_fingerprint": "6f84e6a3fd77bb4a975544a98996d3f63dbfd623d07885de86ab0449813e5a44",
+      "metadata_fingerprint": "e9ef476311da8d6d023f3d62dad7a4c3b126edbbe8c9a9dbc331b57abf0e0277"
+    },
+    {
+      "id": "remote-policy",
+      "version": "2026-10-15-v1",
+      "vector_fingerprint": "79794cbd5aaeb1099fdf217db5d7cfc6aef043d523f9af55d9112f3da6edaf39",
+      "metadata_fingerprint": "3b9ca47dd0bb9a9e3219c25cedc972f842912b638e08bf0cebfdc447069f7920"
+    },
+    {
+      "id": "travel-policy",
+      "version": "2026-10-15-v1",
+      "vector_fingerprint": "a051d4f499ffbe3ad3fa6e70373be887ddcc067863a7fa9a8ebd54533c9ad991",
+      "metadata_fingerprint": "3e1571b11684575258192280a78860e5a719a12f3659c12d51dda622893dd2a4"
+    },
+    {
+      "id": "equipment-policy",
+      "version": "2026-10-18-v1",
+      "vector_fingerprint": "25a70a7a7c0e0fe2da0913e13f0e522ac052caa328f74c92f70da21026b70157",
+      "metadata_fingerprint": "4a117cb312fd767a51e852ab98e0375eed7777e6eab0669150b9d695936d5c30"
+    }
+  ],
+  "incoming": [
+    {
+      "id": "leave-policy",
+      "version": "2026-10-18-v2",
+      "vector_fingerprint": "6f84e6a3fd77bb4a975544a98996d3f63dbfd623d07885de86ab0449813e5a44",
+      "metadata_fingerprint": "dfa7f1600b3c02f9b4d45729fdd80e94b88137276ca4daa685f64b6febb4e817"
+    },
+    {
+      "id": "remote-policy",
+      "version": "2026-10-18-v2",
+      "vector_fingerprint": "56880436ca78cff4f8c14d89140081108aa4158a9e7f8a211bd7934ddde088a5",
+      "metadata_fingerprint": "62b819edf129917a5c00476f73de5f9a747f7bb043d7aacf957ba0e86d5cf461"
+    },
+    {
+      "id": "equipment-policy",
+      "version": "2026-10-18-v1",
+      "vector_fingerprint": "25a70a7a7c0e0fe2da0913e13f0e522ac052caa328f74c92f70da21026b70157",
+      "metadata_fingerprint": "4a117cb312fd767a51e852ab98e0375eed7777e6eab0669150b9d695936d5c30"
+    },
+    {
+      "id": "training-policy",
+      "version": "2026-10-18-v1",
+      "vector_fingerprint": "0b2a19c8025aa040b2bdd6de785e22dfd57d9a0515e9b7802f906d734f8a7fef",
+      "metadata_fingerprint": "b1a47964f6c2e73cc9b34fcda84651946791087107bed239506fde15254c4de3"
+    }
+  ],
+  "operations": [
+    {
+      "document_id": "leave-policy",
+      "action": "METADATA_ONLY"
+    },
+    {
+      "document_id": "remote-policy",
+      "action": "REINDEX"
+    },
+    {
+      "document_id": "equipment-policy",
+      "action": "UNCHANGED"
+    },
+    {
+      "document_id": "training-policy",
+      "action": "REINDEX"
+    },
+    {
+      "document_id": "travel-policy",
+      "action": "DELETE"
+    }
+  ],
+  "applied": false,
+  "note": "模拟独立知识源的完整快照同步计划，未执行写库或向量编码。"
+}

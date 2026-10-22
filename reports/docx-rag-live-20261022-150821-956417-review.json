@@ -1,0 +1,12 @@
+{
+  "report": "docx-rag-live-20261022-150821-956417.json",
+  "reviewer": "assistant",
+  "semantic_review": "passed_for_this_sample",
+  "checks": [
+    "city_limits: 520 / 380 元，每人每晚，与两行城市范围一致",
+    "combined: 上海520元、预订前部门经理书面批准、住宿发票和订单记录；引用两章",
+    "unknown: 未规定餐费标准，canAnswer=false 且 sources/citations 均为空"
+  ],
+  "learner_variant_exercise": "pending",
+  "limitations": "仅本次三题；不证明通用 Word 解析或大库检索能力"
+}

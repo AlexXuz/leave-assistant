@@ -1,0 +1,7 @@
+﻿{
+    "delay_seconds":  60,
+    "time_utc":  "2026-10-15T14:00:31.1647791+00:00",
+    "forced_app_close":  false,
+    "helper_pid":  11608,
+    "state":  "shutdown_requested"
+}

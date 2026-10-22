@@ -1,0 +1,16 @@
+{
+  "dataset_version": "retrieval-lab-v2-reserved-10",
+  "purpose": "十条预留同领域教学题；在开发题选定配置后单次评估，不用于选参。与开发题共享制度事实和部分业务家族，不声称外部独立或跨业务泛化。当前不运行。",
+  "cases": [
+    {"id":"reserved_equipment_boundary","category":"boundary","family":"equipment_purchase","question":"采购一台价格刚好5000元的办公电脑，需要部门经理共同签字吗？","required_ids":["equipment-policy:lab-v2:1"],"answer_points":["不需要","直属主管审批"]},
+    {"id":"reserved_overtime","category":"boundary","family":"overtime_approval","question":"今天下班后计划多工作四小时，申请最晚什么时候交，哪些人确认？","required_ids":["overtime-policy:lab-v2:1"],"answer_points":["正常下班前提交","直属主管审批、部门经理确认"]},
+    {"id":"reserved_overtime_record","category":"paraphrase","family":"overtime_record","question":"加班已经批过但漏打卡了，几天内补记录，需要附什么？","required_ids":["overtime-policy:lab-v2:3"],"answer_points":["三个工作日内","系统任务记录"]},
+    {"id":"reserved_project_account","category":"neighbor","family":"project_account","question":"新项目管理系统的账号权限，要经过谁确认和审批才能让IT配置？","required_ids":["access-policy:lab-v2:1"],"answer_points":["项目负责人确认范围","直属主管审批"]},
+    {"id":"reserved_guest_meal","category":"neighbor","family":"business_meal","question":"请合作方一起吃工作餐，能直接套用上海出差每天120元的餐费标准吗？","required_ids":["meal-policy:lab-v2:3"],"answer_points":["不能","业务招待需事前部门经理批准"]},
+    {"id":"reserved_advance_overdue","category":"neighbor","family":"advance_overdue","question":"回来超过十个工作日预借款还没结清，会影响再次借款还是取消原出差批准？","required_ids":["travel-advance-policy:lab-v2:3"],"answer_points":["暂停受理新的预借款","不撤销已批准出差"]},
+    {"id":"reserved_sick_short","category":"boundary","family":"sick_proof","question":"连续病假只有两天，按这份制度必须交医院证明吗？","required_ids":["leave-details-policy:lab-v2:3"],"answer_points":["不足三天无需按本条提交"]},
+    {"id":"reserved_leave_adjust","category":"neighbor","family":"annual_cancel","question":"已经开始休年假，实际休假日期又变了，记录应该怎么改？","required_ids":["leave-details-policy:lab-v2:1"],"answer_points":["直属主管确认后交人力资源部修正"]},
+    {"id":"reserved_other_city_caps","category":"multi","family":"hotel_meal","question":"到北京上海之外的城市出差，住一晚和吃一天各能报多少钱？","required_ids":["travel-policy:2026-10-15-v1:1","meal-policy:lab-v2:1"],"answer_points":["住宿380元每人每晚","餐费80元每人每天"]},
+    {"id":"reserved_remote_vpn","category":"multi","family":"remote_vpn","question":"获准在家工作后，VPN该找谁开通？如果改为周三在家，还需要谁额外批准？","required_ids":["access-policy:lab-v2:3","remote-policy:2026-10-15-v1:2"],"answer_points":["VPN找IT安全团队","周三远程额外部门经理批准"]}
+  ]
+}

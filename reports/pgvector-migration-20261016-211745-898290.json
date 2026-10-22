@@ -1,0 +1,542 @@
+{
+  "run_time": "2026-10-16T21:17:45.898290+08:00",
+  "dataset_version": "policy-retrieval-dev-v1",
+  "index_manifest": {
+    "built_at": "2026-10-16T15:34:39.614717+08:00",
+    "chunk_count": 7,
+    "chunks_sha256": "6a582e7306f42f42e64b8c040fba7d9db3009095d75333663fc2ead83161e37b",
+    "embedding": {
+      "dimension": 512,
+      "max_seq_length": 512,
+      "model": "BAAI/bge-small-zh-v1.5",
+      "normalized": true,
+      "query_instruction": "为这个句子生成表示以用于检索相关文章：",
+      "revision": "7999e1d3359715c523056ef9478215996d62a620",
+      "weights_sha256": "354763b9b1357bc9c44f62c6be2276321081ed2567773608c0d0785b61d5a026"
+    },
+    "format_version": 1,
+    "ordered_chunk_ids": [
+      "leave-policy:2026-10-15-v1:1",
+      "leave-policy:2026-10-15-v1:2",
+      "leave-policy:2026-10-15-v1:3",
+      "remote-policy:2026-10-15-v1:1",
+      "remote-policy:2026-10-15-v1:2",
+      "travel-policy:2026-10-15-v1:1",
+      "travel-policy:2026-10-15-v1:2"
+    ],
+    "sources_sha256": "1bd780462c8a6bf9eff8e91110f8713110196f30349a34bf78a47f575f92f078",
+    "vectors_sha256": "e2c6e13da05fd51c901fbbc0cd3d661b2d53212afc84f118caad6def48cee1d5"
+  },
+  "postgres_version": "PostgreSQL 17.11 (Debian 17.11-1.pgdg12+2) on x86_64-pc-linux-gnu, compiled by gcc (Debian 12.2.0-14+deb12u1) 12.2.0, 64-bit",
+  "pgvector_version": "0.8.7",
+  "reimported_chunk_count": 7,
+  "comparison_count": 48,
+  "max_abs_score_error": 9.235610387570148e-08,
+  "comparisons": [
+    {
+      "case_id": "annual_four_days",
+      "top_k": 1,
+      "chunk_ids": [
+        "leave-policy:2026-10-15-v1:1"
+      ],
+      "max_abs_score_error": 6.528835361230279e-08,
+      "passed": true
+    },
+    {
+      "case_id": "annual_four_days",
+      "top_k": 2,
+      "chunk_ids": [
+        "leave-policy:2026-10-15-v1:1",
+        "leave-policy:2026-10-15-v1:2"
+      ],
+      "max_abs_score_error": 6.528835361230279e-08,
+      "passed": true
+    },
+    {
+      "case_id": "annual_four_days",
+      "top_k": 3,
+      "chunk_ids": [
+        "leave-policy:2026-10-15-v1:1",
+        "leave-policy:2026-10-15-v1:2",
+        "leave-policy:2026-10-15-v1:3"
+      ],
+      "max_abs_score_error": 6.528835361230279e-08,
+      "passed": true
+    },
+    {
+      "case_id": "annual_four_days",
+      "top_k": 4,
+      "chunk_ids": [
+        "leave-policy:2026-10-15-v1:1",
+        "leave-policy:2026-10-15-v1:2",
+        "leave-policy:2026-10-15-v1:3",
+        "travel-policy:2026-10-15-v1:2"
+      ],
+      "max_abs_score_error": 6.528835361230279e-08,
+      "passed": true
+    },
+    {
+      "case_id": "annual_three_days",
+      "top_k": 1,
+      "chunk_ids": [
+        "leave-policy:2026-10-15-v1:2"
+      ],
+      "max_abs_score_error": 0.0,
+      "passed": true
+    },
+    {
+      "case_id": "annual_three_days",
+      "top_k": 2,
+      "chunk_ids": [
+        "leave-policy:2026-10-15-v1:2",
+        "leave-policy:2026-10-15-v1:1"
+      ],
+      "max_abs_score_error": 3.40781524110767e-08,
+      "passed": true
+    },
+    {
+      "case_id": "annual_three_days",
+      "top_k": 3,
+      "chunk_ids": [
+        "leave-policy:2026-10-15-v1:2",
+        "leave-policy:2026-10-15-v1:1",
+        "leave-policy:2026-10-15-v1:3"
+      ],
+      "max_abs_score_error": 3.40781524110767e-08,
+      "passed": true
+    },
+    {
+      "case_id": "annual_three_days",
+      "top_k": 4,
+      "chunk_ids": [
+        "leave-policy:2026-10-15-v1:2",
+        "leave-policy:2026-10-15-v1:1",
+        "leave-policy:2026-10-15-v1:3",
+        "remote-policy:2026-10-15-v1:2"
+      ],
+      "max_abs_score_error": 5.960464477539063e-08,
+      "passed": true
+    },
+    {
+      "case_id": "annual_notice",
+      "top_k": 1,
+      "chunk_ids": [
+        "leave-policy:2026-10-15-v1:1"
+      ],
+      "max_abs_score_error": 3.883906185553343e-08,
+      "passed": true
+    },
+    {
+      "case_id": "annual_notice",
+      "top_k": 2,
+      "chunk_ids": [
+        "leave-policy:2026-10-15-v1:1",
+        "leave-policy:2026-10-15-v1:2"
+      ],
+      "max_abs_score_error": 5.960464477539063e-08,
+      "passed": true
+    },
+    {
+      "case_id": "annual_notice",
+      "top_k": 3,
+      "chunk_ids": [
+        "leave-policy:2026-10-15-v1:1",
+        "leave-policy:2026-10-15-v1:2",
+        "leave-policy:2026-10-15-v1:3"
+      ],
+      "max_abs_score_error": 5.960464477539063e-08,
+      "passed": true
+    },
+    {
+      "case_id": "annual_notice",
+      "top_k": 4,
+      "chunk_ids": [
+        "leave-policy:2026-10-15-v1:1",
+        "leave-policy:2026-10-15-v1:2",
+        "leave-policy:2026-10-15-v1:3",
+        "remote-policy:2026-10-15-v1:2"
+      ],
+      "max_abs_score_error": 5.960464477539063e-08,
+      "passed": true
+    },
+    {
+      "case_id": "sick_notice",
+      "top_k": 1,
+      "chunk_ids": [
+        "leave-policy:2026-10-15-v1:1"
+      ],
+      "max_abs_score_error": 7.678391766852144e-08,
+      "passed": true
+    },
+    {
+      "case_id": "sick_notice",
+      "top_k": 2,
+      "chunk_ids": [
+        "leave-policy:2026-10-15-v1:1",
+        "travel-policy:2026-10-15-v1:2"
+      ],
+      "max_abs_score_error": 7.678391766852144e-08,
+      "passed": true
+    },
+    {
+      "case_id": "sick_notice",
+      "top_k": 3,
+      "chunk_ids": [
+        "leave-policy:2026-10-15-v1:1",
+        "travel-policy:2026-10-15-v1:2",
+        "leave-policy:2026-10-15-v1:2"
+      ],
+      "max_abs_score_error": 7.678391766852144e-08,
+      "passed": true
+    },
+    {
+      "case_id": "sick_notice",
+      "top_k": 4,
+      "chunk_ids": [
+        "leave-policy:2026-10-15-v1:1",
+        "travel-policy:2026-10-15-v1:2",
+        "leave-policy:2026-10-15-v1:2",
+        "remote-policy:2026-10-15-v1:1"
+      ],
+      "max_abs_score_error": 7.678391766852144e-08,
+      "passed": true
+    },
+    {
+      "case_id": "remote_frequency",
+      "top_k": 1,
+      "chunk_ids": [
+        "remote-policy:2026-10-15-v1:1"
+      ],
+      "max_abs_score_error": 4.1784570248282193e-08,
+      "passed": true
+    },
+    {
+      "case_id": "remote_frequency",
+      "top_k": 2,
+      "chunk_ids": [
+        "remote-policy:2026-10-15-v1:1",
+        "remote-policy:2026-10-15-v1:2"
+      ],
+      "max_abs_score_error": 4.1784570248282193e-08,
+      "passed": true
+    },
+    {
+      "case_id": "remote_frequency",
+      "top_k": 3,
+      "chunk_ids": [
+        "remote-policy:2026-10-15-v1:1",
+        "remote-policy:2026-10-15-v1:2",
+        "leave-policy:2026-10-15-v1:2"
+      ],
+      "max_abs_score_error": 4.1784570248282193e-08,
+      "passed": true
+    },
+    {
+      "case_id": "remote_frequency",
+      "top_k": 4,
+      "chunk_ids": [
+        "remote-policy:2026-10-15-v1:1",
+        "remote-policy:2026-10-15-v1:2",
+        "leave-policy:2026-10-15-v1:2",
+        "travel-policy:2026-10-15-v1:2"
+      ],
+      "max_abs_score_error": 4.9319916484158455e-08,
+      "passed": true
+    },
+    {
+      "case_id": "wednesday_exception",
+      "top_k": 1,
+      "chunk_ids": [
+        "remote-policy:2026-10-15-v1:2"
+      ],
+      "max_abs_score_error": 1.9817306906588783e-08,
+      "passed": true
+    },
+    {
+      "case_id": "wednesday_exception",
+      "top_k": 2,
+      "chunk_ids": [
+        "remote-policy:2026-10-15-v1:2",
+        "remote-policy:2026-10-15-v1:1"
+      ],
+      "max_abs_score_error": 7.626309239672224e-08,
+      "passed": true
+    },
+    {
+      "case_id": "wednesday_exception",
+      "top_k": 3,
+      "chunk_ids": [
+        "remote-policy:2026-10-15-v1:2",
+        "remote-policy:2026-10-15-v1:1",
+        "travel-policy:2026-10-15-v1:2"
+      ],
+      "max_abs_score_error": 7.626309239672224e-08,
+      "passed": true
+    },
+    {
+      "case_id": "wednesday_exception",
+      "top_k": 4,
+      "chunk_ids": [
+        "remote-policy:2026-10-15-v1:2",
+        "remote-policy:2026-10-15-v1:1",
+        "travel-policy:2026-10-15-v1:2",
+        "leave-policy:2026-10-15-v1:1"
+      ],
+      "max_abs_score_error": 8.662094996836345e-08,
+      "passed": true
+    },
+    {
+      "case_id": "shanghai_hotel",
+      "top_k": 1,
+      "chunk_ids": [
+        "travel-policy:2026-10-15-v1:1"
+      ],
+      "max_abs_score_error": 0.0,
+      "passed": true
+    },
+    {
+      "case_id": "shanghai_hotel",
+      "top_k": 2,
+      "chunk_ids": [
+        "travel-policy:2026-10-15-v1:1",
+        "travel-policy:2026-10-15-v1:2"
+      ],
+      "max_abs_score_error": 3.678891524749872e-08,
+      "passed": true
+    },
+    {
+      "case_id": "shanghai_hotel",
+      "top_k": 3,
+      "chunk_ids": [
+        "travel-policy:2026-10-15-v1:1",
+        "travel-policy:2026-10-15-v1:2",
+        "leave-policy:2026-10-15-v1:1"
+      ],
+      "max_abs_score_error": 3.678891524749872e-08,
+      "passed": true
+    },
+    {
+      "case_id": "shanghai_hotel",
+      "top_k": 4,
+      "chunk_ids": [
+        "travel-policy:2026-10-15-v1:1",
+        "travel-policy:2026-10-15-v1:2",
+        "leave-policy:2026-10-15-v1:1",
+        "remote-policy:2026-10-15-v1:1"
+      ],
+      "max_abs_score_error": 3.678891524749872e-08,
+      "passed": true
+    },
+    {
+      "case_id": "travel_receipts",
+      "top_k": 1,
+      "chunk_ids": [
+        "travel-policy:2026-10-15-v1:2"
+      ],
+      "max_abs_score_error": 5.329070518200751e-15,
+      "passed": true
+    },
+    {
+      "case_id": "travel_receipts",
+      "top_k": 2,
+      "chunk_ids": [
+        "travel-policy:2026-10-15-v1:2",
+        "travel-policy:2026-10-15-v1:1"
+      ],
+      "max_abs_score_error": 2.293548484466612e-08,
+      "passed": true
+    },
+    {
+      "case_id": "travel_receipts",
+      "top_k": 3,
+      "chunk_ids": [
+        "travel-policy:2026-10-15-v1:2",
+        "travel-policy:2026-10-15-v1:1",
+        "leave-policy:2026-10-15-v1:1"
+      ],
+      "max_abs_score_error": 2.293548484466612e-08,
+      "passed": true
+    },
+    {
+      "case_id": "travel_receipts",
+      "top_k": 4,
+      "chunk_ids": [
+        "travel-policy:2026-10-15-v1:2",
+        "travel-policy:2026-10-15-v1:1",
+        "leave-policy:2026-10-15-v1:1",
+        "leave-policy:2026-10-15-v1:2"
+      ],
+      "max_abs_score_error": 2.5855542262753772e-08,
+      "passed": true
+    },
+    {
+      "case_id": "leave_and_remote",
+      "top_k": 1,
+      "chunk_ids": [
+        "remote-policy:2026-10-15-v1:1"
+      ],
+      "max_abs_score_error": 3.785674018708107e-08,
+      "passed": true
+    },
+    {
+      "case_id": "leave_and_remote",
+      "top_k": 2,
+      "chunk_ids": [
+        "remote-policy:2026-10-15-v1:1",
+        "remote-policy:2026-10-15-v1:2"
+      ],
+      "max_abs_score_error": 3.785674018708107e-08,
+      "passed": true
+    },
+    {
+      "case_id": "leave_and_remote",
+      "top_k": 3,
+      "chunk_ids": [
+        "remote-policy:2026-10-15-v1:1",
+        "remote-policy:2026-10-15-v1:2",
+        "leave-policy:2026-10-15-v1:2"
+      ],
+      "max_abs_score_error": 3.785674018708107e-08,
+      "passed": true
+    },
+    {
+      "case_id": "leave_and_remote",
+      "top_k": 4,
+      "chunk_ids": [
+        "remote-policy:2026-10-15-v1:1",
+        "remote-policy:2026-10-15-v1:2",
+        "leave-policy:2026-10-15-v1:2",
+        "leave-policy:2026-10-15-v1:1"
+      ],
+      "max_abs_score_error": 6.085941339772916e-08,
+      "passed": true
+    },
+    {
+      "case_id": "hotel_and_receipts",
+      "top_k": 1,
+      "chunk_ids": [
+        "travel-policy:2026-10-15-v1:1"
+      ],
+      "max_abs_score_error": 7.906050303319034e-08,
+      "passed": true
+    },
+    {
+      "case_id": "hotel_and_receipts",
+      "top_k": 2,
+      "chunk_ids": [
+        "travel-policy:2026-10-15-v1:1",
+        "travel-policy:2026-10-15-v1:2"
+      ],
+      "max_abs_score_error": 7.906050303319034e-08,
+      "passed": true
+    },
+    {
+      "case_id": "hotel_and_receipts",
+      "top_k": 3,
+      "chunk_ids": [
+        "travel-policy:2026-10-15-v1:1",
+        "travel-policy:2026-10-15-v1:2",
+        "remote-policy:2026-10-15-v1:2"
+      ],
+      "max_abs_score_error": 7.906050303319034e-08,
+      "passed": true
+    },
+    {
+      "case_id": "hotel_and_receipts",
+      "top_k": 4,
+      "chunk_ids": [
+        "travel-policy:2026-10-15-v1:1",
+        "travel-policy:2026-10-15-v1:2",
+        "remote-policy:2026-10-15-v1:2",
+        "leave-policy:2026-10-15-v1:1"
+      ],
+      "max_abs_score_error": 7.906050303319034e-08,
+      "passed": true
+    },
+    {
+      "case_id": "annual_notice_and_approval",
+      "top_k": 1,
+      "chunk_ids": [
+        "leave-policy:2026-10-15-v1:1"
+      ],
+      "max_abs_score_error": 7.439333238323798e-08,
+      "passed": true
+    },
+    {
+      "case_id": "annual_notice_and_approval",
+      "top_k": 2,
+      "chunk_ids": [
+        "leave-policy:2026-10-15-v1:1",
+        "leave-policy:2026-10-15-v1:2"
+      ],
+      "max_abs_score_error": 7.439333238323798e-08,
+      "passed": true
+    },
+    {
+      "case_id": "annual_notice_and_approval",
+      "top_k": 3,
+      "chunk_ids": [
+        "leave-policy:2026-10-15-v1:1",
+        "leave-policy:2026-10-15-v1:2",
+        "remote-policy:2026-10-15-v1:1"
+      ],
+      "max_abs_score_error": 9.235610387570148e-08,
+      "passed": true
+    },
+    {
+      "case_id": "annual_notice_and_approval",
+      "top_k": 4,
+      "chunk_ids": [
+        "leave-policy:2026-10-15-v1:1",
+        "leave-policy:2026-10-15-v1:2",
+        "remote-policy:2026-10-15-v1:1",
+        "travel-policy:2026-10-15-v1:2"
+      ],
+      "max_abs_score_error": 9.235610387570148e-08,
+      "passed": true
+    },
+    {
+      "case_id": "remote_wednesday_and_deadline",
+      "top_k": 1,
+      "chunk_ids": [
+        "remote-policy:2026-10-15-v1:1"
+      ],
+      "max_abs_score_error": 0.0,
+      "passed": true
+    },
+    {
+      "case_id": "remote_wednesday_and_deadline",
+      "top_k": 2,
+      "chunk_ids": [
+        "remote-policy:2026-10-15-v1:1",
+        "remote-policy:2026-10-15-v1:2"
+      ],
+      "max_abs_score_error": 5.960464477539063e-08,
+      "passed": true
+    },
+    {
+      "case_id": "remote_wednesday_and_deadline",
+      "top_k": 3,
+      "chunk_ids": [
+        "remote-policy:2026-10-15-v1:1",
+        "remote-policy:2026-10-15-v1:2",
+        "leave-policy:2026-10-15-v1:1"
+      ],
+      "max_abs_score_error": 5.960464477539063e-08,
+      "passed": true
+    },
+    {
+      "case_id": "remote_wednesday_and_deadline",
+      "top_k": 4,
+      "chunk_ids": [
+        "remote-policy:2026-10-15-v1:1",
+        "remote-policy:2026-10-15-v1:2",
+        "leave-policy:2026-10-15-v1:1",
+        "leave-policy:2026-10-15-v1:2"
+      ],
+      "max_abs_score_error": 5.960464477539063e-08,
+      "passed": true
+    }
+  ],
+  "note": "Real PostgreSQL exact retrieval vs same NumPy snapshot. 12 questions x K=1,2,3,4. No chat API calls. Does not measure generated answer quality or production performance."
+}

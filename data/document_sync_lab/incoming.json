@@ -1,0 +1,39 @@
+{
+  "source_id": "day7-policy-source",
+  "complete": true,
+  "note": "独立模拟的新完整快照：版本更新、正文更新、保持不变、新增及删除场景。",
+  "documents": [
+    {
+      "id": "leave-policy",
+      "title": "青禾实验室请假制度",
+      "version": "2026-10-18-v2",
+      "content": "# 青禾实验室请假制度\n\n文档 ID：leave-policy\n版本：2026-10-18-v2\n说明：纯属虚构的教学资料，不代表实际公司的制度或法律规定。\n\n## 申请时间\n\n年假原则上提前两个工作日申请。突发病假可以先通知直属主管，返岗后补交申请。\n\n## 年假审批\n\n单次连续年假不超过三天，由直属主管审批。\n单次连续年假超过三天，需要直属主管和部门经理共同审批。\n这里的天数是本次申请的请假天数，不涉及周末和节假日计算。\n\n## 知识范围\n\n本文件没有记录任何员工的个人年假余额，也没有规定婚假天数。\n",
+      "visibility": "public",
+      "allowed_departments": []
+    },
+    {
+      "id": "remote-policy",
+      "title": "青禾实验室远程办公制度",
+      "version": "2026-10-18-v2",
+      "content": "# 青禾实验室远程办公制度\n\n文档 ID：remote-policy\n版本：2026-10-18-v2\n说明：纯属虚构的教学资料。\n\n## 频率与审批\n\n员工每周最多申请三天远程办公，由直属主管审批。\n远程办公申请最晚在前一个工作日提交。\n\n## 固定现场日\n\n每周三是团队固定现场协作日，原则上不安排远程办公。\n确有特殊原因需要在周三远程办公的，必须额外获得部门经理批准。\n",
+      "visibility": "public",
+      "allowed_departments": []
+    },
+    {
+      "id": "equipment-policy",
+      "title": "青禾实验室设备借用制度",
+      "version": "2026-10-18-v1",
+      "content": "# 青禾实验室设备借用制度\n\n## 备用电脑\n工作电脑维修期间，由 IT 管理员登记并发放备用电脑。",
+      "visibility": "public",
+      "allowed_departments": []
+    },
+    {
+      "id": "training-policy",
+      "title": "青禾实验室培训报名制度",
+      "version": "2026-10-18-v1",
+      "content": "# 青禾实验室培训报名制度\n\n## 报名申请\n外部培训报名申请最晚在开课前三个工作日提交，由直属主管审批。",
+      "visibility": "public",
+      "allowed_departments": []
+    }
+  ]
+}

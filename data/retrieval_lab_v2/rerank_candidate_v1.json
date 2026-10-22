@@ -1,0 +1,58 @@
+{
+  "config_id": "rrf-reranker-candidate-v1",
+  "status": "candidate_for_reserved_evaluation_only",
+  "fixed_date": "2026-10-18",
+  "development_report": "reports\\reranker-eval-20261018-164228-388687.json",
+  "development_report_sha256": "71bc92352bb7834ac8f80699930a6b537c48bbb8f05f1e0a90791e76ebf7e2fa",
+  "corpus_sha256": "49d753cc5193a8cd84bfd72c50a5a7313f87e659bd72545f23cef899cfb1fd15",
+  "freeze": {
+    "experiment_version": "retrieval-lab-v2",
+    "frozen_date": "2026-10-18",
+    "files_sha256": {
+      "base_chunks.json": "fc35b686b5b3f643abde74a7b4d2fd50723a83e4c2ea4a43dc9c7080ff30d169",
+      "additional_policies.json": "715f8faf274a8ce2745af60f634457bd70999c89f12d78e0c380197b54e51285",
+      "dev_cases.json": "e7f97750dff13c2672d8759d10b0d3ee5b6ce62e85c64b3d5c7d18d05a69a146",
+      "reserved_cases.json": "8e6f30414b0cf180d4f0ed96cb2fce62c225e37d2ed084b04b4586a89da85fba"
+    },
+    "initial_config": {
+      "candidate_k": 6,
+      "top_k": 2,
+      "rank_constant": 60,
+      "bm25_k1": 1.5,
+      "bm25_b": 0.75,
+      "jieba_HMM": false
+    },
+    "note": "Materials and annotations fixed before running new retrieval results. Dev outcomes may guide later work; reserved queries are not run now. No target winner or required score improvement."
+  },
+  "embedding": {
+    "model": "BAAI/bge-small-zh-v1.5",
+    "revision": "7999e1d3359715c523056ef9478215996d62a620",
+    "dimension": 512,
+    "max_seq_length": 512,
+    "device": "cpu",
+    "weights_sha256": "354763b9b1357bc9c44f62c6be2276321081ed2567773608c0d0785b61d5a026",
+    "normalized": true,
+    "query_instruction": "为这个句子生成表示以用于检索相关文章："
+  },
+  "candidate_strategy": "equal-weight-rrf",
+  "candidate_k": 6,
+  "top_k": 2,
+  "rank_constant": 60,
+  "keyword_config": {
+    "HMM": false,
+    "mode": "search",
+    "k1": 1.5,
+    "b": 0.75,
+    "epsilon": 0.25
+  },
+  "reranker": {
+    "model": "cross-encoder/mmarco-mMiniLMv2-L12-H384-v1",
+    "revision": "1427fd652930e4ba29e8149678df786c240d8825",
+    "weights_sha256": "5daeca2481a76b5976a2bdc32f0a78532b6716da4f8cd3ff59460ef8d2f359b4",
+    "max_length": 512,
+    "score_kind": "raw_logit",
+    "device": "cpu",
+    "batch_size": 8
+  },
+  "note": "Experimental candidate fixed after dev evaluation and before reserved evaluation; main application default unchanged. Reserved queries share domain and some fact families with dev; not external independent generalization."
+}
