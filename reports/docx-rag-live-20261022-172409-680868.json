@@ -1,0 +1,14 @@
+{
+  "run_time": "2026-10-22T17:24:09.680868+08:00",
+  "source_id": "day9-docx-live-47a92f73c6df4b049dbf3e7ef778f738",
+  "prompt_version": "docx-policy-rag-v1",
+  "mode": "run",
+  "real_embedding": false,
+  "real_chat_model": false,
+  "setup_complete": false,
+  "teaching_data_cleaned": false,
+  "cases": [],
+  "manual_review_required": true,
+  "limitations": "单份短 Word 制度，三个片段；不是通用 Word/长表解析或大库检索评估，身份仍由教学脚本模拟。",
+  "setup_error_type": "FileNotFoundError"
+}

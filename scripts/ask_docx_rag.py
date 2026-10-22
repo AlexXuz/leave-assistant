@@ -142,13 +142,16 @@ def run(args):
     except Exception as error:
         record["setup_error_type"] = type(error).__name__
         print(f"运行中止：{type(error).__name__}；请结合 setup_complete 与报告定位。", flush=True)
+        if isinstance(error, FileNotFoundError):
+            record["missing_file"] = str(error.filename)
+            print(f"缺少文件：{error.filename}", flush=True)
     path = PROJECT_ROOT / "reports" / f"docx-rag-live-{now.strftime('%Y%m%d-%H%M%S-%f')}.json"
     path.parent.mkdir(exist_ok=True)
     path.write_text(json.dumps(record, ensure_ascii=False, indent=2), encoding="utf-8")
     print(f"\n报告：{path}")
     print(f"教学来源清理：{record['teaching_data_cleaned']}；未写原 policy-dev 或替换 PDF 样例。")
     if not args.run:
-        print("仅预览：真实本地 Embedding 和数据库，未调用聊天模型。")
+        print(f"仅预览：实际本地编码={record['real_embedding']}，数据库准备完成={record['setup_complete']}；未调用聊天模型。")
     expected = len(CASES) if args.suite else 1
     completed = len(record["cases"]) == expected and all(item["status"] != "error" for item in record["cases"])
     checks_ok = all(all(item.get("objective_checks", {}).values()) for item in record["cases"])

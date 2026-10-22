@@ -1,0 +1,50 @@
+{
+  "source_pdf": "data/ingestion_lab/travel-policy.pdf",
+  "source_pdf_sha256": "298a916cf87cb8c2399b92e863b1e106e71faf1923bd50174a34a167858f935f",
+  "source_page": 1,
+  "renderer": "pdftoppm",
+  "images": {
+    "clear": {
+      "file": "travel-page1-clear.png",
+      "sha256": "02851acec1dee5b296a3c3d4fe8266b9c723b540310a80727caec1b5190a2ef2",
+      "render_args": [
+        "-f",
+        "1",
+        "-l",
+        "1",
+        "-singlefile",
+        "-r",
+        "170",
+        "-png"
+      ]
+    },
+    "small": {
+      "file": "travel-page1-small.png",
+      "sha256": "b51daf6b6850616a8ed4fafb517e3abf7fcc15e616f7193c8d405f40376d386f",
+      "render_args": [
+        "-f",
+        "1",
+        "-l",
+        "1",
+        "-singlefile",
+        "-scale-to",
+        "680",
+        "-png"
+      ]
+    },
+    "tiny": {
+      "file": "travel-page1-tiny.png",
+      "sha256": "36da91fe8e4736b4c08d5093c09e1132c12115f15378ed14d4af6f43b2fe4b29",
+      "render_args": [
+        "-f",
+        "1",
+        "-l",
+        "1",
+        "-singlefile",
+        "-scale-to",
+        "320",
+        "-png"
+      ]
+    }
+  }
+}
