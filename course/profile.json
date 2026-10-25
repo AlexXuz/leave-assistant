@@ -1,20 +1,8 @@
 {
-  "track": "alexstudy",
-  "display_name": "Alex的学习分支",
-  "completed_stages": [
-    1,
-    2,
-    3,
-    4,
-    5,
-    6,
-    7,
-    8,
-    9,
-    10,
-    11
-  ],
-  "next_day": 12,
-  "initialized": false,
-  "note": "Day1–Day11保留历史阶段验收；新版独立任务如需复验另留证据，不伪造新任务通过。"
+  "track": "starter",
+  "display_name": "新学员",
+  "initialized": true,
+  "completed_stages": [],
+  "next_day": 1,
+  "note": "所有练习从待实现开始；作者示范独立可运行，不能作为本人完成证据。"
 }

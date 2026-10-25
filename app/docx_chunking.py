@@ -31,34 +31,4 @@ def build_docx_chunks(document: dict, blocks: list[dict]) -> list[dict]:
 
     此策略针对小表/短章节；helper 对过长章节明确拒绝，尚不是长表通用切分器。
     """
-    validate_blocks(blocks)
-    sections = []
-    for block in blocks:
-        number = block["block"]
-        if block["kind"] == "paragraph" and block["style"] == "Heading 1":
-            sections.append({
-                "heading": block["text"],
-                "block_start": number,
-                "block_end": number,
-                "parts": []
-            })
-            continue
-        if block["kind"] == "paragraph":
-            text = block["text"]
-        else:
-            text = table_to_text(block["rows"])
-        if not sections:
-            sections.append({
-                "heading": "概述",
-                "block_start": number,
-                "block_end": number,
-                "parts": []
-            })
-        current_section = sections[-1]
-        current_section["parts"].append(text)
-        current_section["block_end"] = number
-    return [
-        make_section_chunk(document, section)
-        for section in sections
-        if section["parts"]
-    ]
+    raise NotImplementedError("请完成 build_docx_chunks；输入输出与验收见网页课程")

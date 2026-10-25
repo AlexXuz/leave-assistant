@@ -3,7 +3,7 @@
 from pgvector.psycopg import register_vector
 
 from app.embeddings import embed_query
-from app.pgvector_retrieval import search_pgvector
+from app.course.examples.foundations.pgvector_retrieval import search_pgvector
 from app.pgvector_store import check_collection, connect_database
 
 

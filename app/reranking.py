@@ -26,27 +26,4 @@ def rerank_candidates(
     score_pairs 类型的含义：接收“字符串二元组的列表”，返回“浮点数序列”。
     本函数中将它当普通函数调用即可，不需要实现神经网络或导入模型库。
     """
-    if top_k < 1:
-        raise ValueError
-    results = []
-    if len(candidates) < 1:
-        return results
-    pairs = []
-    for candidate in candidates:
-        pairs.append((question, candidate["chunk"]["content"]))
-        results.append({
-            "chunk": candidate["chunk"],
-            "score": 0.0,
-            "retrieval_score": float(candidate["score"])
-        })
-    scores = score_pairs(pairs)
-    if len(candidates) != len(scores):
-        raise ValueError
-    for index, score in enumerate(scores):
-        results[index]["score"] = float(score)
-    results = sorted(
-        results,
-        key=lambda item: item["score"],
-        reverse=True
-    )
-    return results[:top_k]
+    raise NotImplementedError("请完成 rerank_candidates；输入输出与验收见网页课程")

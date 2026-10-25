@@ -10,8 +10,8 @@ from pathlib import Path
 import numpy as np
 
 from app.embeddings import embedding_metadata
-from app.policy_qa import load_policy_documents
-from app.retrieval import load_documents_for_chunking, split_policy_document
+from app.course.examples.foundations.policy_qa import load_policy_documents
+from app.course.examples.foundations.retrieval import load_documents_for_chunking, split_policy_document
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 CHUNKS_PATH = PROJECT_ROOT / "data" / "policy_chunks.json"

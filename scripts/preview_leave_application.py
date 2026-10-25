@@ -3,7 +3,7 @@
 import argparse
 import json
 
-from app.exercises import LeaveExtraction
+from app.course.examples.foundations.exercises import LeaveExtraction
 from app.leave_draft_preview import prepare_leave_preview
 from app.permission_service import TrustedAccessContext
 from app.teaching_leave_service import TeachingLeaveService

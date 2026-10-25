@@ -7,9 +7,9 @@ from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 from app.embeddings import embedding_metadata
-from app.exercises import call_model
-from app.policy_qa import parse_policy_answer
-from app.rag_qa import RAG_PROMPT_VERSION, prepare_rag_request
+from app.course.examples.foundations.exercises import call_model
+from app.course.examples.foundations.policy_qa import parse_policy_answer
+from app.course.examples.foundations.rag_qa import RAG_PROMPT_VERSION, prepare_rag_request
 
 REPORTS_DIRECTORY = Path(__file__).resolve().parents[1] / "reports"
 

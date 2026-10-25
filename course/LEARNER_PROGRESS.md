@@ -1,60 +1,36 @@
-# 本人自学进度与证据
+# 本人学习进度与证据
 
-Day1–Day11既有阶段验收保持。Day12–Day26课程材料已备好，不代表本人完成。网页“已阅读”只记录阅读；热身passed只代表固定函数案例；整课完成按[EVIDENCE_PROTOCOL](EVIDENCE_PROTOCOL.md)。本次修订不勾选任何后续Day。
+这是新学员的初始化进度，26课均未完成。网页阅读标记与作者示范不会勾选本人能力；详细要求见[证据规则](EVIDENCE_PROTOCOL.md)。
 
-## alexstudy历史阶段记录
-
-当前个人分支保留Day1–Day11原有实现与阶段验收；网页默认继续Day12。新增Day1–Day11独立任务和模板可用于复验，不把历史结果伪造成新任务证据。新学员使用main，全部26课从待完成开始。
-
-| 阶段 | 历史状态 | 依据 |
-|---|---|---|
-| Day1–Day11 | 已完成原阶段验收 | 原实现保留，历史笔记见course/history，原运行报告见reports |
-| Day12–Day26 | 待本人完成 | 沿用下方证据规则与独立任务 |
-
-## 逐课记录
-
-每课先填course/submissions中已建好的JSON：本人commit、挑战及其基线、辅助来源、设计/复现步骤、正常/变体/失败恢复产物与哈希、关键项复核。表格中的勾选必须附自己的可复现证据，不能复制作者报告。
-
-| Day | 已阅读 | 热身/基础 | 独立任务 | 变体与失败恢复 | 复核通过 | 本人记录 |
+| 单元 | 阅读 | 热身 | 独立任务 | 变体与恢复 | 复核 | 本人记录 |
 |---|---|---|---|---|---|---|
-| 12 | ☐ | ☐ | ☐ | ☐ | ☐ | submissions/graph_recovery_workflow.json（待填） |
-| 13 | ☐ | ☐ | ☐ | ☐ | ☐ | submissions/conversation_context_pipeline.json（待填） |
-| 14 | ☐ | ☐ | ☐ | ☐ | ☐ | submissions/mcp_business_client.json（待填） |
-| 15 | ☐ | ☐ | ☐ | ☐ | ☐ | submissions/department_report_skill.json（待填） |
-| 16 | ☐ | ☐ | ☐ | ☐ | ☐ | submissions/deployment_verification.json（待填） |
-| 17 | ☐ | ☐ | ☐ | ☐ | ☐ | submissions/resumable_report_stream.json（待填） |
-| 18 | ☐ | ☐ | ☐ | ☐ | ☐ | submissions/failure_recovery_diagnostics.json（待填） |
-| 19 · 硬门 | ☐ | ☐ | ☐ | ☐ | ☐ | submissions/office_assistant_integration.json（待填） |
-| 20 | ☐ | ☐ | ☐ | ☐ | ☐ | submissions/optimization_experiment.json（待填） |
-| 21 | ☐ | ☐ | ☐ | ☐ | ☐ | submissions/lora_experiment_workflow.json（待填） |
-| 22 | ☐ | ☐ | ☐ | ☐ | ☐ | submissions/authorized_query_service.json（待填） |
-| 23 | ☐ | ☐ | ☐ | ☐ | ☐ | submissions/query_result_presentation.json（待填） |
-| 24 · 硬门 | ☐ | ☐ | ☐ | ☐ | ☐ | submissions/department_policy_integration.json（待填） |
-| 25 | ☐ | ☐ | ☐ | ☐ | ☐ | submissions/job_evidence_portfolio.json（待填） |
-| 26 · 硬门 | ☐ | ☐ | ☐ | ☐ | ☐ | submissions/independent_final_demo.json（待填） |
+| Day1 | ☐ | ☐ | ☐ | ☐ | ☐ | [待填记录](submissions/model_request_pipeline.json) |
+| Day2 | ☐ | ☐ | ☐ | ☐ | ☐ | [待填记录](submissions/validated_output_pipeline.json) |
+| Day3 | ☐ | ☐ | ☐ | ☐ | ☐ | [待填记录](submissions/grounded_answer_service.json) |
+| Day4 | ☐ | ☐ | ☐ | ☐ | ☐ | [待填记录](submissions/retrieval_pipeline.json) |
+| Day5 | ☐ | ☐ | ☐ | ☐ | ☐ | [待填记录](submissions/persistent_rag_pipeline.json) |
+| Day6 | ☐ | ☐ | ☐ | ☐ | ☐ | [待填记录](submissions/retrieval_experiment.json) |
+| Day7 | ☐ | ☐ | ☐ | ☐ | ☐ | [待填记录](submissions/knowledge_sync_pipeline.json) |
+| Day8 | ☐ | ☐ | ☐ | ☐ | ☐ | [待填记录](submissions/pdf_evidence_pipeline.json) |
+| Day9 | ☐ | ☐ | ☐ | ☐ | ☐ | [待填记录](submissions/structured_document_pipeline.json) |
+| Day10 | ☐ | ☐ | ☐ | ☐ | ☐ | [待填记录](submissions/business_tool_pipeline.json) |
+| Day11 | ☐ | ☐ | ☐ | ☐ | ☐ | [待填记录](submissions/confirmed_application_workflow.json) |
+| Day12 | ☐ | ☐ | ☐ | ☐ | ☐ | [待填记录](submissions/graph_recovery_workflow.json) |
+| Day13 | ☐ | ☐ | ☐ | ☐ | ☐ | [待填记录](submissions/conversation_context_pipeline.json) |
+| Day14 | ☐ | ☐ | ☐ | ☐ | ☐ | [待填记录](submissions/mcp_business_client.json) |
+| Day15 | ☐ | ☐ | ☐ | ☐ | ☐ | [待填记录](submissions/department_report_skill.json) |
+| Day16 | ☐ | ☐ | ☐ | ☐ | ☐ | [待填记录](submissions/deployment_verification.json) |
+| Day17 | ☐ | ☐ | ☐ | ☐ | ☐ | [待填记录](submissions/resumable_report_stream.json) |
+| Day18 | ☐ | ☐ | ☐ | ☐ | ☐ | [待填记录](submissions/failure_recovery_diagnostics.json) |
+| Day19 · 硬门 | ☐ | ☐ | ☐ | ☐ | ☐ | [待填记录](submissions/office_assistant_integration.json) |
+| Day20 | ☐ | ☐ | ☐ | ☐ | ☐ | [待填记录](submissions/optimization_experiment.json) |
+| Day21 | ☐ | ☐ | ☐ | ☐ | ☐ | [待填记录](submissions/lora_experiment_workflow.json) |
+| Day22 | ☐ | ☐ | ☐ | ☐ | ☐ | [待填记录](submissions/authorized_query_service.json) |
+| Day23 | ☐ | ☐ | ☐ | ☐ | ☐ | [待填记录](submissions/query_result_presentation.json) |
+| Day24 · 硬门 | ☐ | ☐ | ☐ | ☐ | ☐ | [待填记录](submissions/department_policy_integration.json) |
+| Day25 | ☐ | ☐ | ☐ | ☐ | ☐ | [待填记录](submissions/job_evidence_portfolio.json) |
+| Day26 · 硬门 | ☐ | ☐ | ☐ | ☐ | ☐ | [待填记录](submissions/independent_final_demo.json) |
 
-## 硬验收门
+每次勾选附本人commit、正常/变体/失败恢复结果和复核。Day19要求前18课，Day24要求前一门及Day20–23，Day26要求前两门及Day25。阅读始终开放。
 
-- Day19：Day1–18证据与复核完成（alexstudy的Day1–11沿用原阶段验收）；自己整合页面/API链路、注入/预算评估、实际失败恢复。未通过不记Day20以后完成。
-- Day24：Day19和Day20–23完成；自己把新政策接到预检、确认、提交和页面，并证明政策变化/并发/回滚/幂等。未通过不记Day25以后完成。
-- Day26：前两门与Day25完成；独立演示、实际故障定位、新需求和追问。权限、确认、重复占用、虚构证据等关键违规不能靠总分抵消。
-
-可继续阅读后续课件，不以关页面/封锁文件代替学习管理。未见需求由复核者确认，公开抽签和提前看过的变体不自动满足。
-
-## Day25岗位与求职补缺
-
-☐ 5–10个真实目标岗位，来源/日期、要求→项目→本人证据→缺口映射；至少一个主目标，主目标核心要求有证据，加分项可列具体计划。
-
-☐ 简历用十年Java后端权限、事务、幂等与排障经验解释AI能力迁移，区分本人实现、参考/AI辅助和未完成部分。
-
-☐ 真实云环境最小闭环（隔离教学数据、TLS/访问控制、密钥、日志、重启/回滚）：待本人执行，不因本机Docker标完成。
-
-☐ 提示注入与成本延迟评估：待本人运行；仅有GET健康检查报告不替代模型链路评估。
-
-☐ 能讲清实际失败恢复的演示：待本人录制/复核。
-
-上述按APPLICATION_READINESS与主目标要求补强，可以边投递边补相关缺口；不要求完成所有选修或所有JD加分项。
-
-## 选修
-
-按[OPTIONAL_PATHS](OPTIONAL_PATHS.md)选择一条与目标岗位相关的分支，另存本人证据，未执行保持空。生产SSO、多实例HA、预训练业务微调等没有实际完成时不能写成已掌握。
+`alexstudy`保留作者历史学习实现和记录；不得复制为自己的完成证据。Day25按5–10个真实目标岗位建立要求、项目、证据和缺口映射；主目标必备缺口未补齐不计完成。

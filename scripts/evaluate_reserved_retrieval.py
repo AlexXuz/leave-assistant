@@ -8,11 +8,11 @@ from datetime import datetime, timedelta, timezone
 from importlib.metadata import version
 
 from app.embeddings import embed_query
-from app.hybrid_retrieval import fuse_rrf
+from app.course.examples.foundations.hybrid_retrieval import fuse_rrf
 from app.keyword_retrieval import KeywordIndex
 from app.local_reranker import load_reranker, reranker_metadata, score_pairs
-from app.reranking import rerank_candidates
-from app.retrieval import rank_chunks
+from app.course.examples.foundations.reranking import rerank_candidates
+from app.course.examples.foundations.retrieval import rank_chunks
 from scripts.retrieval_lab import LAB, ROOT, load_index, measurement, read_fixture
 
 CONFIG_PATH = LAB / "rerank_candidate_v1.json"

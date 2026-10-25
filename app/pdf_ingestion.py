@@ -6,8 +6,7 @@ from pypdf import PdfReader
 from pypdf.errors import PdfReadError
 
 
-class DocumentParseError(ValueError):
-    """文档解析不完整，调用方应停止本次导入，记录原因。"""
+from app.course.examples.foundations.pdf_ingestion import DocumentParseError  # Shared teaching interface.
 
 
 def read_pdf_pages(path: str | Path) -> list[dict]:
@@ -31,17 +30,7 @@ def read_pdf_pages(path: str | Path) -> list[dict]:
     不硬编码两页或样例内容；不编码向量、不写数据库。
     PDF 内容流的提取顺序可能与视觉顺序不同，本课暂时保留原始提取结果。
     """
-    reader = open_pdf_reader(path)
-    results = []
-    for index, page in enumerate(reader.pages, start=1):
-        text = (page.extract_text() or "").strip()
-        if not text:
-            raise DocumentParseError(f"第{index}页为空")
-        results.append({
-            "page": index,
-            "text": text
-        })
-    return results
+    raise NotImplementedError("请完成 read_pdf_pages；输入输出与验收见网页课程")
 
 
 def open_pdf_reader(path: str | Path):

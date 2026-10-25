@@ -10,11 +10,11 @@ from pathlib import Path
 from pgvector.psycopg import register_vector
 
 from app.embeddings import embed_query
-from app.hybrid_retrieval import fuse_rrf
+from app.course.examples.foundations.hybrid_retrieval import fuse_rrf
 from app.keyword_retrieval import KeywordIndex
-from app.pgvector_retrieval import search_pgvector
+from app.course.examples.foundations.pgvector_retrieval import search_pgvector
 from app.pgvector_store import CHUNK_FIELDS, COLLECTION_NAME, check_collection, connect_database
-from app.retrieval_metrics import evaluate_evidence
+from app.course.examples.foundations.retrieval_metrics import evaluate_evidence
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 

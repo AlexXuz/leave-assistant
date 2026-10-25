@@ -18,7 +18,7 @@ def main():
 from app.leave_web_accounts import WEB_RUN_ID,initialize_accounts,create_account_draft,web_view
 from app.pgvector_store import connect_database
 from app.permission_service import TrustedAccessContext
-from app.exercises import LeaveExtraction
+from app.course.examples.foundations.exercises import LeaveExtraction
 with connect_database() as c:
  initialize_accounts(c,WEB_RUN_ID)
  access=TrustedAccessContext('web-zhangsan',(),())
@@ -54,8 +54,8 @@ with connect_database() as c:
                 result=client.post('/api/course/labs/'+lab,headers=origin,json={});result.raise_for_status()
             bi=client.post('/api/course/labs/bi',headers=origin,json={'sql':"SELECT department,SUM(days) AS total_days FROM course_bi.visible_leave WHERE month='2026-10' AND status='APPROVED' GROUP BY department"})
             bi.raise_for_status();assert bi.json()['rows']==[{'department':'研发部','total_days':6}]
-            assert len(client.get('/api/course').json()['lessons'])==15
-            record['checks'].append('Linux container MCP child, Skill subprocess and authorized SQL role execute successfully; course has 15 lessons')
+            assert len(client.get('/api/course').json()['lessons'])==26
+            record['checks'].append('Linux container MCP child, Skill subprocess and authorized SQL role execute successfully; course has 26 lessons')
             record['application']=restored['business_state']['application'];record['status']='passed'
             record['image_id']=subprocess.run([docker,'image','inspect','--format','{{.Id}}','leave-course-web:latest'],capture_output=True,text=True,check=True).stdout.strip()
         finally:client.post('/api/logout',headers=origin,json={})

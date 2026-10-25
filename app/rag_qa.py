@@ -28,21 +28,7 @@ def prepare_rag_request(question: str, top_k: int = 2) -> dict:
     Day 4 文件基线已由助教保存在 app/file_rag_baseline.py。
     作业前运行 scripts.check_pgvector_rag 显示 FAIL 属于预期。
     """
-    top_k_chunks = retrieve_pgvector(question, top_k)
-    documents = []
-    for top_k_chunk in top_k_chunks:
-        chunk = top_k_chunk["chunk"]
-        documents.append({
-            "id": chunk["id"],
-            "content": chunk["content"]
-        })
-    messages = build_policy_messages(question, documents)
-    result = {
-        "retrieved_chunks": top_k_chunks,
-        "documents": documents,
-        "messages": messages
-    }
-    return result
+    raise NotImplementedError("请完成 prepare_rag_request；输入输出与验收见网页课程")
 
 
 # 以下读取由助教提供。

@@ -13,10 +13,10 @@ from psycopg import Error as DatabaseError
 from pydantic import BaseModel, ConfigDict, Field, ValidationError
 from starlette.middleware.trustedhost import TrustedHostMiddleware
 
-from app.exercises import LeaveExtraction, build_messages, parse_model_output
-from app.leave_confirmation import confirm_leave_draft
+from app.course.examples.foundations.exercises import LeaveExtraction, build_messages, parse_model_output
+from app.course.examples.foundations.leave_confirmation import confirm_leave_draft
 from app.leave_confirmation_store import DraftRevisionConflict, DraftStateError
-from app.leave_submission import SubmissionBlocked, submit_leave
+from app.course.examples.foundations.leave_submission import SubmissionBlocked, submit_leave
 from app.leave_web_accounts import (BALANCE_YEAR, DEMO_PASSWORD, DEMO_USERS, WEB_RUN_ID, account_balance,
                                     create_account_draft, current_user, initialize_accounts, login, web_view)
 from app.leave_workflow_store import PostgresLeaveStore

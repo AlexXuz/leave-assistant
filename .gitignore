@@ -29,3 +29,10 @@ reports/leave-web-submit-*.json
 course/challenges/issued/
 course/learner_artifacts/
 reports/learner/
+
+# Generated personal experiment reports.
+reports/*
+!reports/examples/
+!reports/examples/**
+data/day1_review_results.json
+data/retrieval_lab_v2/reserved_result_v1.json

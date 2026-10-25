@@ -7,14 +7,10 @@ from app.permission_service import TrustedAccessContext
 from app.leave_workflow_types import ConfirmationRecord, LeaveWorkflowStore, SubmissionRecord, WorkflowDraft
 
 
-class IdempotencyConflict(ValueError):
-    pass
+from app.course.examples.foundations.leave_submission import IdempotencyConflict  # Shared teaching interface.
 
 
-class SubmissionBlocked(ValueError):
-    def __init__(self, assessment):
-        self.assessment = assessment
-        super().__init__(assessment["code"])
+from app.course.examples.foundations.leave_submission import SubmissionBlocked  # Shared teaching interface.
 
 
 def require_confirmation(row: WorkflowDraft, confirmation: ConfirmationRecord) -> None:
@@ -56,34 +52,4 @@ def submit_leave(draft_id: str, expected_revision: int, idempotency_key: str,
     先锁请求key，再锁草稿，最后锁额度；不要在事务中调用LLM或外部HR网络接口。
     本实现额度与申请同处教学PostgreSQL事务，不能把它直接当作跨外部HR系统的分布式原子事务。
     """
-    if (not isinstance(access, TrustedAccessContext)
-            or not isinstance(access.user_id, str)
-            or not access.user_id.strip()):
-        raise PermissionError("非法用户")
-    if (type(expected_revision) is not int
-            or expected_revision < 1
-            or not isinstance(idempotency_key, str)
-            or not idempotency_key.strip()
-            or len(idempotency_key) > 128):
-        raise ValueError
-    with store.transaction():
-        store.lock_request(access.user_id, idempotency_key)
-        old = store.find_submission(access.user_id, idempotency_key)
-        if old is not None:
-            if old["draft_id"] != draft_id or old["revision"] != expected_revision:
-                raise IdempotencyConflict()
-            return old
-        row = store.lock_draft(draft_id, access.user_id)
-        if row["revision"] != expected_revision or content_hash(row["payload"]) != row["assessed_hash"]:
-            raise DraftRevisionConflict
-        if row["status"] != "CONFIRMED":
-            raise DraftStateError
-        require_confirmation(row, store.get_confirmation(draft_id))
-        draft = LeaveExtraction.model_validate(row["payload"])
-        balance = store.lock_balance(access.user_id, draft.startDate.year)
-        assessment = assess_leave_draft(draft, balance)
-        if assessment["status"] != "READY_FOR_CONFIRMATION":
-            raise SubmissionBlocked(assessment)
-        days = assessment["requested_days"]
-        store.reserve_balance(access.user_id, draft.startDate.year, days)
-        return store.save_submission(draft_id, idempotency_key, days)
+    raise NotImplementedError("请完成 submit_leave；输入输出与验收见网页课程")

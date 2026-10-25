@@ -25,19 +25,4 @@ def prepare_authorized_rag_request(
     PermissionError、IndexValidationError、数据库异常均应传出，不能捕获后回退。
     不把 access 或部门名单放进 Prompt 让模型决定权限；不修改输入。
     """
-    if top_k < 1:
-        raise ValueError("top_k必须大于等于1")
-    retrieved_chunks = retrieve_visible(question, source_id, access, top_k)
-    documents = []
-    for retrieved_chunk in retrieved_chunks:
-        documents.append({
-            "id": retrieved_chunk["chunk"]["id"],
-            "content": retrieved_chunk["chunk"]["content"]
-        })
-    messages = build_policy_messages(question, documents)
-    result = {
-        "retrieved_chunks": retrieved_chunks,
-        "documents": documents,
-        "messages": messages
-    }
-    return result
+    raise NotImplementedError("请完成 prepare_authorized_rag_request；输入输出与验收见网页课程")

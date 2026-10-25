@@ -2,14 +2,14 @@
   "config_id": "rrf-reranker-candidate-v1",
   "status": "candidate_for_reserved_evaluation_only",
   "fixed_date": "2026-10-18",
-  "development_report": "reports\\reranker-eval-20261018-164228-388687.json",
+  "development_report": "reports/examples/reranker-eval-20261018-164228-388687.json",
   "development_report_sha256": "71bc92352bb7834ac8f80699930a6b537c48bbb8f05f1e0a90791e76ebf7e2fa",
   "corpus_sha256": "49d753cc5193a8cd84bfd72c50a5a7313f87e659bd72545f23cef899cfb1fd15",
   "freeze": {
     "experiment_version": "retrieval-lab-v2",
     "frozen_date": "2026-10-18",
     "files_sha256": {
-      "base_chunks.json": "fc35b686b5b3f643abde74a7b4d2fd50723a83e4c2ea4a43dc9c7080ff30d169",
+      "base_chunks.json": "20507848d7a835e38056bbddfd0ab5eaff812e220845d89be07b4f579b9c94f4",
       "additional_policies.json": "715f8faf274a8ce2745af60f634457bd70999c89f12d78e0c380197b54e51285",
       "dev_cases.json": "e7f97750dff13c2672d8759d10b0d3ee5b6ce62e85c64b3d5c7d18d05a69a146",
       "reserved_cases.json": "8e6f30414b0cf180d4f0ed96cb2fce62c225e37d2ed084b04b4586a89da85fba"
@@ -22,7 +22,7 @@
       "bm25_b": 0.75,
       "jieba_HMM": false
     },
-    "note": "Materials and annotations fixed before running new retrieval results. Dev outcomes may guide later work; reserved queries are not run now. No target winner or required score improvement."
+    "note": "Materials and annotations fixed before running new retrieval results. Dev outcomes may guide later work; reserved queries are not run now. No target winner or required score improvement. Public starter serializes fixture text with LF; annotation and query contents are unchanged."
   },
   "embedding": {
     "model": "BAAI/bge-small-zh-v1.5",
@@ -54,5 +54,5 @@
     "device": "cpu",
     "batch_size": 8
   },
-  "note": "Experimental candidate fixed after dev evaluation and before reserved evaluation; main application default unchanged. Reserved queries share domain and some fact families with dev; not external independent generalization."
+  "note": "Experimental candidate fixed after dev evaluation and before reserved evaluation; main application default unchanged. Reserved queries share domain and some fact families with dev; not external independent generalization. This is an explicit author benchmark, not the current learner result."
 }

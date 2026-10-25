@@ -5,11 +5,7 @@ from pydantic import BaseModel, ConfigDict, Field
 from app.permission_service import TrustedAccessContext
 
 
-class BalanceQuery(BaseModel):
-    """助教提供：只让模型选择年份，不能提供或覆盖员工身份。"""
-
-    model_config = ConfigDict(extra="forbid", strict=True)
-    year: int = Field(ge=2000, le=2100)
+from app.course.examples.foundations.leave_balance_tool import BalanceQuery  # Shared teaching interface.
 
 
 BALANCE_TOOL = {
@@ -42,9 +38,4 @@ def execute_balance_tool(name: str, arguments_json: str, access: TrustedAccessCo
     可信登录employee-demo-a时，只能调用 service.get_balance('employee-demo-a', 2026)。
     本函数不写数据库、不调模型、不做关键词意图分类，也不执行动态eval/getattr。
     """
-    if not isinstance(access, TrustedAccessContext) or not access.user_id or not access.user_id.strip():
-        raise PermissionError("缺乏可信身份")
-    if name != "get_my_leave_balance":
-        raise ValueError("非法函数名")
-    query = BalanceQuery.model_validate_json(arguments_json)
-    return service.get_balance(access.user_id, query.year)
+    raise NotImplementedError("请完成 execute_balance_tool；输入输出与验收见网页课程")

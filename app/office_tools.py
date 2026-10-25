@@ -6,19 +6,7 @@ from app.leave_balance_tool import BALANCE_TOOL, execute_balance_tool
 from app.permission_service import TrustedAccessContext, retrieve_visible
 
 
-class PolicySearch(BaseModel):
-    """助教提供：模型只提供检索问题，不提供身份、知识源或部门权限。"""
-
-    model_config = ConfigDict(extra="forbid", strict=True)
-    question: str = Field(min_length=1, max_length=1500)
-
-    @field_validator("question")
-    @classmethod
-    def strip_question(cls, value):
-        value = value.strip()
-        if not value:
-            raise ValueError("检索问题不能为空白")
-        return value
+from app.course.examples.foundations.office_tools import PolicySearch  # Shared teaching interface.
 
 
 POLICY_TOOL = {
@@ -62,10 +50,4 @@ def execute_office_tool(
     异常继续向上抛。空证据由helper返回no_evidence，不改查余额、不移除权限重查。
     本函数不调用聊天模型、不处理tool_call_id、不拼最终答案；这些属于外层编排。
     """
-    if name == "get_my_leave_balance":
-        return execute_balance_tool(name, arguments_json, access, balance_service)
-    elif name == "search_policy":
-        query = PolicySearch.model_validate_json(arguments_json)
-        return search_policy_tool(query.question, policy_source_id, access)
-    else:
-        raise ValueError("非法函数名")
+    raise NotImplementedError("请完成 execute_office_tool；输入输出与验收见网页课程")

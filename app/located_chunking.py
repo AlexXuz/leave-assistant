@@ -35,31 +35,4 @@ def split_located_pages(document: dict, pages: list[dict], max_chars: int = 200,
     这是一版透明可检查的切分基线，会切开句子，也不解决跨页条款；
     后续可按语义/段落优化，但来源位置不能因此丢失。本轮不入库、不编码。
     """
-    if max_chars <= 0 or overlap < 0 or overlap >= max_chars:
-        raise ValueError("要求 max_chars > 0，且 0 <= overlap < max_chars")
-    chunks = []
-    if len(pages) < 1:
-        return chunks
-    for page in pages:
-        if not page["text"].strip():
-            raise ValueError(f"第{page['page']}页为空白")
-        text = page["text"]
-        chunk_index = 1
-        start = 0
-        while start < len(text):
-            end = min(start + max_chars, len(text))
-            window = text[start:end]
-            chunks.append({
-                "id": f"{document['id']}:{document['version']}:p{page['page']}:c{chunk_index}",
-                "document_id": document['id'], "title": document['title'], "version": document['version'],
-                "heading": f"第{page['page']}页",
-                "content": f"{document['title']}\n{window}",
-                "locator": {"kind": "pdf", "source_file": document['source_file'],
-                            "source_sha256": document['source_sha256'], "page": page["page"],
-                            "start": start, "end": end}
-            })
-            if end == len(text):
-                break
-            start = end - overlap
-            chunk_index += 1
-    return chunks
+    raise NotImplementedError("请完成 split_located_pages；输入输出与验收见网页课程")

@@ -22,28 +22,4 @@ def resolve_citations(source_ids: list[str], retrieved_chunks: list[dict]) -> li
     调用方仍用 parse_policy_answer 校验回答结构；本函数仅映射来源，
     不证明回答被证据支持。若执行后续文件下载/打开，服务端还需再次校验访问权。
     """
-    chunk_by_id = {}
-    for hit in retrieved_chunks:
-        chunk = hit["chunk"]
-        if chunk["id"] in chunk_by_id:
-            raise ValueError("chunk_id重复")
-        chunk_by_id[chunk["id"]] = chunk
-    results = []
-    if len(source_ids) < 1:
-        return results
-    seen = set()
-    for source_id in source_ids:
-        if source_id not in chunk_by_id:
-            raise ValueError("引用了本次未命中的片段")
-        if source_id in seen:
-            continue
-        chunk = chunk_by_id[source_id]
-        results.append({
-            "chunk_id": chunk["id"],
-            "document_id": chunk["document_id"],
-            "title": chunk["title"],
-            "version": chunk["version"],
-            "locator": chunk.get("locator")
-        })
-        seen.add(source_id)
-    return results
+    raise NotImplementedError("请完成 resolve_citations；输入输出与验收见网页课程")

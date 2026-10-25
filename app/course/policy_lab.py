@@ -5,10 +5,10 @@ from uuid import uuid4
 from pydantic import BaseModel, ConfigDict, Field
 
 from app.office_tool_lab import teaching_policy_source
-from app.office_tools import search_policy_tool
+from app.course.examples.foundations.office_tools import search_policy_tool
 from app.permission_service import TrustedAccessContext
 from app.pgvector_store import PROJECT_ROOT
-from app.source_citations import resolve_citations
+from app.course.examples.foundations.source_citations import resolve_citations
 from scripts.ask_pdf_rag import tracked_model_call
 
 

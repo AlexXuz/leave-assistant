@@ -57,19 +57,7 @@ def search_visible_chunks(
     top_k < 1 先抛 ValueError，不执行 SQL。执行一次查询，用 rows_to_hits 转换结果。
     空结果返回 []，不自动去掉过滤条件重查。不修改输入。
     """
-    if top_k < 1:
-        raise ValueError("top_k需要大于等于1")
-    vector = Vector(query_vector)
-    params = (
-        vector,
-        source_id,
-        list(department_ids),
-        vector,
-        top_k
-    )
-    rows = connection.execute(SEARCH_SQL, params).fetchall()
-    results = rows_to_hits(rows)
-    return results
+    raise NotImplementedError("请完成 search_visible_chunks；输入输出与验收见网页课程")
 
 
 def rows_to_hits(rows) -> list[dict]:

@@ -1,0 +1,4 @@
+# Frozen retrieval materials must have identical bytes across platforms.
+data/retrieval_lab_v2/*.json text eol=lf
+# Author reports retain their original bytes for linked SHA-256 provenance.
+reports/examples/*.json -text

@@ -12,6 +12,11 @@ from pydantic import ValidationError
 from app.exercises import parse_model_output
 
 
+from app.course.profile import read_profile
+import inspect
+
+@unittest.skipIf(read_profile()['track']=='starter' and 'raise NotImplementedError' in inspect.getsource(parse_model_output),
+                 'Day1–2练习尚未实现；完成后自动运行真实输出契约测试')
 class TestLeaveOutput(unittest.TestCase):
     def test_complete_draft(self):
         # Arrange：原始模型输出仅包含四个字段。

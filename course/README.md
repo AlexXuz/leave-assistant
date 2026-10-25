@@ -4,7 +4,7 @@
 
 ## 最省事的入口
 
-本机打开 http://127.0.0.1:8012/course ，或双击仓库根目录 `start-course.cmd`。首次在新环境安装依赖、启动数据库的方法见DEPLOYMENT.md。网页课件可直接阅读，业务实验需要在办公助手登录。
+本机打开 http://127.0.0.1:8012/course ，或双击仓库根目录 `start-course.cmd`。首次在新环境安装依赖、启动数据库的方法见[部署说明](../docs/deployment.md)。网页课件可直接阅读，业务实验需要在办公助手登录。
 
 账号zhangsan/lisi/wangwu/zhaoliu，密码均为demo123，2026年初始年假可用9/3/0/15天。同一账号的申请共享额度，退出/重启不重置。个人课件不依赖聊天历史。
 
@@ -19,7 +19,7 @@
 - [选修顺序与验收](OPTIONAL_PATHS.md)：按目标岗位选分支，不扩成全部必修。
 - [目标岗位映射](portfolio/JOB_REQUIREMENTS.md)与[求职最小补强](portfolio/APPLICATION_READINESS.md)：5–10个真实岗位、Java经验迁移、云闭环/安全与成本/恢复演示。
 
-运行示范放在app/course/examples，分级提示在course/solutions，独立项目放在course/projects。课程序号只组织课件，所有映射来自manifest.json。原热身仍在course/assignments，Day12仍用app/leave_graph_routing.py；Day1–Day11代码保持。
+运行示范放在app/course/examples，分级提示在course/solutions，独立项目放在course/projects。课程序号只组织课件，所有映射来自manifest.json。原热身仍在course/assignments，Day12仍用app/leave_graph_routing.py；Day1–Day11热身在app/职责模块，main保留待实现骨架，alexstudy保留个人答案。
 
 | Day | 讲解 | 独立任务书 | 在IDE写入的文件 |
 |---|---|---|---|
@@ -56,7 +56,7 @@
 
 完整作者示范有单独入口，默认只显示说明，须主动展开。它是帮助理解与事后对照的材料，不能冒认本人独立实现。部署、作品集与综合验收需要实际操作与人工复核；JSON/哈希检查不证明语义、运行真实性或招聘资格。
 
-保存作业后无需依赖后台自动重载；如改自己的API路由/服务结构，按DEPLOYMENT.md启动或重启服务。课程作者校验运行scripts/check_course_revision.py、check_course_package.py、check_course_http.py，不会填写本人完成记录。
+保存作业后无需依赖后台自动重载；如改自己的API路由/服务结构，按[部署说明](../docs/deployment.md)启动或重启服务。课程作者校验运行scripts/check_course_revision.py、check_course_package.py、check_course_http.py，不会填写本人完成记录。
 
 ## 环境边界
 

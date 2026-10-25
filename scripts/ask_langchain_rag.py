@@ -9,9 +9,9 @@ from pathlib import Path
 from langsmith import tracing_context
 
 from app.langchain_model import generate_step
-from app.langchain_rag import build_prepare_chain, validate_step
-from app.policy_qa import build_policy_messages
-from app.rag_qa import RAG_PROMPT_VERSION
+from app.course.examples.foundations.langchain_rag import build_prepare_chain, validate_step
+from app.course.examples.foundations.policy_qa import build_policy_messages
+from app.course.examples.foundations.rag_qa import RAG_PROMPT_VERSION
 
 REPORTS_DIRECTORY = Path(__file__).resolve().parents[1] / "reports"
 

@@ -13,9 +13,9 @@ from openai import OpenAI
 from pydantic import BaseModel, ConfigDict, Field
 
 from app.office_tool_lab import teaching_policy_source
-from app.office_tools import OFFICE_TOOLS, execute_office_tool
+from app.course.examples.foundations.office_tools import OFFICE_TOOLS, execute_office_tool
 from app.permission_service import TrustedAccessContext
-from app.source_citations import resolve_citations
+from app.course.examples.foundations.source_citations import resolve_citations
 from app.teaching_leave_service import TeachingLeaveService
 from scripts.ask_balance_tool import request
 

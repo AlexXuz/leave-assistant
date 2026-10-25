@@ -9,7 +9,7 @@ from uuid import uuid4
 from psycopg.types.json import Jsonb
 
 from app.leave_confirmation_store import DraftRevisionConflict, DraftStateError, content_hash
-from app.leave_submission import SubmissionBlocked
+from app.course.examples.foundations.leave_submission import SubmissionBlocked
 from app.leave_workflow_types import ConfirmationRecord, SubmissionRecord, WorkflowDraft
 
 

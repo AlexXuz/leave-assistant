@@ -8,15 +8,15 @@ from uuid import uuid4
 
 from psycopg.types.json import Jsonb
 
-from app.exercises import LeaveExtraction
+from app.course.examples.foundations.exercises import LeaveExtraction
 from app.leave_confirmation_store import content_hash
-from app.leave_draft import assess_leave_draft
+from app.course.examples.foundations.leave_draft import assess_leave_draft
 from app.leave_workflow_runtime import read_workflow
 from app.leave_workflow_store import PostgresLeaveStore
 from app.permission_service import TrustedAccessContext
 from app.pgvector_store import PROJECT_ROOT
 
-WEB_RUN_ID = "day12-web-accounts-v1"
+WEB_RUN_ID = "llm-engineer-lab-starter"
 BALANCE_YEAR = 2026
 DEMO_PASSWORD = "demo123"  # 仅虚构本地教学账号，页面明确展示。
 DEMO_USERS = (

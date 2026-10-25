@@ -18,7 +18,8 @@ def check_foundation(day,mode):
     completed=[]
     def load(name):
         path=('app.course.examples.foundations.' if mode=='reference' else 'app.')+name
-        return importlib.reload(importlib.import_module(path))
+        module=importlib.import_module(path)
+        return module if mode=='reference' else importlib.reload(module)
     def reject(call,error=ValueError):
         try:call()
         except NotImplementedError:raise

@@ -10,10 +10,10 @@ from pathlib import Path
 import numpy as np
 
 from app.embeddings import embed_documents, embed_query, embedding_metadata
-from app.hybrid_retrieval import fuse_rrf
+from app.course.examples.foundations.hybrid_retrieval import fuse_rrf
 from app.keyword_retrieval import KeywordIndex
-from app.retrieval import rank_chunks, split_policy_document
-from app.retrieval_metrics import evaluate_evidence
+from app.course.examples.foundations.retrieval import rank_chunks, split_policy_document
+from app.course.examples.foundations.retrieval_metrics import evaluate_evidence
 
 ROOT = Path(__file__).resolve().parents[1]
 LAB = ROOT / "data" / "retrieval_lab_v2"

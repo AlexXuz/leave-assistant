@@ -23,39 +23,7 @@ def split_policy_document(document: dict[str, str]) -> list[dict[str, str]]:
     不修改输入。不要把 7 个已知章节硬编码进函数。
     提示：循环内遇到新标题时保存上一节，循环结束后还要保存最后一节。
     """
-    result = []
-
-    def save_chunk(chunk_heading, chunk_body_lines):
-        body = "\n".join(chunk_body_lines).strip()
-
-        if not chunk_heading or not body:
-            return
-
-        index = len(result) + 1
-
-        result.append({
-            "id": f"{document['id']}:{document['version']}:{index}",
-            "document_id": document["id"],
-            "title": document["title"],
-            "version": document["version"],
-            "heading": chunk_heading,
-            "content": f"{document['title']}\n{chunk_heading}\n{body}",
-        })
-
-    heading = None
-    body_lines = []
-
-    for line in document["content"].splitlines():
-        if line.startswith("## "):
-            save_chunk(heading, body_lines)
-            heading = line[3:].strip()
-            body_lines = []
-        elif heading is not None:
-            body_lines.append(line)
-
-    save_chunk(heading, body_lines)
-
-    return result
+    raise NotImplementedError("请完成 split_policy_document；输入输出与验收见网页课程")
 
 
 def rank_chunks(query_vector, chunk_vectors, chunks: list[dict], top_k: int = 2) -> list[dict]:
@@ -73,21 +41,7 @@ def rank_chunks(query_vector, chunk_vectors, chunks: list[dict], top_k: int = 2)
     可用 @ 计算归一化向量点积；也可以逐行计算。
     浮点分数用 float(...) 转成可 JSON 序列化的 Python 数值。
     """
-    results = []
-    if top_k < 1:
-        raise ValueError
-    if len(chunks) < 1:
-        return results
-    scores = chunk_vectors @ query_vector
-    for index, chunk in enumerate(chunks):
-        result = {
-            "chunk": chunk,
-            "score": float(scores[index])
-        }
-        results.append(result)
-    results = sorted(results, key=lambda item: item["score"], reverse=True)
-    results = results[:top_k]
-    return results
+    raise NotImplementedError("请完成 rank_chunks；输入输出与验收见网页课程")
 
 
 # 以下是已提供的元数据读取，不是本轮作业。

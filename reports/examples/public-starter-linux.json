@@ -1,0 +1,14 @@
+{
+  "kind": "author_public_starter_linux_validation",
+  "status": "passed",
+  "learner_completed": false,
+  "image": "sha256:abed894d2d8d92abe76b5a4a9e491b6d24f295d1d82459fe3efb897f1117a5a8",
+  "platform": "Docker Linux amd64",
+  "checks": [
+    "26 reference contracts and real PostgreSQL integration",
+    "156 HTTP content pages, authorization, transaction workflow and SSE"
+  ],
+  "model": "fixed_response",
+  "secrets_baked_into_image": false,
+  "personal_namespace_used": false
+}

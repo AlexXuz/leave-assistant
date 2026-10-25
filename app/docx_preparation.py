@@ -4,8 +4,8 @@ import hashlib
 import json
 from pathlib import Path
 
-from app.docx_ingestion import read_docx_blocks
-from app.pdf_ingestion import DocumentParseError
+from app.course.examples.foundations.docx_ingestion import read_docx_blocks
+from app.course.examples.foundations.pdf_ingestion import DocumentParseError
 
 DIRECTORY = Path(__file__).resolve().parents[1] / "data/ingestion_lab"
 MAX_SECTION_CHARS = 400

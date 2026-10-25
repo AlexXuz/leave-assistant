@@ -14,7 +14,4 @@ def build_policy_index() -> dict:
 
     不在这里编码问题或调用聊天模型。
     """
-    chunks = load_current_chunks()
-    chunk_vectors = embed_documents([chunk["content"] for chunk in chunks])
-    manifest = save_index(chunks, chunk_vectors)
-    return manifest
+    raise NotImplementedError("请完成 build_policy_index；输入输出与验收见网页课程")

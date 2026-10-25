@@ -27,43 +27,4 @@ def apply_sync_batch(connection, batch: dict) -> dict:
     异常由事务上下文管理器触发回滚；不要把每份文档放进独立事务。
     不修改 batch。代入 Java 可理解为一次带修订号校验的 @Transactional 批次。
     """
-    counts = {
-        "REINDEX": 0,
-        "METADATA_ONLY": 0,
-        "DELETE": 0,
-        "UNCHANGED": 0,
-    }
-    source_id = batch["source_id"]
-    with connection.transaction():
-        generation = lock_source(
-            connection,
-            source_id,
-            batch["expected_generation"],
-        )
-        for operation in batch["operations"]:
-            action = operation["action"]
-            document_id = operation["document_id"]
-            if action == "REINDEX":
-                replace_document(connection, source_id, batch["documents"][document_id])
-                counts["REINDEX"] += 1
-            elif action == "METADATA_ONLY":
-                replace_document(connection, source_id, batch["documents"][document_id])
-                counts["METADATA_ONLY"] += 1
-            elif action == "DELETE":
-                delete_document(connection, source_id, document_id)
-                counts["DELETE"] += 1
-            elif action == "UNCHANGED":
-                counts["UNCHANGED"] += 1
-            else:
-                raise ValueError("未知动作")
-        if counts["REINDEX"] > 0 or counts["METADATA_ONLY"] > 0 or counts["DELETE"] > 0:
-            generation = advance_source(
-                connection,
-                source_id,
-                batch["embedding_config"]
-            )
-    result = {
-        "generation": generation,
-        "counts": counts
-    }
-    return result
+    raise NotImplementedError("请完成 apply_sync_batch；输入输出与验收见网页课程")

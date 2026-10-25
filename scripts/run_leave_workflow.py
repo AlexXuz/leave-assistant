@@ -5,9 +5,9 @@ from datetime import datetime, timedelta, timezone
 import json
 from pathlib import Path
 
-from app.exercises import LeaveExtraction, build_messages, parse_model_output
-from app.leave_confirmation import confirm_leave_draft
-from app.leave_submission import submit_leave
+from app.course.examples.foundations.exercises import LeaveExtraction, build_messages, parse_model_output
+from app.course.examples.foundations.leave_confirmation import confirm_leave_draft
+from app.course.examples.foundations.leave_submission import submit_leave
 from app.leave_workflow_runtime import cleanup_demo, create_demo_draft, explanation_messages, read_workflow, validate_explanation
 from app.leave_workflow_store import PostgresLeaveStore
 from app.permission_service import TrustedAccessContext

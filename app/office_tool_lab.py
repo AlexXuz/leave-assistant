@@ -5,11 +5,11 @@ from contextlib import contextmanager
 from pgvector.psycopg import register_vector
 
 from app.document_manifest import build_document_manifest
-from app.document_sync import plan_document_sync
-from app.document_sync_execution import apply_sync_batch
+from app.course.examples.foundations.document_sync import plan_document_sync
+from app.course.examples.foundations.document_sync_execution import apply_sync_batch
 from app.embeddings import embed_documents, load_embedding_model
 from app.pgvector_store import PROJECT_ROOT, connect_database
-from app.retrieval import load_documents_for_chunking, split_policy_document
+from app.course.examples.foundations.retrieval import load_documents_for_chunking, split_policy_document
 from app.vector_index import current_embedding_config
 
 

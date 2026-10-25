@@ -10,7 +10,7 @@ from importlib.metadata import version
 from pathlib import Path
 
 from app.local_reranker import load_reranker, reranker_metadata, score_pairs
-from app.reranking import rerank_candidates
+from app.course.examples.foundations.reranking import rerank_candidates
 from scripts.retrieval_lab import ROOT, measurement, read_fixture
 
 BASELINE = ROOT / "reports" / "retrieval-lab-v2-20261018-112435-358398.json"

@@ -34,23 +34,4 @@ def search_pgvector(connection, query_vector, top_k: int = 2) -> list[dict]:
 
     本轮只改本函数；旧 rag_qa.py 继续用文件索引，数据库验收后再接入。
     """
-    if top_k < 1:
-        raise ValueError()
-    vector = Vector(query_vector)
-    params = (
-        vector,
-        COLLECTION_NAME,
-        vector,
-        top_k
-    )
-    rows = connection.execute(SEARCH_SQL, params).fetchall()
-    results = []
-    for row in rows:
-        chunk = {}
-        for field in CHUNK_FIELDS:
-            chunk[field] = row[field]
-        results.append({
-            "chunk": chunk,
-            "score": float(row["score"])
-        })
-    return results
+    raise NotImplementedError("请完成 search_pgvector；输入输出与验收见网页课程")

@@ -19,20 +19,7 @@ def hits_to_documents(hits: list[dict]) -> list[Document]:
     保留输入顺序，不修改 hits；空列表返回空列表。不调用检索或模型。
     可用普通 for + append，不要求列表推导式。
     """
-    documents = []
-    for hit in hits:
-        documents.append(Document(
-            id=hit["chunk"]["id"],
-            page_content=hit["chunk"]["content"],
-            metadata={
-                "document_id": hit["chunk"]["document_id"],
-                "title": hit["chunk"]["title"],
-                "version": hit["chunk"]["version"],
-                "heading": hit["chunk"]["heading"],
-                "score": float(hit["score"])
-            }
-        ))
-    return documents
+    raise NotImplementedError("请完成 hits_to_documents；输入输出与验收见网页课程")
 
 
 # noinspection PyTypeChecker
@@ -44,7 +31,7 @@ def build_prepare_chain() -> RunnableSequence:
     输入：{"question": "问题", "top_k": 2}。
     chain.invoke(输入) 才依次执行两个步骤。
     """
-    return RunnableLambda(retrieve_step) | RunnableLambda(prepare_step)
+    raise NotImplementedError("请完成 build_prepare_chain；输入输出与验收见网页课程")
 
 
 # 以下回调和模型链由助教提供，先阅读，不需要修改。

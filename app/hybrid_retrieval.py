@@ -22,26 +22,4 @@ def fuse_rrf(
     实现思路：一个按 ID 累积分数的字典；每一路各有自己的 seen 集合。
     构建新的命中字典，再稳定降序排序并切片。
     """
-    if top_k < 1 or rank_constant < 1:
-        raise ValueError
-    merged = {}
-    for hits in rankings:
-        seen = set()
-        for rank, hit in enumerate(hits, start=1):
-            identifier = hit["chunk"]["id"]
-            if identifier in seen:
-                continue
-            contribution = 1.0/(rank + rank_constant)
-            if identifier not in merged:
-                merged[identifier] = {
-                    "chunk": hit["chunk"],
-                    "score": 0.0
-                }
-            merged[identifier]["score"] += contribution
-            seen.add(identifier)
-    results = sorted(
-        merged.values(),
-        key=lambda item: item["score"],
-        reverse=True
-    )
-    return results[:top_k]
+    raise NotImplementedError("请完成 fuse_rrf；输入输出与验收见网页课程")

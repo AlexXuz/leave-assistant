@@ -10,7 +10,7 @@ import time
 from dotenv import load_dotenv
 from openai import OpenAI
 
-from app.leave_balance_tool import BALANCE_TOOL, execute_balance_tool
+from app.course.examples.foundations.leave_balance_tool import BALANCE_TOOL, execute_balance_tool
 from app.permission_service import TrustedAccessContext
 from app.teaching_leave_service import TeachingLeaveService
 

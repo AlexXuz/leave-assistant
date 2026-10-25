@@ -31,38 +31,4 @@ def plan_document_sync(
 
     提示：用 id → 文档清单的字典查找旧记录；用 set 判断新快照的 ID 成员。
     """
-    if not complete_snapshot:
-        raise ValueError("必须提供同一知识源的完整快照")
-    if any(
-        len({doc["id"] for doc in docs}) != len(docs)
-        for docs in (current_documents,incoming_documents)
-    ):
-        raise ValueError("存在重复文档ID")
-    current_by_id = {doc["id"]: doc for doc in current_documents}
-    results = []
-    for incoming_document in incoming_documents:
-        if (incoming_document["id"] not in current_by_id or
-                current_by_id[incoming_document["id"]]["vector_fingerprint"]
-                != incoming_document["vector_fingerprint"]):
-            results.append({
-                    "document_id": incoming_document["id"],
-                    "action": "REINDEX"
-                })
-        elif current_by_id[incoming_document["id"]]["metadata_fingerprint"] != incoming_document["metadata_fingerprint"]:
-            results.append({
-                    "document_id": incoming_document["id"],
-                    "action": "METADATA_ONLY"
-                })
-        else:
-            results.append({
-                    "document_id": incoming_document["id"],
-                    "action": "UNCHANGED"
-                })
-    incoming_by_id = {doc["id"]: doc for doc in incoming_documents}
-    for current_document in current_documents:
-        if current_document["id"] not in incoming_by_id:
-            results.append({
-                "document_id": current_document["id"],
-                "action": "DELETE"
-            })
-    return results
+    raise NotImplementedError("请完成 plan_document_sync；输入输出与验收见网页课程")

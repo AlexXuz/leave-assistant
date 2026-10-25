@@ -2,7 +2,7 @@
 
 import json
 
-from app.indexing import build_policy_index
+from app.course.examples.foundations.indexing import build_policy_index
 from app.vector_index import INDEX_PATH
 
 

@@ -8,8 +8,8 @@ from langgraph.checkpoint.sqlite import SqliteSaver
 from langgraph.graph import StateGraph, START, END
 from langgraph.types import Command, interrupt
 
-from app.leave_confirmation import confirm_leave_draft
-from app.leave_submission import submit_leave
+from app.course.examples.foundations.leave_confirmation import confirm_leave_draft
+from app.course.examples.foundations.leave_submission import submit_leave
 from app.leave_web_accounts import web_view
 from app.leave_workflow_store import PostgresLeaveStore
 from app.pgvector_store import PROJECT_ROOT, connect_database

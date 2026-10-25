@@ -4,7 +4,7 @@ import hashlib
 import json
 from pathlib import Path
 
-from app.pdf_ingestion import DocumentParseError, read_pdf_pages
+from app.course.examples.foundations.pdf_ingestion import DocumentParseError, read_pdf_pages
 
 DIRECTORY = Path(__file__).resolve().parents[1] / "data/ingestion_lab"
 

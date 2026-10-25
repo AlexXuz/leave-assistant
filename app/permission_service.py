@@ -5,7 +5,7 @@ from dataclasses import dataclass
 from pgvector.psycopg import register_vector
 
 from app.embeddings import embed_query
-from app.permission_retrieval import search_visible_chunks
+from app.course.examples.foundations.permission_retrieval import search_visible_chunks
 from app.pgvector_store import connect_database
 from app.source_locations import attach_chunk_locators
 from app.vector_index import IndexValidationError, current_embedding_config

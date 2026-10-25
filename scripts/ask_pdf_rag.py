@@ -12,17 +12,17 @@ from uuid import uuid4
 from pgvector.psycopg import register_vector
 
 from app.document_manifest import build_document_manifest
-from app.document_sync import plan_document_sync
-from app.document_sync_execution import apply_sync_batch
+from app.course.examples.foundations.document_sync import plan_document_sync
+from app.course.examples.foundations.document_sync_execution import apply_sync_batch
 from app.embeddings import embed_documents
-from app.exercises import call_model
-from app.located_chunking import split_located_pages
+from app.course.examples.foundations.exercises import call_model
+from app.course.examples.foundations.located_chunking import split_located_pages
 from app.pdf_preparation import prepare_sample_pdf
-from app.permission_rag import prepare_authorized_rag_request
+from app.course.examples.foundations.permission_rag import prepare_authorized_rag_request
 from app.permission_service import TrustedAccessContext
 from app.pgvector_store import PROJECT_ROOT, connect_database
-from app.policy_qa import parse_policy_answer
-from app.source_citations import resolve_citations
+from app.course.examples.foundations.policy_qa import parse_policy_answer
+from app.course.examples.foundations.source_citations import resolve_citations
 from app.vector_index import current_embedding_config
 
 PROMPT_VERSION = "pdf-policy-rag-v1"

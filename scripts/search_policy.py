@@ -6,7 +6,7 @@ from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 from app.embeddings import embed_documents, embed_query, embedding_metadata
-from app.retrieval import rank_chunks
+from app.course.examples.foundations.retrieval import rank_chunks
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 

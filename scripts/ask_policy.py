@@ -6,8 +6,8 @@ import os
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
-from app.exercises import call_model
-from app.policy_qa import (
+from app.course.examples.foundations.exercises import call_model
+from app.course.examples.foundations.policy_qa import (
     POLICY_PROMPT_VERSION,
     build_policy_messages,
     load_policy_documents,

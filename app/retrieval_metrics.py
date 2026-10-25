@@ -23,18 +23,4 @@ def evaluate_evidence(retrieved_ids: list[str], required_ids: list[str]) -> dict
     提示：set(列表) 可去重，& 可求两个集合的交集，- 可求差集；
     len 求数量，sorted(集合) 得到排序后的列表。也可以用循环实现。
     """
-    required = set(required_ids)
-    if not required:
-        raise ValueError("必要证据不能为空")
-    found = required & set(retrieved_ids)
-    missing = set(required_ids) - set(retrieved_ids)
-    evidence_recall = len(found)/len(required)
-    all_required_found = True
-    if evidence_recall < 1:
-        all_required_found = False
-    result = {
-        "evidence_recall": evidence_recall,
-        "all_required_found": all_required_found,
-        "missing_ids": sorted(missing)
-    }
-    return result
+    raise NotImplementedError("请完成 evaluate_evidence；输入输出与验收见网页课程")

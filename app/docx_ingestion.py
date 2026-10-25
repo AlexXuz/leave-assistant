@@ -35,32 +35,7 @@ def read_docx_blocks(path: str | Path) -> list[dict]:
     支持普通正文段落、样式标题和无合并的矩形表；复杂结构 helper 会明确拒绝。
     下一课再把表头/数据行转为可检索事实，并记录所在章节和正文块位置。
     """
-    document = open_docx_document(path)
-    results = []
-    for block, element in enumerate(document.iter_inner_content(),start=1):
-        if isinstance(element, Paragraph):
-            text = element.text.strip()
-            if not text:
-                continue
-            results.append({
-                "kind": "paragraph",
-                "block": block,
-                "style": element.style.name,
-                "text": text
-            })
-        if isinstance(element, Table):
-            rows = [
-                [cell.text.strip() for cell in row.cells]
-                for row in element.rows
-            ]
-            results.append({
-                "kind": "table",
-                "block": block,
-                "rows": rows
-            })
-    if not results:
-        raise DocumentParseError("整份文档为空")
-    return results
+    raise NotImplementedError("请完成 read_docx_blocks；输入输出与验收见网页课程")
 
 
 def open_docx_document(path: str | Path):

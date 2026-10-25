@@ -29,18 +29,4 @@ def confirm_leave_draft(draft_id: str, expected_revision: int, access: TrustedAc
     注意CONFIRMED只是用户确认此版本，不是SUBMITTED，更不是审批通过。
     本题内存存储只是可运行的接口替身，真实持久化及提交事务在后续接入。
     """
-    if not isinstance(access, TrustedAccessContext) or not isinstance(access.user_id, str) or not access.user_id.strip():
-        raise PermissionError("非法用户")
-    if type(expected_revision) is not int or expected_revision < 1:
-        raise ValueError("expected_revision必须正整数")
-    with store.transaction():
-        row = store.lock_draft(draft_id, access.user_id)
-        if row["revision"] != expected_revision:
-            raise DraftRevisionConflict("旧版本确认不能覆盖新草稿")
-        if content_hash(row["payload"]) != row["assessed_hash"]:
-            raise DraftRevisionConflict("当前内容不再对应通过预检的内容")
-        if row["status"] == "CONFIRMED":
-            return store.get_confirmation(draft_id)
-        if row["status"] != "READY_FOR_CONFIRMATION":
-            raise DraftStateError("不能确认BLOCKED、NEEDS_INFO、已提交等状态")
-        return store.mark_confirmed(draft_id)
+    raise NotImplementedError("请完成 confirm_leave_draft；输入输出与验收见网页课程")

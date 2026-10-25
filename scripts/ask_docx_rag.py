@@ -8,18 +8,18 @@ from uuid import uuid4
 
 from pgvector.psycopg import register_vector
 
-from app.docx_chunking import build_docx_chunks
+from app.course.examples.foundations.docx_chunking import build_docx_chunks
 from app.docx_preparation import prepare_sample_docx
 from app.document_manifest import build_document_manifest
-from app.document_sync import plan_document_sync
-from app.document_sync_execution import apply_sync_batch
+from app.course.examples.foundations.document_sync import plan_document_sync
+from app.course.examples.foundations.document_sync_execution import apply_sync_batch
 from app.embeddings import embed_documents, load_embedding_model
-from app.pdf_ingestion import DocumentParseError
-from app.permission_rag import prepare_authorized_rag_request
+from app.course.examples.foundations.pdf_ingestion import DocumentParseError
+from app.course.examples.foundations.permission_rag import prepare_authorized_rag_request
 from app.permission_service import TrustedAccessContext
 from app.pgvector_store import PROJECT_ROOT, connect_database
-from app.policy_qa import parse_policy_answer
-from app.source_citations import resolve_citations
+from app.course.examples.foundations.policy_qa import parse_policy_answer
+from app.course.examples.foundations.source_citations import resolve_citations
 from app.vector_index import current_embedding_config
 from scripts.ask_pdf_rag import tracked_model_call
 

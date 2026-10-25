@@ -7,8 +7,8 @@ from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 from app.embeddings import embed_query
-from app.retrieval import rank_chunks
-from app.retrieval_metrics import evaluate_evidence
+from app.course.examples.foundations.retrieval import rank_chunks
+from app.course.examples.foundations.retrieval_metrics import evaluate_evidence
 from app.vector_index import load_index
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]

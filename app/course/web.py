@@ -131,6 +131,7 @@ def mount_course(app,user,owned,run_id,ensure_ready,model_guard):
         if path.suffix!='.md':
             return '<pre><code>'+html.escape(source)+'</code></pre>'
         tokens=_md.parse(source)
+        readable_paths=allowed_files()
         for token in tokens:
             for child in token.children or []:
                 if child.type!='link_open':continue
@@ -138,7 +139,7 @@ def mount_course(app,user,owned,run_id,ensure_ready,model_guard):
                 parsed=urlsplit(href)
                 if parsed.scheme or parsed.netloc or not parsed.path:continue
                 destination=(path.parent/unquote(parsed.path)).resolve()
-                if destination in allowed_files():
+                if destination in readable_paths:
                     target='/api/course/files?'+urlencode({'path':destination.relative_to(PROJECT_ROOT).as_posix()})
                     if parsed.fragment:target+='#'+parsed.fragment
                     child.attrSet('href',target)

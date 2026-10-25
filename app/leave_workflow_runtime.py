@@ -6,9 +6,9 @@ from uuid import uuid4
 from pydantic import BaseModel, ConfigDict, Field
 from psycopg.types.json import Jsonb
 
-from app.exercises import LeaveExtraction
+from app.course.examples.foundations.exercises import LeaveExtraction
 from app.leave_confirmation_store import content_hash
-from app.leave_draft import assess_leave_draft, missing_fields
+from app.course.examples.foundations.leave_draft import assess_leave_draft, missing_fields
 from app.leave_workflow_store import PostgresLeaveStore
 from app.permission_service import TrustedAccessContext
 from app.pgvector_store import PROJECT_ROOT

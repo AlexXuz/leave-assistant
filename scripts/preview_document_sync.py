@@ -4,7 +4,7 @@ import json
 from datetime import datetime, timedelta, timezone
 
 from app.document_manifest import read_source_snapshot
-from app.document_sync import plan_document_sync
+from app.course.examples.foundations.document_sync import plan_document_sync
 from app.pgvector_store import PROJECT_ROOT
 
 

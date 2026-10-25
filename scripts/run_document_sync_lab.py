@@ -10,13 +10,13 @@ import numpy as np
 from pgvector.psycopg import register_vector
 from psycopg.errors import DivisionByZero
 
-from app import document_sync_execution as execution
+from app.course.examples.foundations import document_sync_execution as execution
 from app.document_manifest import build_document_manifest, fingerprint, read_source_snapshot
-from app.document_sync import plan_document_sync
+from app.course.examples.foundations.document_sync import plan_document_sync
 from app.document_sync_store import SourceRevisionConflict
 from app.embeddings import embed_documents
 from app.pgvector_store import PROJECT_ROOT, connect_database
-from app.retrieval import split_policy_document
+from app.course.examples.foundations.retrieval import split_policy_document
 from app.vector_index import current_embedding_config
 
 

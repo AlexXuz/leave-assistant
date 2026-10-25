@@ -1,7 +1,7 @@
 """助教编排：用服务端身份查询余额，向学习者纯函数提供业务数据。"""
 
-from app.exercises import LeaveExtraction
-from app.leave_draft import assess_leave_draft
+from app.course.examples.foundations.exercises import LeaveExtraction
+from app.course.examples.foundations.leave_draft import assess_leave_draft
 from app.permission_service import TrustedAccessContext
 
 

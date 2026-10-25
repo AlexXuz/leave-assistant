@@ -4,7 +4,7 @@ import hashlib
 import json
 from pathlib import Path
 
-from app.retrieval import split_policy_document
+from app.course.examples.foundations.retrieval import split_policy_document
 from app.vector_index import current_embedding_config
 
 LAB_DIRECTORY = Path(__file__).resolve().parents[1] / "data" / "document_sync_lab"

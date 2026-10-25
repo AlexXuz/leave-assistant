@@ -15,6 +15,9 @@ class CourseContracts(unittest.TestCase):
             self.assertEqual(len(value.json()['lessons']),26)
             self.assertEqual(client.get('/api/me').status_code,401)
             self.assertEqual(client.get('/course').status_code,200)
+            for resource in value.json()['resources']:
+                with self.subTest(resource=resource['path']):
+                    self.assertEqual(client.get('/api/course/files',params={'path':resource['path']}).status_code,200)
 
     def test_unimplemented_is_not_fake_success(self):
         with patch('app.main.build_messages',side_effect=NotImplementedError('pending')),TestClient(extraction_app) as client:
