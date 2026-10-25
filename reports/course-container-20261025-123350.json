@@ -1,0 +1,19 @@
+{
+  "environment": "independent_leave_course_compose_port_8013",
+  "model_called": false,
+  "checks": [
+    "Container restart retains login session, business draft and actual SQLite graph interrupt",
+    "Reference graph explicit confirm and submit create one pending-approval application; replay keeps ID",
+    "Linux container MCP child, Skill subprocess and authorized SQL role execute successfully; course has 15 lessons"
+  ],
+  "fixture_retained": true,
+  "main_host_accounts_touched": false,
+  "application": {
+    "application_id": "application-290acdc99a814218ad049b9cfe7569d1",
+    "status": "PENDING_APPROVAL",
+    "requested_days": 4,
+    "idempotency_key": "gfCdhNEPveQFOSZpvOVTg6xQ0aYxx9K2"
+  },
+  "status": "passed",
+  "image_id": "sha256:bdd15d87157e43676d3602e8c84d7b1a0c3ae33af766d1e1890fbfdc525b56a9"
+}

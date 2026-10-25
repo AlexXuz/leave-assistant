@@ -1,0 +1,30 @@
+{
+  "action": "submit",
+  "operator": "browser",
+  "business_state": {
+    "run_id": "day11-e2e-8a08cef5f9db4fe38d3b8f1eae74866d",
+    "draft_id": "draft-f5f0c92cffc445d5874bc7e98b6431fe",
+    "user_id": "employee-demo-a",
+    "revision": 1,
+    "draft_status": "SUBMITTED",
+    "draft": {
+      "leaveType": "ANNUAL",
+      "startDate": "2026-11-02",
+      "endDate": "2026-11-05",
+      "reason": "处理家事"
+    },
+    "missing_fields": [],
+    "remaining_days": 5,
+    "reserved_days": 4,
+    "used_days": 0,
+    "confirmed": true,
+    "application": {
+      "application_id": "application-69363de641be4aa2ba73311eda4fc0c3",
+      "status": "PENDING_APPROVAL",
+      "requested_days": 4,
+      "idempotency_key": "pHQ-RbibxLlUo-HJ_t8xnVltHQaaIFQQ"
+    },
+    "assessment": null
+  },
+  "model_calls": []
+}

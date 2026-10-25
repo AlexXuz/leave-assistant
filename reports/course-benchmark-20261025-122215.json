@@ -1,0 +1,12 @@
+{
+  "endpoint": "GET /api/me",
+  "environment": "local_loopback",
+  "samples": 20,
+  "concurrency": 2,
+  "warmup_requests": 1,
+  "chat_model_called": false,
+  "success_rate": 1.0,
+  "p50_ms": 66.69,
+  "p95_ms": 81.55,
+  "limitations": "Small local authenticated SQL-read sample; not LLM latency, load capacity or production SLA."
+}

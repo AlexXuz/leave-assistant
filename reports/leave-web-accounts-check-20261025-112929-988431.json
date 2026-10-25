@@ -1,0 +1,13 @@
+{
+  "run_id": "day12-web-check-c7e296deac0842a098b65ecab5f22415",
+  "real_database": true,
+  "chat_model": "fixed_response",
+  "checks": [
+    "One account shares quota across drafts: 9 -> 5 -> 1; retries never reserve twice; confirmation has no reservation",
+    "Personal leave explicitly unsupported; annual allowance never presented as personal-leave allowance",
+    "Four logins have independent 9/3/0/15 initial quotas, owned histories; forged identity and cross-account access rejected; logout revokes session",
+    "Restart and login retain balance, application IDs and histories; learner route remains unfinished"
+  ],
+  "cleaned": true,
+  "status": "passed"
+}

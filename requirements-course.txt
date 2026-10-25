@@ -1,0 +1,8 @@
+# Day12–26 runtime; MCP intentionally uses the v1 API taught in the course.
+langgraph==1.2.17
+langchain-core==1.6.12
+langgraph-checkpoint-sqlite==3.1.2
+mcp==1.30.0
+sqlglot==30.24.0
+markdown-it-py==4.2.0
+PyYAML==6.0.3

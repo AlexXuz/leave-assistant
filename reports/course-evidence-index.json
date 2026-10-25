@@ -1,0 +1,15 @@
+{
+  "prepared_at": "2026-10-25",
+  "authoring_status": "ready",
+  "learner_completed_through": 11,
+  "reports": {
+    "参考函数与组件联调": "course-package-20261025-123951.json",
+    "课程页面/API/SSE": "course-http-20261025-124001.json",
+    "真实模型ChatBI与只读Agent": "course-real-model-20261025-122109.json",
+    "真实授权RAG与引用": "course-policy-20261025-123105.json",
+    "CPU LoRA训练与重载": "course-lora-20261025-115947.json",
+    "本机有限并发读接口": "course-benchmark-20261025-122215.json",
+    "Docker重启/图恢复/MCP/Skill/SQL": "course-container-20261025-123350.json"
+  },
+  "learner_assignments_overwritten": false
+}

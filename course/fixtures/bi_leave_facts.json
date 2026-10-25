@@ -1,0 +1,258 @@
+[
+  {
+    "id": 1,
+    "department": "研发部",
+    "month": "2026-09",
+    "leave_type": "ANNUAL",
+    "days": 1,
+    "status": "APPROVED"
+  },
+  {
+    "id": 2,
+    "department": "研发部",
+    "month": "2026-09",
+    "leave_type": "ANNUAL",
+    "days": 2,
+    "status": "APPROVED"
+  },
+  {
+    "id": 3,
+    "department": "研发部",
+    "month": "2026-09",
+    "leave_type": "ANNUAL",
+    "days": 3,
+    "status": "APPROVED"
+  },
+  {
+    "id": 4,
+    "department": "研发部",
+    "month": "2026-09",
+    "leave_type": "SICK",
+    "days": 4,
+    "status": "PENDING_APPROVAL"
+  },
+  {
+    "id": 5,
+    "department": "研发部",
+    "month": "2026-10",
+    "leave_type": "ANNUAL",
+    "days": 1,
+    "status": "APPROVED"
+  },
+  {
+    "id": 6,
+    "department": "研发部",
+    "month": "2026-10",
+    "leave_type": "ANNUAL",
+    "days": 2,
+    "status": "APPROVED"
+  },
+  {
+    "id": 7,
+    "department": "研发部",
+    "month": "2026-10",
+    "leave_type": "ANNUAL",
+    "days": 3,
+    "status": "APPROVED"
+  },
+  {
+    "id": 8,
+    "department": "研发部",
+    "month": "2026-10",
+    "leave_type": "SICK",
+    "days": 4,
+    "status": "PENDING_APPROVAL"
+  },
+  {
+    "id": 9,
+    "department": "财务部",
+    "month": "2026-09",
+    "leave_type": "ANNUAL",
+    "days": 1,
+    "status": "APPROVED"
+  },
+  {
+    "id": 10,
+    "department": "财务部",
+    "month": "2026-09",
+    "leave_type": "ANNUAL",
+    "days": 2,
+    "status": "APPROVED"
+  },
+  {
+    "id": 11,
+    "department": "财务部",
+    "month": "2026-09",
+    "leave_type": "ANNUAL",
+    "days": 3,
+    "status": "APPROVED"
+  },
+  {
+    "id": 12,
+    "department": "财务部",
+    "month": "2026-09",
+    "leave_type": "SICK",
+    "days": 4,
+    "status": "PENDING_APPROVAL"
+  },
+  {
+    "id": 13,
+    "department": "财务部",
+    "month": "2026-10",
+    "leave_type": "ANNUAL",
+    "days": 1,
+    "status": "APPROVED"
+  },
+  {
+    "id": 14,
+    "department": "财务部",
+    "month": "2026-10",
+    "leave_type": "ANNUAL",
+    "days": 2,
+    "status": "APPROVED"
+  },
+  {
+    "id": 15,
+    "department": "财务部",
+    "month": "2026-10",
+    "leave_type": "ANNUAL",
+    "days": 3,
+    "status": "APPROVED"
+  },
+  {
+    "id": 16,
+    "department": "财务部",
+    "month": "2026-10",
+    "leave_type": "SICK",
+    "days": 4,
+    "status": "PENDING_APPROVAL"
+  },
+  {
+    "id": 17,
+    "department": "运营部",
+    "month": "2026-09",
+    "leave_type": "ANNUAL",
+    "days": 1,
+    "status": "APPROVED"
+  },
+  {
+    "id": 18,
+    "department": "运营部",
+    "month": "2026-09",
+    "leave_type": "ANNUAL",
+    "days": 2,
+    "status": "APPROVED"
+  },
+  {
+    "id": 19,
+    "department": "运营部",
+    "month": "2026-09",
+    "leave_type": "ANNUAL",
+    "days": 3,
+    "status": "APPROVED"
+  },
+  {
+    "id": 20,
+    "department": "运营部",
+    "month": "2026-09",
+    "leave_type": "SICK",
+    "days": 4,
+    "status": "PENDING_APPROVAL"
+  },
+  {
+    "id": 21,
+    "department": "运营部",
+    "month": "2026-10",
+    "leave_type": "ANNUAL",
+    "days": 1,
+    "status": "APPROVED"
+  },
+  {
+    "id": 22,
+    "department": "运营部",
+    "month": "2026-10",
+    "leave_type": "ANNUAL",
+    "days": 2,
+    "status": "APPROVED"
+  },
+  {
+    "id": 23,
+    "department": "运营部",
+    "month": "2026-10",
+    "leave_type": "ANNUAL",
+    "days": 3,
+    "status": "APPROVED"
+  },
+  {
+    "id": 24,
+    "department": "运营部",
+    "month": "2026-10",
+    "leave_type": "SICK",
+    "days": 4,
+    "status": "PENDING_APPROVAL"
+  },
+  {
+    "id": 25,
+    "department": "产品部",
+    "month": "2026-09",
+    "leave_type": "ANNUAL",
+    "days": 1,
+    "status": "APPROVED"
+  },
+  {
+    "id": 26,
+    "department": "产品部",
+    "month": "2026-09",
+    "leave_type": "ANNUAL",
+    "days": 2,
+    "status": "APPROVED"
+  },
+  {
+    "id": 27,
+    "department": "产品部",
+    "month": "2026-09",
+    "leave_type": "ANNUAL",
+    "days": 3,
+    "status": "APPROVED"
+  },
+  {
+    "id": 28,
+    "department": "产品部",
+    "month": "2026-09",
+    "leave_type": "SICK",
+    "days": 4,
+    "status": "PENDING_APPROVAL"
+  },
+  {
+    "id": 29,
+    "department": "产品部",
+    "month": "2026-10",
+    "leave_type": "ANNUAL",
+    "days": 1,
+    "status": "APPROVED"
+  },
+  {
+    "id": 30,
+    "department": "产品部",
+    "month": "2026-10",
+    "leave_type": "ANNUAL",
+    "days": 2,
+    "status": "APPROVED"
+  },
+  {
+    "id": 31,
+    "department": "产品部",
+    "month": "2026-10",
+    "leave_type": "ANNUAL",
+    "days": 3,
+    "status": "APPROVED"
+  },
+  {
+    "id": 32,
+    "department": "产品部",
+    "month": "2026-10",
+    "leave_type": "SICK",
+    "days": 4,
+    "status": "PENDING_APPROVAL"
+  }
+]

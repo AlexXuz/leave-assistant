@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>轻舟 · 办公助手</title><link rel="stylesheet" href="/assets/style.css"><script src="/assets/app.js" defer></script></head>
+<body>
+<section id="login-screen" class="login-screen">
+  <div class="login-intro"><a class="brand" href="/">轻舟<span>OFFICE ASSISTANT</span></a><div class="eyebrow">YOUR WORKSPACE</div><h1>从你的账号，开始安排。</h1><p>每位员工有自己的年假额度和申请记录。<br>提交后预占额度，退出再登录也会保留。</p><div class="login-footnote">本机演示环境 · 使用虚构员工与额度</div></div>
+  <div class="login-card"><h2>登录办公助手</h2><p class="login-subtitle">选择一个演示账号，或输入下方账号密码。 <a href="/course">阅读完整自学课件 →</a></p><div id="demo-accounts" class="demo-accounts"></div><p id="demo-password" class="login-subtitle"></p>
+    <form id="login-form"><label for="username">账号</label><input id="username" name="username" autocomplete="username" required placeholder="例如：zhangsan"><label for="password">密码</label><input id="password" name="password" type="password" autocomplete="current-password" required placeholder="演示密码"><button id="login" type="submit" class="primary">登录</button></form>
+    <div id="login-notice" class="notice" role="status" hidden></div>
+  </div>
+</section>
+<div id="workspace-ui" class="workspace-ui" hidden>
+<aside class="sidebar">
+  <a class="brand" href="/">轻舟<span>OFFICE ASSISTANT</span></a>
+  <div class="workspace">个人工作台</div><div class="nav active">↗　请假申请</div><a href="/course" class="switch-account">自学课程 · Day12–26 →</a>
+  <div class="history-title">最近申请 <button id="reload" class="icon" aria-label="刷新最近申请">↻</button></div>
+  <div id="history" class="history"><p class="muted">暂无申请</p></div>
+  <div class="profile"><div id="avatar" class="avatar">人</div><div><span id="profile-name"></span><small id="profile-department"></small></div></div><button id="logout" class="switch-account">退出 / 切换账号</button>
+</aside>
+<main>
+  <header><span>工作台 / 请假申请</span><span id="header-user"></span><span class="environment"><i></i>教学数据</span></header>
+  <div class="content">
+    <div class="eyebrow">LEAVE REQUEST</div><h1>把请假的事，安排清楚。</h1><p class="intro">说出你的安排，助手整理草稿。核对无误后，由你确认并提交。</p>
+    <section class="account-summary" aria-label="我的年假账户"><div><b id="account-year">2026 年假账户</b><small>同一账号的全部申请共享此额度</small></div><div><span>当前可用</span><strong id="account-available">—</strong><small>天</small></div><div><span>已预占</span><strong id="account-reserved">—</strong><small>天</small></div><div><span>已使用</span><strong id="account-used">—</strong><small>天</small></div><button id="account-refresh" class="icon" aria-label="刷新账户余额">↻</button></section>
+    <ol class="steps"><li id="step1" class="current"><b>1</b>描述需求</li><li id="step2"><b>2</b>核对草稿</li><li id="step3"><b>3</b>提交申请</li></ol>
+    <div id="notice" class="notice" role="status" aria-live="polite" hidden></div>
+    <div class="columns">
+      <section class="card compose"><div class="card-heading"><h2>你计划怎么休假？</h2><span class="tag">AI 整理</span></div>
+        <label for="request">请假需求</label><textarea id="request" maxlength="2000" placeholder="例如：2026年11月2日至5日请四天年假，处理家事。"></textarea>
+        <div class="examples"><button data-example="2026年11月2日至11月5日请四天年假，处理家事。">四天年假</button><button data-example="我想请年假，处理家事。">日期还没定</button></div>
+        <button id="prepare" class="primary">整理申请草稿 <span>↗</span></button>
+        <p class="hint">当前支持整天年假；事假、病假暂未开放。生成草稿不占用额度。</p>
+        <div class="callout"><b>由你掌握最后一步</b><p>助手负责整理信息；只有你核对并点击确认后，才能提交这份申请。</p></div>
+      </section>
+      <section class="card draft"><div class="card-heading"><h2>申请草稿</h2><span id="status" class="badge">等待输入</span></div>
+        <div id="empty" class="empty"><div class="paper">≡</div><h3>你的安排，会在这里成形</h3><p>填写左侧需求，生成一份可核对的请假草稿。</p></div>
+        <div id="detail" hidden>
+          <div id="draft-message" class="draft-message"></div>
+          <dl class="fields"><div><dt>假期类型</dt><dd id="type"></dd></div><div><dt>申请天数</dt><dd id="days"></dd></div><div><dt>开始日期</dt><dd id="start"></dd></div><div><dt>结束日期</dt><dd id="end"></dd></div><div class="wide"><dt>请假事由</dt><dd id="reason"></dd></div></dl>
+          <p id="draft-balance-label" class="hint">申请年度的年假账户额度</p><div id="draft-balances" class="balances"><div><span>年假可用</span><strong id="available">—</strong><small>天</small></div><div><span>年假预占</span><strong id="reserved">—</strong><small>天</small></div><div><span>年假已用</span><strong id="used">—</strong><small>天</small></div></div>
+          <div id="application" class="application" hidden><b>申请已提交，等待审批</b><p>这表示申请已进入待审批状态，尚未获批或休假。</p><code id="application-id"></code></div>
+          <div class="actions"><button id="confirm" class="primary" hidden>确认这份草稿</button><button id="submit" class="primary" hidden>提交申请</button><button id="refresh" class="secondary">刷新状态</button></div>
+          <div class="meta"><span id="version"></span><span>按整日连续日历日计算 · 教学规则</span></div>
+        </div>
+      </section>
+    </div>
+    <details id="learning" class="learning"><summary>学习观察 <span>查看服务端状态与 Day12 路由</span></summary><p>当前页面复用 Day11 的业务函数。Day12 先实现路由判断，后续再接入 LangGraph 暂停与恢复。</p><button id="route" class="secondary" disabled>检查我的路由</button><pre id="route-result"></pre><pre id="raw">尚未生成草稿</pre></details>
+    <footer>本页使用虚构员工和额度。同一账号的多份申请共享年假账户，提交会预占额度；刷新、重新登录和服务重启都不会重置余额。</footer>
+  </div>
+</main>
+</div>
+</body></html>

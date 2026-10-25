@@ -1,0 +1,16 @@
+.git
+.env
+.env.*
+.venv
+.models
+.installers
+.idea
+.vscode
+__pycache__
+**/__pycache__
+*.pyc
+tmp
+reports
+data/indexes
+*.pem
+*.key

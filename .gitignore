@@ -16,6 +16,11 @@ data/indexes/
 tmp/
 *.log
 
+# Browser-entered draft text is local runtime data; publish only reviewed fixtures explicitly.
+reports/leave-web-prepare-*.json
+reports/leave-web-confirm-*.json
+reports/leave-web-submit-*.json
+
 # Credentials and private key material.
 *.pem
 *.key

@@ -1,0 +1,101 @@
+{
+  "mode": "real_model_spot_check",
+  "scope": "fictional_account_and_synthetic_history",
+  "cases": [
+    {
+      "name": "chatbi",
+      "http_status": 200,
+      "result": {
+        "sql": "SELECT department, COALESCE(SUM(days), 0) AS total_days FROM course_bi.visible_leave WHERE month = '2026-10' AND leave_type = 'ANNUAL' AND status = 'APPROVED' GROUP BY department ORDER BY department LIMIT 100",
+        "rows": [
+          {
+            "department": "研发部",
+            "total_days": 6
+          }
+        ],
+        "scope": "研发部",
+        "row_limit": 100,
+        "database_role": "leave_course_bi_reader",
+        "source": "synthetic_historical_leave_facts",
+        "read_only": true,
+        "chart": {
+          "title": "授权部门请假天数",
+          "scope": "研发部",
+          "unit": "天",
+          "labels": [
+            "研发部"
+          ],
+          "values": [
+            6
+          ],
+          "source": "executed_sql_rows"
+        },
+        "model_call": {
+          "purpose": "chatbi_sql",
+          "prompt_version": "course-chatbi-v1",
+          "chat_elapsed_ms": 2015,
+          "configured_model": "deepseek-flash",
+          "model_metadata": {
+            "model": "deepseek-flash",
+            "prompt_version": "course-chatbi-v1",
+            "latency_ms": 1916,
+            "finish_reason": "stop",
+            "tokens": {
+              "completion_tokens": 66,
+              "prompt_tokens": 201,
+              "total_tokens": 267,
+              "completion_tokens_details": null,
+              "prompt_tokens_details": {
+                "audio_tokens": null,
+                "cache_write_tokens": null,
+                "cached_tokens": 0,
+                "image_tokens": null,
+                "text_tokens": null
+              },
+              "prompt_cache_hit_tokens": 0,
+              "prompt_cache_miss_tokens": 201
+            }
+          }
+        },
+        "executed": true
+      }
+    },
+    {
+      "name": "bounded_agent",
+      "http_status": 200,
+      "result": {
+        "status": "answered",
+        "answer": "2026年年假情况（数据来自系统）：\n\n- 授予：10 天\n- 已使用：1 天\n- 占用/预留：0 天\n- **剩余：9 天**\n\n说明：这是当前登录人的年假余额查询结果，我只有只读权限，不能提交或审批休假申请。如需在办公/教学系统中办理，请通过正式申请流程提交。",
+        "trace": [
+          {
+            "step": 1,
+            "tool": "get_my_leave_balance",
+            "result": {
+              "status": "ok",
+              "balance": {
+                "year": 2026,
+                "granted_days": 10,
+                "used_days": 1,
+                "reserved_days": 0,
+                "remaining_days": 9,
+                "leave_type": "ANNUAL",
+                "unit": "天"
+              }
+            }
+          }
+        ],
+        "model": "deepseek-flash",
+        "observed_total_tokens": 1190,
+        "seconds": 3.453,
+        "limits": {
+          "model_steps": 3,
+          "tool_calls": 4,
+          "total_seconds": 40,
+          "observed_tokens": 2200
+        },
+        "write_tools_exposed": false,
+        "semantic_review": "compare_answer_with_trace"
+      }
+    }
+  ]
+}

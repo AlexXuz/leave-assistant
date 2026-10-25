@@ -1,0 +1,54 @@
+{"scenario_id": "intent-01", "input": "leave request", "output": "apply", "split": "train"}
+{"scenario_id": "intent-01", "input": "please leave request", "output": "apply", "split": "train"}
+{"scenario_id": "intent-02", "input": "annual leave", "output": "apply", "split": "train"}
+{"scenario_id": "intent-02", "input": "please annual leave", "output": "apply", "split": "train"}
+{"scenario_id": "intent-03", "input": "take vacation", "output": "apply", "split": "train"}
+{"scenario_id": "intent-03", "input": "please take vacation", "output": "apply", "split": "train"}
+{"scenario_id": "intent-04", "input": "request days off", "output": "apply", "split": "train"}
+{"scenario_id": "intent-04", "input": "please request days off", "output": "apply", "split": "train"}
+{"scenario_id": "intent-05", "input": "submit holiday", "output": "apply", "split": "train"}
+{"scenario_id": "intent-05", "input": "please submit holiday", "output": "apply", "split": "train"}
+{"scenario_id": "intent-06", "input": "arrange leave", "output": "apply", "split": "validation"}
+{"scenario_id": "intent-06", "input": "please arrange leave", "output": "apply", "split": "validation"}
+{"scenario_id": "intent-07", "input": "book annual days", "output": "apply", "split": "validation"}
+{"scenario_id": "intent-07", "input": "please book annual days", "output": "apply", "split": "validation"}
+{"scenario_id": "intent-08", "input": "plan time off", "output": "apply", "split": "test"}
+{"scenario_id": "intent-08", "input": "please plan time off", "output": "apply", "split": "test"}
+{"scenario_id": "intent-09", "input": "start leave draft", "output": "apply", "split": "test"}
+{"scenario_id": "intent-09", "input": "please start leave draft", "output": "apply", "split": "test"}
+{"scenario_id": "intent-10", "input": "remaining leave", "output": "balance", "split": "train"}
+{"scenario_id": "intent-10", "input": "please remaining leave", "output": "balance", "split": "train"}
+{"scenario_id": "intent-11", "input": "available days", "output": "balance", "split": "train"}
+{"scenario_id": "intent-11", "input": "please available days", "output": "balance", "split": "train"}
+{"scenario_id": "intent-12", "input": "leave balance", "output": "balance", "split": "train"}
+{"scenario_id": "intent-12", "input": "please leave balance", "output": "balance", "split": "train"}
+{"scenario_id": "intent-13", "input": "vacation quota", "output": "balance", "split": "train"}
+{"scenario_id": "intent-13", "input": "please vacation quota", "output": "balance", "split": "train"}
+{"scenario_id": "intent-14", "input": "days left", "output": "balance", "split": "train"}
+{"scenario_id": "intent-14", "input": "please days left", "output": "balance", "split": "train"}
+{"scenario_id": "intent-15", "input": "remaining annual days", "output": "balance", "split": "validation"}
+{"scenario_id": "intent-15", "input": "please remaining annual days", "output": "balance", "split": "validation"}
+{"scenario_id": "intent-16", "input": "current allowance", "output": "balance", "split": "validation"}
+{"scenario_id": "intent-16", "input": "please current allowance", "output": "balance", "split": "validation"}
+{"scenario_id": "intent-17", "input": "check entitlement", "output": "balance", "split": "test"}
+{"scenario_id": "intent-17", "input": "please check entitlement", "output": "balance", "split": "test"}
+{"scenario_id": "intent-18", "input": "read my balance", "output": "balance", "split": "test"}
+{"scenario_id": "intent-18", "input": "please read my balance", "output": "balance", "split": "test"}
+{"scenario_id": "intent-19", "input": "approval rule", "output": "policy", "split": "train"}
+{"scenario_id": "intent-19", "input": "please approval rule", "output": "policy", "split": "train"}
+{"scenario_id": "intent-20", "input": "company policy", "output": "policy", "split": "train"}
+{"scenario_id": "intent-20", "input": "please company policy", "output": "policy", "split": "train"}
+{"scenario_id": "intent-21", "input": "who approves", "output": "policy", "split": "train"}
+{"scenario_id": "intent-21", "input": "please who approves", "output": "policy", "split": "train"}
+{"scenario_id": "intent-22", "input": "leave procedure", "output": "policy", "split": "train"}
+{"scenario_id": "intent-22", "input": "please leave procedure", "output": "policy", "split": "train"}
+{"scenario_id": "intent-23", "input": "advance notice", "output": "policy", "split": "train"}
+{"scenario_id": "intent-23", "input": "please advance notice", "output": "policy", "split": "train"}
+{"scenario_id": "intent-24", "input": "permission rules", "output": "policy", "split": "validation"}
+{"scenario_id": "intent-24", "input": "please permission rules", "output": "policy", "split": "validation"}
+{"scenario_id": "intent-25", "input": "required documents", "output": "policy", "split": "validation"}
+{"scenario_id": "intent-25", "input": "please required documents", "output": "policy", "split": "validation"}
+{"scenario_id": "intent-26", "input": "approval chain", "output": "policy", "split": "test"}
+{"scenario_id": "intent-26", "input": "please approval chain", "output": "policy", "split": "test"}
+{"scenario_id": "intent-27", "input": "read regulations", "output": "policy", "split": "test"}
+{"scenario_id": "intent-27", "input": "please read regulations", "output": "policy", "split": "test"}

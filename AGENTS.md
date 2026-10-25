@@ -4,6 +4,24 @@ This is a project-based Python AI application course for a senior Java engineer.
 Keep the learner's core exercise functions under the learner's control; provide
 scaffolding, explanations, checks and reviews without silently replacing answers.
 
+## Practice and testing experience
+
+Use the local browser application as the primary learner-facing exercise and
+acceptance experience. Connect pages to actual project services and show real
+business state; do not substitute success animations or raw CLI output for the
+workflow. Keep automated checks and CLI tools for regression and diagnosis.
+The teacher supplies page/API scaffolding so the learner focuses on the current
+Python/AI core exercise. Explain which paths are implemented and which are pending.
+
+## Self-study package (requested 2026-10-25)
+
+The user asked for the rest of Day12–Day26 to be prepared together, with lectures,
+assignments and separate reference answers, then one batch commit/push. Course
+materials live in course/. The default reference labs may run complete examples;
+do not copy reference answers into the learner's assignment functions or mark the
+learner as having completed later Days merely because the package checks pass.
+Keep authoring/verification status separate from course/LEARNER_PROGRESS.md.
+
 ## GitHub synchronization
 
 The user authorized uploading this learning project to GitHub and synchronizing

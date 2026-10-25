@@ -1,0 +1,15 @@
+FROM python:3.11-slim@sha256:b7a9e5f6a93d6d4a31f129bbd4bdee69efccb6ded0fb230d78aafaf37af98377
+WORKDIR /app
+ENV PYTHONUNBUFFERED=1 PYTHONDONTWRITEBYTECODE=1
+COPY requirements-course-runtime.txt requirements-course.txt requirements-course.lock.txt ./
+RUN pip install --no-cache-dir -c requirements-course.lock.txt -r requirements-course-runtime.txt && useradd --create-home course
+COPY app ./app
+COPY course ./course
+COPY scripts ./scripts
+COPY infra ./infra
+COPY data ./data
+RUN mkdir -p /app/tmp/course /app/reports && chown -R course:course /app
+USER course
+EXPOSE 8000
+HEALTHCHECK --interval=10s --timeout=3s --start-period=20s CMD python -c "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/health',timeout=2)"
+CMD ["python","-m","uvicorn","app.leave_web:app","--host","0.0.0.0","--port","8000"]

@@ -1,0 +1,11 @@
+{
+  "real_database": true,
+  "chat_model": "fixed_response",
+  "checks": [
+    "Separate explicit confirm and submit; latest SQL state; same-request retry without duplicate reservation",
+    "Browser ownership isolation, CSRF origin checks, strict version input and restart persistence",
+    "Unfinished learner route reports 501; Day11 workflow remains usable"
+  ],
+  "cleaned": true,
+  "status": "passed"
+}

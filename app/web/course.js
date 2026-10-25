@@ -1,0 +1,52 @@
+const $=id=>document.getElementById(id);let lessons=[],day=12,tab='lesson',busy=false,graphResult=null,eventSource=null,jobId=null,cursor=0;
+function notice(text=''){$('notice').textContent=text;$('notice').hidden=!text;}
+async function api(path,body){const r=await fetch(path,body===undefined?{cache:'no-store'}:{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});const value=await r.json();if(!r.ok)throw Error(typeof value.detail==='string'?value.detail:'请求校验未通过');return value;}
+function output(value){$('output').textContent=JSON.stringify(value,null,2);}
+async function work(fn){if(busy)return;busy=true;notice();document.querySelectorAll('button').forEach(b=>b.disabled=true);try{await fn();}catch(error){notice(error.message);}finally{busy=false;document.querySelectorAll('button').forEach(b=>b.disabled=false);syncGraph();}}
+function readSet(){try{return new Set(JSON.parse(localStorage.getItem('leave-course-read')||'[]'));}catch{return new Set();}}
+function nav(){const read=readSet();$('lessons').replaceChildren();for(const item of lessons){const b=document.createElement('button');b.classList.toggle('selected',item.day===day);const n=document.createElement('b');n.textContent='DAY '+item.day+(read.has(item.day)?' · 已阅读':'');const t=document.createElement('span');t.textContent=item.title;b.append(n,t);b.onclick=()=>work(async()=>{day=item.day;graphResult=null;history.replaceState(null,'','/course?day='+day);await show('lesson');nav();});$('lessons').append(b);} $('read').textContent=read.has(day)?'取消已阅读标记':'标记已阅读';}
+async function show(name){tab=name;const item=lessons.find(x=>x.day===day);$('title').textContent='Day '+day+' · '+item.title;document.querySelectorAll('[data-tab]').forEach(b=>b.classList.toggle('active',b.dataset.tab===tab));$('article').hidden=tab==='lab';$('lab').hidden=tab!=='lab';if(tab==='lab'){await controls(item.lab);return;}const r=await fetch('/api/course/'+day+'/content/'+tab,{cache:'no-store'});if(!r.ok)throw Error('课件暂不可读');$('article').innerHTML=await r.text();}
+function button(text,fn,secondary=false){const b=document.createElement('button');b.textContent=text;if(secondary)b.className='secondary';b.onclick=()=>work(fn);$('lab-controls').append(b);return b;}
+function text(content){const p=document.createElement('p');p.textContent=content;$('lab-controls').append(p);}
+function field(id,label,value='',area=false){const l=document.createElement('label');l.htmlFor=id;l.textContent=label;const input=document.createElement(area?'textarea':'input');input.id=id;input.value=value;$('lab-controls').append(l,input);return input;}
+function syncGraph(){if(!$('graph-confirm'))return;const action=graphResult?.interrupts?.[0]?.action;$('graph-confirm').disabled=busy||action!=='confirm';$('graph-submit').disabled=busy||action!=='submit';}
+function graphState(result){graphResult=result;const view=result.business_state;const target=$('graph-state');target.textContent='当前草稿：'+view.draft.startDate+' 至 '+view.draft.endDate+'，'+view.draft.reason+'；版本 '+view.revision+'。\n业务状态：'+view.draft_status+'；年假可用 '+view.remaining_days+' 天，预占 '+view.reserved_days+' 天。\n'+(result.interrupts.length?'等待你的动作：'+result.interrupts[0].action:'图已结束；申请：'+(view.application?.application_id||'尚未提交'));output(result);syncGraph();}
+async function controls(kind){if(eventSource){eventSource.close();eventSource=null;}$('lab-controls').replaceChildren();$('chart').replaceChildren();$('output').textContent='点击按钮运行；需要业务身份的实验先在办公助手登录。';graphResult=null;
+ if(kind==='graph'){
+  text('先在办公助手生成一份年假草稿，不要确认；再选择草稿启动图。确认和提交都需要你单独点击。');
+  const select=document.createElement('select');select.id='graph-draft';$('lab-controls').append(select);
+  const mode=document.createElement('select');mode.id='graph-mode';for(const [value,label]of[['reference','参考实现'],['exercise','我的作业']]){const o=document.createElement('option');o.value=value;o.textContent=label;mode.append(o);}$('lab-controls').append(mode);
+  const state=document.createElement('div');state.id='graph-state';state.textContent='尚未读取编排状态';$('lab-controls').append(state);
+  const drafts=await api('/api/drafts');for(const d of drafts){const o=document.createElement('option');o.value=d.draft_id;o.textContent=(d.draft.startDate||'日期未定')+' / '+d.draft_status+' / '+d.draft.reason;select.append(o);}
+  async function act(action){if(!select.value)throw Error('先在办公助手生成一份草稿');graphState(await api('/api/course/labs/graph/'+select.value,{mode:mode.value,action,revision:graphResult?.business_state.revision??null}));}
+  button('开始 / 读取图',()=>act('start'));const c=button('确认当前版本',()=>act('confirm'));c.id='graph-confirm';const s=button('提交申请',()=>act('submit'));s.id='graph-submit';button('刷新暂停状态',()=>act('show'),true);syncGraph();
+ } else if(kind==='context'){
+  field('context-question','当前问题','现在的年假余额是多少？');field('context-budget','字符预算','1600');
+  button('构造受预算约束的上下文',async()=>output(await api('/api/course/labs/context',{question:$('context-question').value,budget_chars:Number($('context-budget').value),turns:[{user:'旧问题：我要休四天',assistant:'旧回答：等待补信息'},{user:'改为两天，以当前数据库为准',assistant:'请核对最新草稿'}]})));
+  button('保存“简短”偏好',async()=>output(await api('/api/course/labs/memory',{tone:'concise'})),true);button('读取我的偏好',async()=>output(await api('/api/course/labs/memory')),true);button('删除我的偏好',async()=>output(await api('/api/course/labs/memory',{delete:true})),true);
+ } else if(kind==='mcp'){text('启动独立MCP stdio服务，宿主注入当前登录身份。不会调用聊天模型。');button('发现并调用MCP工具',async()=>output(await api('/api/course/labs/mcp',{})));
+ } else if(kind==='skill'){text('只执行仓库内审阅过的部门报告脚本，不接受任意脚本路径。');button('加载Skill并生成报告',async()=>output(await api('/api/course/labs/skill',{})));
+ } else if(kind==='diagnostics'){text('分别观察HTTP与数据库就绪；不把配置存在当作模型网络已验证。');button('读取本机诊断',async()=>output(await api('/api/course/labs/diagnostics')));
+ } else if(kind==='jobs'){
+  text('事件来自真实只读报告阶段，并非模型token。关闭事件流不等于取消；显式取消只作用于这个任务。');
+  field('job-id','任务编号（可粘贴已创建编号以恢复查看）','');
+  function connect(){jobId=$('job-id').value.trim();if(!jobId)throw Error('先创建任务');if(eventSource)eventSource.close();eventSource=new EventSource('/api/course/labs/jobs/'+jobId+'/events?after='+cursor);for(const name of['stage','done','error','cancelled'])eventSource.addEventListener(name,event=>{if(!event.data)return;cursor=Number(event.lastEventId)||cursor;$('output').textContent+='\n'+name+' '+event.data;if(['done','error','cancelled'].includes(name)){eventSource.close();eventSource=null;}});}
+  button('启动报告任务',async()=>{const job=await api('/api/course/labs/jobs',{});$('job-id').value=job.id;cursor=0;output(job);connect();});button('接收 / 重连事件',async()=>{connect();},true);button('读取任务状态',async()=>output(await api('/api/course/labs/jobs/'+$('job-id').value.trim())),true);button('请求取消',async()=>output(await api('/api/course/labs/jobs/'+$('job-id').value.trim()+'/cancel',{})),true);
+ } else if(kind==='traces'){text('只展示当前登录人最近的请求元数据。真实模型用量另见运行报告；本页不显示密钥、Cookie或正文。');button('读取最近调用链',async()=>output(await api('/api/course/labs/traces')));button('生成一条诊断请求',async()=>output(await api('/api/course/labs/diagnostics')),true);
+ } else if(kind==='bi'){
+  text('查询独立模拟历史表，当前账号仅可见本人部门。参考SQL不调用模型；自然语言按钮会调用本机配置的真实模型。');
+  field('bi-question','明确问题','统计2026年10月已批准的年假天数，按部门汇总。',true);
+  field('bi-sql','可编辑的参考SQL',"SELECT department, SUM(days) AS total_days FROM course_bi.visible_leave WHERE month='2026-10' AND status='APPROVED' AND leave_type='ANNUAL' GROUP BY department",true);
+  function result(value){output(value);$('chart').replaceChildren();if(value.chart){const maximum=Math.max(1,...value.chart.values);for(let i=0;i<value.chart.labels.length;i++){const row=document.createElement('div');row.className='bar';const label=document.createElement('span');label.className='bar-label';label.textContent=value.chart.labels[i];const track=document.createElement('div');track.className='bar-track';const fill=document.createElement('div');fill.className='bar-fill';fill.style.width=(100*value.chart.values[i]/maximum)+'%';track.append(fill);const number=document.createElement('span');number.textContent=value.chart.values[i]+'天';row.append(label,track,number);$('chart').append(row);}}}
+  button('执行参考SQL',async()=>result(await api('/api/course/labs/bi',{sql:$('bi-sql').value})));button('模型生成并查询',async()=>result(await api('/api/course/labs/bi',{question:$('bi-question').value})),true);
+ } else if(kind==='training'){text('执行真实60步CPU LoRA机制训练：随机小GPT2，无新模型下载，不证明业务任务效果。需要主机训练依赖；课程Docker镜像不含torch。');button('运行CPU微型LoRA',async()=>output(await api('/api/course/labs/training',{})));
+ } else if(kind==='integration'){
+  text('有限只读Agent最多3次模型请求、4次工具调用。它可查询当前账号余额/申请，没有提交工具；答案需对照trace。');field('agent-question','问题','我2026年还剩几天年假？');button('运行只读Agent（真实模型）',async()=>output(await api('/api/course/labs/agent',{question:$('agent-question').value})));
+  field('policy-question','研发教学制度问题','连续请四天年假，需要谁审批？');text('以下检索复用主机授权RAG与本地Embedding，教学制度仅研发部可见。轻量课程镜像不包含Embedding权重。');button('授权制度检索与引用（真实模型）',async()=>output(await api('/api/course/labs/policy',{question:$('policy-question').value})),true);
+ } else {text('本课主要交付设计、数据或证据。先读作业要求，再用上方按钮检查核心函数；文档和独立集成需要按评分表人工复核。');}
+}
+document.querySelectorAll('[data-tab]').forEach(b=>b.onclick=()=>work(()=>show(b.dataset.tab)));
+$('check-exercise').onclick=()=>work(async()=>output(await api('/api/course/'+day+'/check',{mode:'exercise'})));
+$('check-reference').onclick=()=>work(async()=>output(await api('/api/course/'+day+'/check',{mode:'reference'})));
+$('read').onclick=()=>{const set=readSet();set.has(day)?set.delete(day):set.add(day);localStorage.setItem('leave-course-read',JSON.stringify([...set]));nav();};
+work(async()=>{lessons=(await api('/api/course')).lessons;const requested=Number(new URLSearchParams(location.search).get('day'));if(lessons.some(x=>x.day===requested))day=requested;nav();await show('lesson');try{const me=await api('/api/me');$('account').textContent=me.user.display_name+' · '+me.user.department;}catch{}});

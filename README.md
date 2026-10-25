@@ -2,7 +2,21 @@
 
 面向有 Java 后端经验的开发者，通过项目练习 Python、结构化模型调用、RAG、pgvector、文档导入与 Agent 应用开发。
 
-当前 Day 1–Day 8 已完成阶段验收；Day 9 的 Word 文档解析与切分正在进行。代码与结果均按实际状态保留，尚未完成的任务以对应 Day 文档为准。
+本人学习进度：Day 1–Day 11 已完成阶段验收。**Day12–Day26完整自学课程包已备好**：讲解、作业、分开的参考答案、页面实验、部署文件与验证记录都在 [course/README.md](course/README.md)。课程准备完成不等于本人已学完，个人进度见 [course/LEARNER_PROGRESS.md](course/LEARNER_PROGRESS.md)。
+
+双击根目录 `start-course.cmd`，或打开 http://127.0.0.1:8012/course 开始学习。讲解可直接阅读，业务实验先登录演示账号。新环境安装/容器部署见 [DEPLOYMENT.md](DEPLOYMENT.md)，真实验证范围见 [course/VALIDATION.md](course/VALIDATION.md)。
+
+## 浏览器体验入口
+
+启动本机Docker/PostgreSQL后，运行：
+
+```powershell
+.\.venv\Scripts\python.exe -X utf8 -m uvicorn app.leave_web:app --host 127.0.0.1 --port 8012 --reload
+```
+
+打开 http://127.0.0.1:8012 ，体验自然语言生成草稿、核对、明确确认、提交待审批和历史状态查看。页面复用已验收业务函数；员工与额度是隔离的教学数据。Day12路由作业和后续LangGraph接入边界见 [DAY12.md](DAY12.md)。
+
+演示账号：zhangsan/张三（初始可用年假9天）、lisi/李四（3天）、wangwu/王五（0天）、zhaoliu/赵六（15天），密码均为`demo123`。同一账号的多份申请共享持久的2026年假账户；刷新、重新登录和重启不重置额度。当前支持年假，事假/病假明确提示暂不支持。
 
 每完成一个 Day 的验收与复核，更新学习记录、提交并推送 GitHub。仓库不包含本机密钥、虚拟环境、模型权重及临时渲染文件；完整同步约定见 [AGENTS.md](AGENTS.md)。
 

@@ -1,0 +1,13 @@
+{
+  "run_id": "day12-web-check-a368d695f3aa4a6e844e1e01cec3e6c8",
+  "model": "fixed_response",
+  "real_database": true,
+  "checks": [
+    "45 lesson/assignment/answer pages, explicit reference vs learner modes, authenticated memory/context",
+    "HTTP graph start/confirm/submit and replay correspond to real persisted business state",
+    "ChatBI role-scoped result, rejected arbitrary function and clarification without execution",
+    "Actual HTTP SSE framing/cursor and job/graph ownership isolation"
+  ],
+  "cleaned": true,
+  "status": "passed"
+}
