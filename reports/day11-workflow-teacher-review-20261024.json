@@ -1,0 +1,21 @@
+{
+  "operator": "assistant_scripted_teaching_demo_not_learner_confirmation",
+  "reports": {
+    "prepare": "leave-workflow-prepare-20261024-210325-467676.json",
+    "confirm": "leave-workflow-confirm-20261024-210409-834191.json",
+    "submit": "leave-workflow-submit-20261024-210420-600942.json",
+    "retry": "leave-workflow-submit-20261024-210558-631841.json"
+  },
+  "status": "teacher_demo_passed",
+  "checks": [
+    "真实DeepSeek提取完整四天年假字段",
+    "独立CLI确认动作不由提取结果自动触发",
+    "确认不占额度，提交写待审批申请并预占4天",
+    "同key重试保留同一申请编号，可用5/预占4/已用0",
+    "最终说明字段与后端状态编号一致，语义逐字复核为待审批"
+  ],
+  "latest_narration_report": "leave-workflow-submit-20261024-210558-631841.json",
+  "superseded_intermediate_report": "leave-workflow-submit-20261024-210535-683315.json在额度字段补全前产生，不用其证明字段来源",
+  "learner_walkthrough": "pending",
+  "scope": "独立本地教学命名空间，模拟登录；无真实HR、审批或HTTP认证"
+}

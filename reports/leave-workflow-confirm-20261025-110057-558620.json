@@ -1,0 +1,37 @@
+{
+  "time": "2026-10-25T11:00:57.497509+08:00",
+  "action": "confirm",
+  "mode": "run",
+  "model_calls": [],
+  "operation_committed": true,
+  "status": "completed",
+  "confirmation_action_source": "explicit_cli_command",
+  "limitations": "本地教学CLI模拟登录，非生产认证/HTTP接口；额度和申请同处教学PostgreSQL。",
+  "confirmation": {
+    "draft_id": "draft-d778434911714eea8bb9f83dec3fb31b",
+    "user_id": "employee-demo-a",
+    "revision": 1,
+    "content_hash": "196cbd35330e252a68e1b3b0df5d26b06ad07ff144466dbcc97dd2f655be903b",
+    "status": "CONFIRMED"
+  },
+  "business_state": {
+    "run_id": "day11-e2e-fa7e5e40f416415b8226ead32a60bc25",
+    "draft_id": "draft-d778434911714eea8bb9f83dec3fb31b",
+    "user_id": "employee-demo-a",
+    "revision": 1,
+    "draft_status": "CONFIRMED",
+    "draft": {
+      "leaveType": "ANNUAL",
+      "startDate": "2026-11-02",
+      "endDate": "2026-11-05",
+      "reason": "处理家事"
+    },
+    "missing_fields": [],
+    "remaining_days": 9,
+    "reserved_days": 0,
+    "used_days": 0,
+    "confirmed": true,
+    "application": null,
+    "assessment": null
+  }
+}

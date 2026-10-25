@@ -1,0 +1,11 @@
+{
+  "time": "2026-10-25T10:56:27.241962+08:00",
+  "action": "confirm",
+  "mode": "run",
+  "model_calls": [],
+  "operation_committed": false,
+  "status": "error",
+  "confirmation_action_source": "explicit_cli_command",
+  "limitations": "本地教学CLI模拟登录，非生产认证/HTTP接口；额度和申请同处教学PostgreSQL。",
+  "error_type": "FileNotFoundError"
+}

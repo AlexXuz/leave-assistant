@@ -1,0 +1,35 @@
+{
+  "time": "2026-10-25T11:01:50.445920+08:00",
+  "action": "show",
+  "mode": "preview",
+  "model_calls": [],
+  "operation_committed": false,
+  "status": "completed",
+  "confirmation_action_source": null,
+  "limitations": "本地教学CLI模拟登录，非生产认证/HTTP接口；额度和申请同处教学PostgreSQL。",
+  "business_state": {
+    "run_id": "day11-e2e-fa7e5e40f416415b8226ead32a60bc25",
+    "draft_id": "draft-d778434911714eea8bb9f83dec3fb31b",
+    "user_id": "employee-demo-a",
+    "revision": 1,
+    "draft_status": "SUBMITTED",
+    "draft": {
+      "leaveType": "ANNUAL",
+      "startDate": "2026-11-02",
+      "endDate": "2026-11-05",
+      "reason": "处理家事"
+    },
+    "missing_fields": [],
+    "remaining_days": 5,
+    "reserved_days": 4,
+    "used_days": 0,
+    "confirmed": true,
+    "application": {
+      "application_id": "application-6b2510f1754b42a4867252bf8b65278a",
+      "status": "PENDING_APPROVAL",
+      "requested_days": 4,
+      "idempotency_key": "day11-request-1"
+    },
+    "assessment": null
+  }
+}

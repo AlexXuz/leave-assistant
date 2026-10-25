@@ -1,0 +1,18 @@
+{
+  "run_id": "day11-submit-799e5cbefbc14f7482a0ed7c8d3c2b3c",
+  "implementation_under_test": "learner",
+  "checks": [],
+  "real_database": true,
+  "chat_model_called": false,
+  "cleaned": true,
+  "status": "failed",
+  "error_type": "SubmissionBlocked",
+  "blocked_assessment": {
+    "status": "READY_FOR_CONFIRMATION",
+    "code": "CHECKS_PASSED",
+    "missing_fields": [],
+    "requested_days": 4,
+    "remaining_days": 9
+  },
+  "created": true
+}

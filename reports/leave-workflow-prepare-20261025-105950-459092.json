@@ -1,0 +1,75 @@
+{
+  "time": "2026-10-25T10:59:48.326588+08:00",
+  "action": "prepare",
+  "mode": "run",
+  "model_calls": [
+    {
+      "purpose": "extract",
+      "prompt_version": "leave-parse-v2",
+      "chat_elapsed_ms": 2005,
+      "configured_model": "deepseek-flash",
+      "model_metadata": {
+        "model": "deepseek-flash",
+        "prompt_version": "leave-parse-v2",
+        "latency_ms": 1902,
+        "finish_reason": "stop",
+        "tokens": {
+          "completion_tokens": 34,
+          "prompt_tokens": 235,
+          "total_tokens": 269,
+          "completion_tokens_details": null,
+          "prompt_tokens_details": {
+            "audio_tokens": null,
+            "cache_write_tokens": null,
+            "cached_tokens": 0,
+            "image_tokens": null,
+            "text_tokens": null
+          },
+          "prompt_cache_hit_tokens": 0,
+          "prompt_cache_miss_tokens": 235
+        }
+      },
+      "messages": [
+        {
+          "role": "system",
+          "content": "\n    我需要你帮我解析一下请假信息，\n    提取 leaveType、startDate、endDate、reason，\n    请假类型使用 ANNUAL、SICK、PERSONAL，\n    日期格式为 YYYY-MM-DD，缺失或有歧义的字段返回 null，\n    相对日期依据传入的参考时间解释，明确说“一天”时，开始日期和结束日期相同。\n    不补充用户没有提供的信息。只输出 JSON，结构示例：\n    {\"leaveType\":\"ANNUAL\",\n    \"startDate\":null,\n    \"endDate\":null,\n    \"reason\":null}。\n    始终返回上述四个字段，缺失信息也不得省略对应字段。\n    只给出开始日期，未给出结束日期或时长时，endDate 返回 null。"
+        },
+        {
+          "role": "user",
+          "content": "参考时间:2026-10-25T10:59:48.326588+08:00\n员工输入:2026年11月2日至11月5日请四天年假，处理家事。"
+        }
+      ],
+      "raw_content": "{\"leaveType\":\"ANNUAL\",\"startDate\":\"2026-11-02\",\"endDate\":\"2026-11-05\",\"reason\":\"处理家事\"}"
+    }
+  ],
+  "operation_committed": true,
+  "status": "completed",
+  "confirmation_action_source": null,
+  "limitations": "本地教学CLI模拟登录，非生产认证/HTTP接口；额度和申请同处教学PostgreSQL。",
+  "business_state": {
+    "run_id": "day11-e2e-fa7e5e40f416415b8226ead32a60bc25",
+    "draft_id": "draft-d778434911714eea8bb9f83dec3fb31b",
+    "user_id": "employee-demo-a",
+    "revision": 1,
+    "draft_status": "READY_FOR_CONFIRMATION",
+    "draft": {
+      "leaveType": "ANNUAL",
+      "startDate": "2026-11-02",
+      "endDate": "2026-11-05",
+      "reason": "处理家事"
+    },
+    "missing_fields": [],
+    "remaining_days": 9,
+    "reserved_days": 0,
+    "used_days": 0,
+    "confirmed": false,
+    "application": null,
+    "assessment": {
+      "status": "READY_FOR_CONFIRMATION",
+      "code": "CHECKS_PASSED",
+      "missing_fields": [],
+      "requested_days": 4,
+      "remaining_days": 9
+    }
+  }
+}

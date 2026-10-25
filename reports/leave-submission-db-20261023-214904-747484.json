@@ -1,0 +1,82 @@
+{
+  "run_id": "day11-submit-f19a82d9903c486982c257e65de8bd23",
+  "implementation_under_test": "temporary_teacher_reference",
+  "checks": [
+    "成功预占4天；同key重试复用结果；换内容/换key不重复申请",
+    "余额下降后复查拒绝；未确认/无权/旧版本/不匹配确认拒绝",
+    "写申请后故障全量回滚；原key可重新提交",
+    "两连接并发争5天额度仅一份4天申请成功；并发同key只创建一次"
+  ],
+  "real_database": true,
+  "chat_model_called": false,
+  "cleaned": true,
+  "concurrency": {
+    "distinct_requests": [
+      {
+        "status": "blocked",
+        "code": "INSUFFICIENT_BALANCE"
+      },
+      {
+        "status": "ok",
+        "result": {
+          "application_id": "application-3aae13d62a044fa18ac9c96f99fc2e6a",
+          "draft_id": "race-2",
+          "user_id": "race-user",
+          "revision": 1,
+          "content_hash": "196cbd35330e252a68e1b3b0df5d26b06ad07ff144466dbcc97dd2f655be903b",
+          "payload": {
+            "reason": "处理家事",
+            "endDate": "2026-11-05",
+            "leaveType": "ANNUAL",
+            "startDate": "2026-11-02"
+          },
+          "requested_days": 4,
+          "idempotency_key": "key-2",
+          "status": "PENDING_APPROVAL"
+        }
+      }
+    ],
+    "same_request": [
+      {
+        "status": "ok",
+        "result": {
+          "application_id": "application-030bd67941b74b189ab68ab8b58dd50d",
+          "draft_id": "retry-race",
+          "user_id": "retry-user",
+          "revision": 1,
+          "content_hash": "196cbd35330e252a68e1b3b0df5d26b06ad07ff144466dbcc97dd2f655be903b",
+          "payload": {
+            "reason": "处理家事",
+            "endDate": "2026-11-05",
+            "leaveType": "ANNUAL",
+            "startDate": "2026-11-02"
+          },
+          "requested_days": 4,
+          "idempotency_key": "same-key",
+          "status": "PENDING_APPROVAL"
+        }
+      },
+      {
+        "status": "ok",
+        "result": {
+          "application_id": "application-030bd67941b74b189ab68ab8b58dd50d",
+          "draft_id": "retry-race",
+          "user_id": "retry-user",
+          "revision": 1,
+          "content_hash": "196cbd35330e252a68e1b3b0df5d26b06ad07ff144466dbcc97dd2f655be903b",
+          "payload": {
+            "reason": "处理家事",
+            "endDate": "2026-11-05",
+            "leaveType": "ANNUAL",
+            "startDate": "2026-11-02"
+          },
+          "requested_days": 4,
+          "idempotency_key": "same-key",
+          "status": "PENDING_APPROVAL"
+        }
+      }
+    ]
+  },
+  "status": "passed",
+  "created": true
+}

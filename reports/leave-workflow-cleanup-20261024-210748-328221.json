@@ -1,0 +1,11 @@
+{
+  "time": "2026-10-24T21:07:48.278875+08:00",
+  "action": "cleanup",
+  "mode": "run",
+  "model_calls": [],
+  "operation_committed": true,
+  "status": "completed",
+  "confirmation_action_source": null,
+  "limitations": "本地教学CLI模拟登录，非生产认证/HTTP接口；额度和申请同处教学PostgreSQL。",
+  "cleaned": true
+}
