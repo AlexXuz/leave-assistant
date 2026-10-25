@@ -1,0 +1,9 @@
+{
+  "checked_at": "2026-10-25T16:32:13.774888+08:00",
+  "image_id": "sha256:1de76db7de4d259823d1aa74a23f1c8b81a45b79c18e21115213bc41bdaa1e3c",
+  "base_digest": "sha256:b7a9e5f6a93d6d4a31f129bbd4bdee69efccb6ded0fb230d78aafaf37af98377",
+  "curriculum_version": 2,
+  "linux_http_report": "course-v2-linux-http-20261025.json",
+  "public_cloud_deployed": false,
+  "learner_completion_certified": false
+}

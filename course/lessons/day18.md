@@ -2,6 +2,8 @@
 
 目标：用可观察证据区分模型、检索、业务、事务与展示阶段，做一次有条件说明的延迟检查。
 
+**完成口径：** 下方小函数和运行观察是热身；整课以文末链接的独立任务、本人证据和关键项复核为准。
+
 ## 先定义成功事实
 
 假设SQL已创建申请，但生成“提交成功”说明时模型超时。用户看到错误，能否换key重试？不能。正确顺序是先读取业务状态，重试同一次提交必须复用原key。把最后一段展示失败写成“没有提交”会导致重复业务。
@@ -24,8 +26,20 @@ request_id追踪一次HTTP请求，draft_id追踪业务草稿，application_id�
 
 性能脚本 `scripts/benchmark_course.py` 对本机已登录只读接口做有限并发。报告必须同时写并发数、样本量、是否调用模型、是否预热、成功率和p50/p95。只测本机GET接口，不能用这个数字宣称真实LLM吞吐或生产SLA。先正确，再在同条件下比较一项修改。
 
-## 作业与验收
+## 热身与示范观察（不代表整课完成）
 
 实现分类函数；写一页故障复盘：症状、证据、根因、修改、复验、剩余限制。必须区分“自动检查通过”和“模型答案语义人工核对通过”。不能把模拟响应性能写成真实模型性能。
 
-验收重点是你能沿着request_id→业务编号→数据库状态解释失败，而非堆一套监控产品名称。参考 `course/solutions/failure_classification.py`。来源：[FastAPI middleware](https://fastapi.tiangolo.com/tutorial/middleware/)、[PostgreSQL monitoring](https://www.postgresql.org/docs/17/monitoring-stats.html)。
+验收重点是你能沿着request_id→业务编号→数据库状态解释失败，而非堆一套监控产品名称。参考 `course/solutions/failure_classification.md`。来源：[FastAPI middleware](https://fastapi.tiangolo.com/tutorial/middleware/)、[PostgreSQL monitoring](https://www.postgresql.org/docs/17/monitoring-stats.html)。
+
+## 独立任务与完成条件（修订版）
+
+原核心函数保留为热身。完整任务：[任务书](../tasks/failure_recovery_diagnostics.md)；在IDE直接打开 `course/projects/failure_recovery_diagnostics.py`。必须独立运行正常流程、需求变体和失败/恢复，保存本人证据。自动热身通过只说明函数契约通过，不能勾选整课完成。
+
+本人记录：`course/submissions/failure_recovery_diagnostics.json`；结构和哈希可由页面检查，独立性/语义与新需求须复核。公开变体不是保密题，练过应另换需求。详见[证据规则](../EVIDENCE_PROTOCOL.md)。
+
+## 生产还差什么，以及下一步
+
+少量本机样本不是生产SLA、容量或真实费用结算。
+
+下一步：在隔离部署环境做有上限的并发/长尾评测，对照实际供应商计费口径记录价格版本，建立超时与总预算告警。

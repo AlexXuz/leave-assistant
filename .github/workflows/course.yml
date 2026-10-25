@@ -28,11 +28,17 @@ jobs:
           python-version: "3.11"
       - run: python -m pip install -c requirements-course.lock.txt -r requirements-course-runtime.txt
       - run: mkdir -p tmp reports
+      - run: python -m scripts.check_course_revision
       - run: python -m scripts.check_course_package
       - run: python -m scripts.check_course_http
+      - run: python -m scripts.check_study_shell
       - run: python -m scripts.check_leave_web
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: course-check-reports
-          path: reports/course-package-*.json
+          path: |
+            reports/course-package-*.json
+            reports/course-http-*.json
+            reports/course-revision-*.json
+            reports/course-study-shell-*.json

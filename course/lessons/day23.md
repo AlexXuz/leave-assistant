@@ -2,6 +2,8 @@
 
 目标：从真实查询行生成表格与图表，说明统计范围与空结果，不让模型凭语言印象编数。
 
+**完成口径：** 下方小函数和运行观察是热身；整课以文末链接的独立任务、本人证据和关键项复核为准。
+
 ## 看看数据经过了哪几层
 
 自然语言定义业务问题；SQL表达过滤与聚合；数据库返回结果；图表只是结果的一种呈现。图表不是第二次猜测。若SQL返回研发部6天，图表不能因为“研发通常更忙”改成8天。
@@ -20,10 +22,22 @@ APPROVED申请天数、PENDING_APPROVAL申请天数、个人可用余额是三�
 
 做一次对照：先手写参考SQL，在固定部门和月份下保存结果；再跑自然语言生成SQL。SQL文本可以不同，但过滤口径和结果应一致。若不同，先解释原因，不能仅以图看起来“差不多”验收。
 
-## 作业
+## 热身与示范观察（不代表整课完成）
 
 完成chart_spec，保持行顺序和数值，不修改输入。再独立扩展一个“2026年9月与10月比较”的版本：先定义两个月的口径，再设计返回结构，最后选择分组柱状图。变化量为当前-上期；增长率在上期为0时应标“不适用”，不能除零，也不直接写100%。
 
 验收：表格与图数值一致、单位正确、范围清楚、空结果有解释、错误不变成空图。最终回答应写“研发部在2026年10月已批准年假共X天，来源为模拟历史表”，而不是声称公司生产数据。
 
-参考答案 `course/solutions/chart_spec.py`。数据库执行与图表来源在 `app/course/analytics.py`。来源：[PostgreSQL aggregate functions](https://www.postgresql.org/docs/17/functions-aggregate.html)、[SQLGlot](https://github.com/tobymao/sqlglot)。
+参考答案 `course/solutions/chart_spec.md`。数据库执行与图表来源在 `app/course/analytics.py`。来源：[PostgreSQL aggregate functions](https://www.postgresql.org/docs/17/functions-aggregate.html)、[SQLGlot](https://github.com/tobymao/sqlglot)。
+
+## 独立任务与完成条件（修订版）
+
+原核心函数保留为热身。完整任务：[任务书](../tasks/query_result_presentation.md)；在IDE直接打开 `course/projects/query_result_presentation.py`。必须独立运行正常流程、需求变体和失败/恢复，保存本人证据。自动热身通过只说明函数契约通过，不能勾选整课完成。
+
+本人记录：`course/submissions/query_result_presentation.json`；结构和哈希可由页面检查，独立性/语义与新需求须复核。公开变体不是保密题，练过应另换需求。详见[证据规则](../EVIDENCE_PROTOCOL.md)。
+
+## 生产还差什么，以及下一步
+
+小型柱状图没有覆盖指标治理、时区、币种换算、历史修订或复杂可视化。
+
+下一步：为一个真实指标建立口径文档与参考SQL，对跨月/空值/数据修订做验收，再选择适合的图形。

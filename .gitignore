@@ -26,3 +26,6 @@ reports/leave-web-submit-*.json
 *.key
 *.p12
 *.pfx
+course/challenges/issued/
+course/learner_artifacts/
+reports/learner/

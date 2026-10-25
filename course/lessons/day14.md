@@ -2,6 +2,8 @@
 
 目标：启动一个独立MCP进程，用另一个客户端发现并调用工具，观察请求Schema、协议结果与业务数据三层结构。
 
+**完成口径：** 下方小函数和运行观察是热身；整课以文末链接的独立任务、本人证据和关键项复核为准。
+
 ## 与Tool Calling的关系
 
 Day10中，模型生成工具名和参数，你的后端执行Python函数。MCP解决的是客户端与工具服务如何发现能力、传递参数和返回结果。模型仍需要决定是否用工具，宿主仍需要绑定身份，服务端仍需要校验权限。没有模型，也能用MCP客户端直接调用；这正是本课首先验证的链路。
@@ -32,4 +34,16 @@ Day10中，模型生成工具名和参数，你的后端执行Python函数。MCP
 
 验收记录必须包含独立进程发现/调用结果，不能只是本地直接调用同名Python函数。失败排查：初始化失败先看进程环境和解释器；JSON解析失败先区分协议content和业务JSON；返回他人数据查身份绑定；超时应停止并清理子进程，不无限重启。
 
-来源：[MCP Python SDK v1](https://github.com/modelcontextprotocol/python-sdk/tree/v1.x)。参考解码函数在 `course/solutions/mcp_result_parser.py`，客户端和服务端已可运行。
+来源：[MCP Python SDK v1](https://github.com/modelcontextprotocol/python-sdk/tree/v1.x)。参考解码函数在 `course/solutions/mcp_result_parser.md`，客户端和服务端已可运行。
+
+## 独立任务与完成条件（修订版）
+
+原核心函数保留为热身。完整任务：[任务书](../tasks/mcp_business_client.md)；在IDE直接打开 `course/projects/mcp_business_client.py`。必须独立运行正常流程、需求变体和失败/恢复，保存本人证据。自动热身通过只说明函数契约通过，不能勾选整课完成。
+
+本人记录：`course/submissions/mcp_business_client.json`；结构和哈希可由页面检查，独立性/语义与新需求须复核。公开变体不是保密题，练过应另换需求。详见[证据规则](../EVIDENCE_PROTOCOL.md)。
+
+## 生产还差什么，以及下一步
+
+本机stdio和宿主身份注入没有实现远程MCP认证、凭证生命周期或租户隔离网关。
+
+下一步：在隔离环境试验远程传输和明确的认证范围，验证过期令牌、错误audience及连接中断，不向公网开放匿名工具。

@@ -2,6 +2,8 @@
 
 目标：建立从失败证据到改进方案的选择过程，并按场景而非文本行划分训练、验证和测试集。
 
+**完成口径：** 下方小函数和运行观察是热身；整课以文末链接的独立任务、本人证据和关键项复核为准。
+
 ## 不同失败需要不同改动
 
 缺失文档应该修导入；相关片段没进候选应该修检索；片段在候选里但排名靠后才考虑重排；用户余额错误应修业务工具或身份；旧确认覆盖新草稿应修状态控制。以上问题通常都不能靠训练模型解决。
@@ -28,4 +30,16 @@
 
 拒答/澄清不能统一算错误。业务问题要求查工具时，“语言看上去正确”也不等于执行成功。训练损失下降只是优化目标下降，必须另外检查独立数据和实际任务表现。
 
-验收交付：数据卡、场景划分表、一份冻结基线、一个只改一项的实验计划，以及不适合微调的失败例子。参考 `course/solutions/optimization_strategy.py`。来源：[Hugging Face PEFT](https://huggingface.co/docs/peft/quicktour)、[Datasets splitting](https://huggingface.co/docs/datasets/process#split)。
+验收交付：数据卡、场景划分表、一份冻结基线、一个只改一项的实验计划，以及不适合微调的失败例子。参考 `course/solutions/optimization_strategy.md`。来源：[Hugging Face PEFT](https://huggingface.co/docs/peft/quicktour)、[Datasets splitting](https://huggingface.co/docs/datasets/process#split)。
+
+## 独立任务与完成条件（修订版）
+
+原核心函数保留为热身。完整任务：[任务书](../tasks/optimization_experiment.md)；在IDE直接打开 `course/projects/optimization_experiment.py`。必须独立运行正常流程、需求变体和失败/恢复，保存本人证据。自动热身通过只说明函数契约通过，不能勾选整课完成。
+
+本人记录：`course/submissions/optimization_experiment.json`；结构和哈希可由页面检查，独立性/语义与新需求须复核。公开变体不是保密题，练过应另换需求。详见[证据规则](../EVIDENCE_PROTOCOL.md)。
+
+## 生产还差什么，以及下一步
+
+小型人工样本和一次对照不能证明泛化、线上提升或值得微调。
+
+下一步：按真实请求分布采样，增加独立时间窗口/场景留出，定义效果、成本和风险阈值后再决定是否训练。

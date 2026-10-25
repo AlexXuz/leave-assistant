@@ -1,0 +1,13 @@
+{
+  "run_id": "day12-web-check-b9e3d918eb524eb59373867a538ce41b",
+  "model": "fixed_response",
+  "real_database": true,
+  "checks": [
+    "15 warmup/project targets, 90 content pages, separate hints/examples, explicit non-completing warmup checks, authenticated evidence gate and document link allowlist",
+    "HTTP graph start/confirm/submit and replay correspond to real persisted business state",
+    "ChatBI role-scoped result, rejected arbitrary function and clarification without execution",
+    "Actual HTTP SSE framing/cursor and job/graph ownership isolation"
+  ],
+  "cleaned": true,
+  "status": "passed"
+}

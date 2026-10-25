@@ -1,0 +1,13 @@
+{
+  "kind": "author_rule_validation",
+  "learner_completed": false,
+  "checks": [
+    "15 task files, separate hints/examples, concrete boundaries and non-completing author/warmup checks",
+    "Synthetic rule fixtures reject tampering, copied author reports, duplicate artifacts, unreviewed novelty and every critical failure; no real completion written",
+    "Day19/24/26 gates and downstream completion blocked by missing prerequisite reviews; reading remains unrestricted",
+    "Day25 five-to-ten job mapping and primary must-have evidence required; nice-to-have plans remain allowed",
+    "Deterministic SSE terminal-commit race: final persisted event delivered exactly once before stream closes"
+  ],
+  "status": "passed",
+  "all_learner_submissions_unchanged": true
+}

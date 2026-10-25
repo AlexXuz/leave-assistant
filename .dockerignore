@@ -14,3 +14,5 @@ reports
 data/indexes
 *.pem
 *.key
+course/challenges/issued
+course/learner_artifacts

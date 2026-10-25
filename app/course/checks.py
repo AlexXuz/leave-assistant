@@ -6,6 +6,12 @@ from pathlib import Path
 
 
 def check_day(day: int, mode: str='reference') -> dict:
+    result=_check_warmup(day,mode)
+    result.update(purpose='author_example' if mode=='reference' else 'warmup_contract',completion_eligible=False)
+    return result
+
+
+def _check_warmup(day: int, mode: str='reference') -> dict:
     if day in (16,25,26):
         return {'day':day,'mode':mode,'status':'manual_review_required','message':'本课按课件的真实操作/证据评分，不用函数断言替代部署或面试。'}
     if mode not in {'reference','exercise'}:
@@ -14,7 +20,7 @@ def check_day(day: int, mode: str='reference') -> dict:
     item=next((item for item in json.loads(manifest.read_text(encoding='utf-8'))['lessons'] if item['day']==day),None)
     if item is None:
         raise ValueError('课程不存在')
-    source=item['solution' if mode=='reference' else 'assignment']
+    source=item['reference' if mode=='reference' else 'assignment']
     path=Path(source).with_suffix('').as_posix().replace('/','.')
     importlib.invalidate_caches()
     try:

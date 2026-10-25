@@ -90,12 +90,16 @@ async def event_stream(request,job_id,run_id,user_id,after):
     while True:
         if await request.is_disconnected():
             return  # 断开浏览器连接不等于用户取消业务任务。
+        # Read terminal state first: emit() commits its final event and status
+        # atomically. Reading events first could miss that commit, then close.
+        row=await asyncio.to_thread(owned_job,job_id,run_id,user_id)
         events=await asyncio.to_thread(read_events,job_id,after)
         for item in events:
             after=item['seq']
             yield f"id: {after}\nevent: {item['event']}\ndata: {json.dumps(item['payload'],ensure_ascii=False)}\n\n"
-        row=await asyncio.to_thread(owned_job,job_id,run_id,user_id)
         if row['status']!='running':
-            return
+            if len(events)<100:
+                return
+            continue  # Drain additional persisted batches before closing.
         yield ': heartbeat\n\n'
         await asyncio.sleep(0.4)

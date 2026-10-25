@@ -2,6 +2,8 @@
 
 目标：区分异步I/O、后台任务和流式传输；实现带持久事件序号的SSE，理解断线与取消的区别。
 
+**完成口径：** 下方小函数和运行观察是热身；整课以文末链接的独立任务、本人证据和关键项复核为准。
+
 ## 一个真实的交互问题
 
 部门报告可能需要查询、汇总、整理。如果HTTP一直等最终结果，用户不知道是否卡住，刷新还可能重发。我们先创建job，立即返回job_id，再用SSE显示阶段进度；最终结果由job状态保存。这里流的是报告处理阶段，不是把固定文字逐字输出冒充LLM token。
@@ -33,4 +35,16 @@ data: {"step": 3, "message": "整理汇总结果"}
 
 验收：格式正确、事件序号连续、终态明确、他人job不可读、取消不伪造成功、同步I/O未堵住主事件循环。输出接口耗时和最终job耗时分开记录。
 
-来源：[MDN SSE](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events)、[Python asyncio](https://docs.python.org/3.11/library/asyncio-task.html)。参考答案 `course/solutions/sse_events.py`。
+来源：[MDN SSE](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events)、[Python asyncio](https://docs.python.org/3.11/library/asyncio-task.html)。参考答案 `course/solutions/sse_events.md`。
+
+## 独立任务与完成条件（修订版）
+
+原核心函数保留为热身。完整任务：[任务书](../tasks/resumable_report_stream.md)；在IDE直接打开 `course/projects/resumable_report_stream.py`。必须独立运行正常流程、需求变体和失败/恢复，保存本人证据。自动热身通过只说明函数契约通过，不能勾选整课完成。
+
+本人记录：`course/submissions/resumable_report_stream.json`；结构和哈希可由页面检查，独立性/语义与新需求须复核。公开变体不是保密题，练过应另换需求。详见[证据规则](../EVIDENCE_PROTOCOL.md)。
+
+## 生产还差什么，以及下一步
+
+单进程asyncio任务不具备分布式队列、租约和跨实例接管保证。
+
+下一步：用外部队列或持久任务租约做双worker实验，验证重复交付、超时接管和终态原子性。

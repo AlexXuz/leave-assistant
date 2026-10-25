@@ -2,6 +2,8 @@
 
 目标：理解SFT的数据与损失，完成一次可保存、重载的LoRA机制实验；清楚区分机制跑通与真实任务效果。
 
+**完成口径：** 下方小函数和运行观察是热身；整课以文末链接的独立任务、本人证据和关键项复核为准。
+
 ## SFT到底在训练什么
 
 因果语言模型预测下一个token。给定“intent: remaining leave\nanswer: balance”，我们希望它学习回答balance，而不是把所有提示都同等计入损失。因此input_ids包含完整输入，labels在Prompt和padding处设为-100，只在回答位置保留token ID。-100是损失忽略标记，不是词表token。
@@ -29,3 +31,15 @@
 本包没有下载额外预训练权重、购买GPU或远程启动训练。迁移清单在 `course/portfolio/TRAINING_TRANSFER.md`，你准备好资源后可以按步骤执行。
 
 验收：实现labels函数；理解为什么只有2112个左右的参数可训练（以实际报告为准）；能重载并解释基座与adapter的关系；记录一个训练数据泄漏的反例。来源：[PEFT quicktour](https://huggingface.co/docs/peft/quicktour)、[LoRA方法](https://huggingface.co/docs/peft/main/en/conceptual_guides/lora)。
+
+## 独立任务与完成条件（修订版）
+
+原核心函数保留为热身。完整任务：[任务书](../tasks/lora_experiment_workflow.md)；在IDE直接打开 `course/projects/lora_experiment_workflow.py`。必须独立运行正常流程、需求变体和失败/恢复，保存本人证据。自动热身通过只说明函数契约通过，不能勾选整课完成。
+
+本人记录：`course/submissions/lora_experiment_workflow.json`；结构和哈希可由页面检查，独立性/语义与新需求须复核。公开变体不是保密题，练过应另换需求。详见[证据规则](../EVIDENCE_PROTOCOL.md)。
+
+## 生产还差什么，以及下一步
+
+随机小模型CPU LoRA只验证训练机制，不是真实预训练模型微调出业务效果。
+
+下一步：按TRAINING_TRANSFER.md选定许可、revision和资源可行的预训练基座，先做未训练业务基线，再以独立测试集比较；资源不足时记录未执行。

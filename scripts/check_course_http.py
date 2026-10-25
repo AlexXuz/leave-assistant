@@ -1,6 +1,7 @@
 """课程HTTP验收，固定模型响应，随机SQL命名空间；不是实际模型效果评测。"""
 from datetime import datetime
 import json
+import shutil
 from unittest.mock import patch
 from uuid import uuid4
 from fastapi.testclient import TestClient
@@ -9,6 +10,7 @@ from app.pgvector_store import PROJECT_ROOT, connect_database
 
 
 def main():
+    issued_challenge=None
     run_id='day12-web-check-'+uuid4().hex
     report={'run_id':run_id,'model':'fixed_response','real_database':True,'checks':[],'cleaned':False}
     origin={'Origin':'http://testserver'}
@@ -18,6 +20,7 @@ def main():
             manifest=client.get('/api/course').json();assert len(manifest['lessons'])==15
             for item in manifest['lessons']:
                 target=item['assignment_target']
+                assert item['project_target']['relative_path']==item['project']
                 assert target['relative_path']==item['assignment']
                 assert target['absolute_path']==str((PROJECT_ROOT/item['assignment']).resolve())
                 if item['assignment'].endswith('.py'):
@@ -25,18 +28,40 @@ def main():
                     assert all(f['line']>0 and f['name'] for f in target['functions'])
                 else:
                     assert target['kind']=='document'
-                for artifact in ('lesson','assignment','solution'):
+                assert item['solution'].endswith('.md')
+                for artifact in ('lesson','assignment','solution','reference','warmup','project'):
                     response=client.get(f"/api/course/{item['day']}/content/{artifact}")
                     assert response.status_code==200 and len(response.text)>100
             assert client.get('/api/course/labs/memory').status_code==401
+            assert client.get('/api/course/19/assessment').status_code==401
+            assert client.post('/api/course/19/challenge',headers=origin,json={}).status_code==401
+            assert client.get('/api/course/files',params={'path':'.env'}).status_code==404
             assert client.post('/api/login',headers=origin,json={'username':'zhangsan','password':'demo123'}).status_code==200
+            issued=client.post('/api/course/19/challenge',headers=origin,json={})
+            if shutil.which('git'):
+                assert issued.status_code==200,issued.text
+                value=issued.json();assert value['challenge']['day']==19 and not value['challenge']['novelty_certified']
+                issued_challenge=(PROJECT_ROOT/value['challenge_file']).resolve()
+                assert issued_challenge.is_relative_to((PROJECT_ROOT/'course/challenges/issued').resolve())
+                assert issued_challenge.is_file()
+            else:
+                assert issued.status_code==422  # lightweight container intentionally has no Git checkout/runtime
             assert client.post('/api/course/12/check',headers=origin,json={'mode':'reference'}).json()['status']=='passed'
+            assert not client.post('/api/course/12/check',headers=origin,json={'mode':'reference'}).json()['completion_eligible']
             own=client.post('/api/course/12/check',headers=origin,json={'mode':'exercise'}).json()
             assert own['mode']=='exercise' and own['status'] in {'not_implemented','passed','failed'}
+            assessment=client.get('/api/course/19/assessment').json()
+            assert assessment['hard_gate'] and isinstance(assessment['completion_eligible'],bool)
+            assert assessment['submission_file']=='course/submissions/office_assistant_integration.json'
+            if assessment['status']=='not_started':assert not assessment['completion_eligible']
+            task=client.get('/api/course/19/content/assignment').text
+            assert 'office_assistant_integration.py' in task and '提示注入' in task and '失败' in task
+            linked=client.get('/api/course/files',params={'path':'course/EVIDENCE_PROTOCOL.md'})
+            assert linked.status_code==200 and '不能证明' in linked.text
             assert client.post('/api/course/labs/memory',headers=origin,json={'tone':'concise'}).json()['stored']
             assert not client.post('/api/course/labs/memory',headers=origin,json={'delete':True}).json()['stored']
             assert client.post('/api/course/labs/context',headers=origin,json={'question':'当前余额','turns':[],'budget_chars':1600}).status_code==200
-            report['checks'].append('15 existing IDE homework targets and callable lines, 45 content pages, explicit reference vs learner modes, authenticated memory/context')
+            report['checks'].append('15 warmup/project targets, 90 content pages, separate hints/examples, explicit non-completing warmup checks, authenticated evidence gate and document link allowlist')
             payload=json.dumps({'leaveType':'ANNUAL','startDate':'2026-11-02','endDate':'2026-11-05','reason':'课程HTTP验收'})
             with patch('app.leave_web.tracked_model_call',return_value=payload):
                 draft=client.post('/api/drafts',headers=origin,json={'text':'四天年假'}).json()
@@ -56,7 +81,7 @@ def main():
             job=client.post('/api/course/labs/jobs',headers=origin,json={}).json()
             events=client.get('/api/course/labs/jobs/'+job['id']+'/events')
             assert events.status_code==200 and 'text/event-stream' in events.headers['content-type']
-            assert 'event: done' in events.text and 'id: 4' in events.text
+            assert 'event: done' in events.text and 'id: 4' in events.text,events.text[-1500:]
             reconnect=client.get('/api/course/labs/jobs/'+job['id']+'/events?after=2')
             assert 'id: 1\n' not in reconnect.text and 'id: 3\n' in reconnect.text
             assert client.get('/api/course/labs/traces').json()
@@ -70,6 +95,8 @@ def main():
         report.update(status='failed',error_type=type(error).__name__,error=str(error))
         raise
     finally:
+        if issued_challenge is not None:
+            issued_challenge.unlink(missing_ok=True)
         with connect_database() as c:
             c.execute('DELETE FROM leave_workflow_lab.runs WHERE id=%s',(run_id,))
             report['cleaned']=c.execute('SELECT count(*) AS n FROM leave_workflow_lab.runs WHERE id=%s',(run_id,)).fetchone()['n']==0

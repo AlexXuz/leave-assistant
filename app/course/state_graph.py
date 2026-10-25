@@ -13,7 +13,7 @@ from app.leave_submission import submit_leave
 from app.leave_web_accounts import web_view
 from app.leave_workflow_store import PostgresLeaveStore
 from app.pgvector_store import PROJECT_ROOT, connect_database
-from course.solutions.leave_graph_routing import route_leave_workflow as reference_route
+from app.course.examples.leave_graph_routing import route_leave_workflow as reference_route
 
 _lock=RLock()  # 本机单进程；SQL幂等/锁仍负责业务写入的最终正确性。
 

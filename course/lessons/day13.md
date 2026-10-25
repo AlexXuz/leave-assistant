@@ -2,6 +2,8 @@
 
 目标：构造一个受预算约束的上下文，保留最新业务事实；把长期偏好按账号存储、修改、删除。不要把模型聊天记忆当作业务数据库。
 
+**完成口径：** 下方小函数和运行观察是热身；整课以文末链接的独立任务、本人证据和关键项复核为准。
+
 ## 先分四种数据
 
 1. 业务事实：余额、草稿版本、确认、申请编号，来自当前数据库查询。
@@ -39,4 +41,16 @@ question = '现在提交了吗？'
 
 验收：修改前后输入相同；消息顺序正确；字符总量不超预算；不同账号互不可见；删除后不再注入。拓展题是写一个摘要，但必须保留修改时间与来源，不能让摘要重写数据库的最新字段。
 
-来源：[LangGraph persistence](https://docs.langchain.com/oss/python/langgraph/persistence)、[Memory](https://docs.langchain.com/oss/python/langgraph/add-memory)。参考答案与服务分别在 `course/solutions/context_selection.py` 和 `app/course/memory.py`。
+来源：[LangGraph persistence](https://docs.langchain.com/oss/python/langgraph/persistence)、[Memory](https://docs.langchain.com/oss/python/langgraph/add-memory)。参考答案与服务分别在 `course/solutions/context_selection.md` 和 `app/course/memory.py`。
+
+## 独立任务与完成条件（修订版）
+
+原核心函数保留为热身。完整任务：[任务书](../tasks/conversation_context_pipeline.md)；在IDE直接打开 `course/projects/conversation_context_pipeline.py`。必须独立运行正常流程、需求变体和失败/恢复，保存本人证据。自动热身通过只说明函数契约通过，不能勾选整课完成。
+
+本人记录：`course/submissions/conversation_context_pipeline.json`；结构和哈希可由页面检查，独立性/语义与新需求须复核。公开变体不是保密题，练过应另换需求。详见[证据规则](../EVIDENCE_PROTOCOL.md)。
+
+## 生产还差什么，以及下一步
+
+字符预算和单一风格偏好没有覆盖真实模型token计量、记忆保留与删除治理。
+
+下一步：接入实际分词/供应商用量，建立包含工具消息的冻结对照集，并验证删除传播到摘要与缓存的策略。

@@ -150,3 +150,14 @@ Day 1 的 dict 返回是教学简化。Day 2 必须完成输出 Schema、业务�
 - MCP 架构：https://modelcontextprotocol.io/docs/learn/architecture
 - Agent Skills：https://agentskills.io/home
 - 上下文工程：https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents
+
+
+## Day12–Day26独立交付修订（2026-10-25）
+
+保持上述课程顺序和Day1–Day11验收。后半程原小函数降为热身，每课新增独立任务书、可直接编辑的项目入口、公开变体/失败恢复/关键验收项和生产补缺动作。Day19、24、26为阶段硬门；本人完成需真实产物、Git/挑战关联与复核，不由作者包级检查或阅读标记决定。
+
+分级提示与完整运行示范分开，先独立尝试再对照。示范移到app/course/examples，独立作业不提供完整接线答案。公开参数/任务族抽签不冒称未见题，另由复核者确认新的业务要求。
+
+Day25落实原计划5–10个真实岗位的要求→实现→本人证据→缺口映射，资深Java能力迁移为主线；主目标核心缺口须有证据，加分项允许补缺计划。真实云小闭环、提示注入与成本延迟评估、失败恢复演示按求职补强清单执行，不因选修无限延后投递。
+
+选修有明确前置、顺序、分支与验收，见course/OPTIONAL_PATHS.md。全部本人进度仍待完成，见course/LEARNER_PROGRESS.md；作者验证与边界见course/VALIDATION.md。

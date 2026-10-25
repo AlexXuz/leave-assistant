@@ -40,7 +40,7 @@ def main():
     try:
         manifest=json.loads((PROJECT_ROOT/'course/manifest.json').read_text(encoding='utf-8'))
         for item in manifest['lessons']:
-            for key in ('lesson','assignment','solution'):
+            for key in ('lesson','assignment','solution','reference','task','project','submission'):
                 assert (PROJECT_ROOT/item[key]).is_file(),item[key]
             result=check_day(item['day'],'reference');report['reference_checks'].append(result)
             assert result['status'] in ('passed','manual_review_required'),result
@@ -66,7 +66,7 @@ def main():
         report['integrations'].append('User-scoped preference write/read/delete')
         mcp=run_sync('zhangsan',2026,run_id)
         assert mcp['extra_identity_rejected']
-        from course.solutions.mcp_result_parser import decode_tool_result
+        from app.course.examples.mcp_result_parser import decode_tool_result
         assert decode_tool_result(mcp['result'])['status']=='ok'
         report['integrations'].append('Independent MCP stdio process discovery/call and extra identity rejection')
         skill=execute_report(run_id,access.user_id)

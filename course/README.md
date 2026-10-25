@@ -10,41 +10,42 @@
 
 ## 推荐学习方式
 
-每课先读讲解，理解输入输出；到页面体验参考链路；关闭参考答案，独立写作业；点击“检查我的作业”；失败先看状态与契约，再看参考。写完还要解释一遍调用链，自动检查仅覆盖已列案例。
+先读讲解，完成热身，再在IDE里做独立任务；卡住时看分级提示，独立尝试后再对照完整作者示范。示范可运行，但不会自动复制到你的作业。读过同题完整接线后如实记录，再换新需求证明迁移。
 
-**作业文件都已创建，不用从网页复制代码。** 网页“我的作业”会显示本机文件的完整路径和待实现函数：复制路径，在自己的IDE打开对应 `.py` 文件，补全函数并保存，回到页面点“保存后检查这个文件”。网页源码区域是只读预览。Day12从 [app/leave_graph_routing.py](../app/leave_graph_routing.py) 开始；后续代码作业在 [assignments](assignments/) 中。Day16、25、26是部署/作品集/综合验收，已有 `.md` 交付文件，按要求记录实际操作。
+每课都有已创建的任务文件，不用从网页复制代码。网页“独立任务”显示主项目文件路径与函数；下方可展开原热身文件。原小函数检查只是第一层，整课完成还需自己的正常、需求变体、失败恢复与复核记录。保存模块后热身检查可重新加载；独立接线应从自己的页面/API/脚本运行。
 
-Python模块按职责使用小写下划线命名，例如 `context_selection.py`、`mcp_result_parser.py`、`readonly_sql.py`。课程序号只用来组织课件和导航；课程到作业文件的映射统一保存在 `manifest.json`，检查器读取映射导入模块，不按Day序号拼接模块名。作业与参考答案位于不同包内，使用相同的职责名称。
+- [证据规则与三道验收门](EVIDENCE_PROTOCOL.md)：Day19、24、26关键项不过，不记该阶段与后续完成；允许继续阅读。
+- [本人学习进度](LEARNER_PROGRESS.md)：默认未完成，作者运行报告不代替本人证据。
+- [选修顺序与验收](OPTIONAL_PATHS.md)：按目标岗位选分支，不扩成全部必修。
+- [目标岗位映射](portfolio/JOB_REQUIREMENTS.md)与[求职最小补强](portfolio/APPLICATION_READINESS.md)：5–10个真实岗位、Java经验迁移、云闭环/安全与成本/恢复演示。
 
-“检查参考实现”不会复制答案到你的函数，也不会把作业标成完成。已实现的Day1–Day11函数和当前Day12作业入口保持原样。Day16部署、Day25作品集和Day26面试需要真实操作/人工复核，不会显示虚假的自动通过。
+运行示范放在app/course/examples，分级提示在course/solutions，独立项目放在course/projects。课程序号只组织课件，所有映射来自manifest.json。原热身仍在course/assignments，Day12仍用app/leave_graph_routing.py；Day1–Day11代码保持。
 
-保存作业后，页面检查会重新加载对应作业模块，不必依赖Windows后台进程的自动重载。双击入口使用稳定的后台服务；若主动修改API路由或服务结构，请按DEPLOYMENT.md在终端启动/重启开发服务。
-
-| 课程 | 讲解 | 作业 | 重点 |
+| Day | 讲解 | 独立任务书 | 在IDE写入的文件 |
 |---|---|---|---|
-| 12 | [LangGraph](lessons/day12.md) | [leave_graph_routing.py](../app/leave_graph_routing.py) | 状态、条件边、暂停/恢复 |
-| 13 | [上下文与记忆](lessons/day13.md) | [context_selection.py](assignments/context_selection.py) | 最新事实、预算、隔离/删除 |
-| 14 | [MCP](lessons/day14.md) | [mcp_result_parser.py](assignments/mcp_result_parser.py) | 独立进程发现/调用 |
-| 15 | [Skill](lessons/day15.md) | [skill_selection.py](assignments/skill_selection.py) | 发现、加载、受控执行 |
-| 16 | [部署](lessons/day16.md) | [deployment_verification.md](assignments/deployment_verification.md) | 镜像、配置、持久化 |
-| 17 | [异步/SSE](lessons/day17.md) | [sse_events.py](assignments/sse_events.py) | 进度、游标、取消 |
-| 18 | [排障与性能](lessons/day18.md) | [failure_classification.py](assignments/failure_classification.py) | 阶段、证据、条件 |
-| 19 | [整合与有限Agent](lessons/day19.md) | [evidence_merging.py](assignments/evidence_merging.py) | 正确数据源、预算 |
-| 20 | [优化与数据](lessons/day20.md) | [optimization_strategy.py](assignments/optimization_strategy.py) | 基线、划分、防泄漏 |
-| 21 | [SFT/LoRA](lessons/day21.md) | [sft_labels.py](assignments/sft_labels.py) | 回答掩码、真实CPU更新 |
-| 22 | [ChatBI SQL](lessons/day22.md) | [readonly_sql.py](assignments/readonly_sql.py) | AST、只读角色、范围 |
-| 23 | [结果与图表](lessons/day23.md) | [chart_spec.py](assignments/chart_spec.py) | 数值来源、口径 |
-| 24 | [需求迁移](lessons/day24.md) | [department_leave_policy.py](assignments/department_leave_policy.py) | 独立拆解与集成 |
-| 25 | [作品集](lessons/day25.md) | [project_portfolio.md](assignments/project_portfolio.md) | 本人贡献与证据 |
-| 26 | [综合验收](lessons/day26.md) | [final_assessment.md](assignments/final_assessment.md) | 演示、故障、解释 |
+| 12 | [LangGraph：状态、暂停与恢复](lessons/day12.md) | [任务/变体/失败/标准](tasks/graph_recovery_workflow.md) | [graph_recovery_workflow.py](projects/graph_recovery_workflow.py) |
+| 13 | [上下文工程与用户记忆](lessons/day13.md) | [任务/变体/失败/标准](tasks/conversation_context_pipeline.md) | [conversation_context_pipeline.py](projects/conversation_context_pipeline.py) |
+| 14 | [MCP：独立客户端调用业务工具](lessons/day14.md) | [任务/变体/失败/标准](tasks/mcp_business_client.md) | [mcp_business_client.py](projects/mcp_business_client.py) |
+| 15 | [Skills：按需加载部门报告能力](lessons/day15.md) | [任务/变体/失败/标准](tasks/department_report_skill.md) | [department_report_skill.py](projects/department_report_skill.py) |
+| 16 | [可复现部署与配置边界](lessons/day16.md) | [任务/变体/失败/标准](tasks/deployment_verification.md) | [deployment_verification.md](assignments/deployment_verification.md) |
+| 17 | [异步任务、SSE与取消](lessons/day17.md) | [任务/变体/失败/标准](tasks/resumable_report_stream.md) | [resumable_report_stream.py](projects/resumable_report_stream.py) |
+| 18 | [调用链、延迟与故障定位](lessons/day18.md) | [任务/变体/失败/标准](tasks/failure_recovery_diagnostics.md) | [failure_recovery_diagnostics.py](projects/failure_recovery_diagnostics.py) |
+| 19 · 验收门 | [把制度、业务与工作流串成产品](lessons/day19.md) | [任务/变体/失败/标准](tasks/office_assistant_integration.md) | [office_assistant_integration.py](projects/office_assistant_integration.py) |
+| 20 | [优化决策、评测与训练数据划分](lessons/day20.md) | [任务/变体/失败/标准](tasks/optimization_experiment.md) | [optimization_experiment.py](projects/optimization_experiment.py) |
+| 21 | [SFT与LoRA：一次真实CPU机制实验](lessons/day21.md) | [任务/变体/失败/标准](tasks/lora_experiment_workflow.md) | [lora_experiment_workflow.py](projects/lora_experiment_workflow.py) |
+| 22 | [ChatBI：自然语言到受控SQL](lessons/day22.md) | [任务/变体/失败/标准](tasks/authorized_query_service.md) | [authorized_query_service.py](projects/authorized_query_service.py) |
+| 23 | [从查询结果到图表与解释](lessons/day23.md) | [任务/变体/失败/标准](tasks/query_result_presentation.md) | [query_result_presentation.py](projects/query_result_presentation.py) |
+| 24 · 验收门 | [独立需求迁移：部门申请上限](lessons/day24.md) | [任务/变体/失败/标准](tasks/department_policy_integration.md) | [department_policy_integration.py](projects/department_policy_integration.py) |
+| 25 | [项目证据与作品集](lessons/day25.md) | [任务/变体/失败/标准](tasks/job_evidence_portfolio.md) | [project_portfolio.md](assignments/project_portfolio.md) |
+| 26 · 验收门 | [综合验收与模拟面试](lessons/day26.md) | [任务/变体/失败/标准](tasks/independent_final_demo.md) | [final_assessment.md](assignments/final_assessment.md) |
 
-## 目录
+## 页面与维护入口
 
-- lessons：可独立阅读的完整讲解，包含原理、调用链、操作、作业和验收。
-- assignments：待实现作业；solutions：参考答案，阅读顺序由你决定。
-- skills/leave-report：可实际执行的报告Skill；fixtures：明确标注的合成数据。
-- portfolio：需求复盘、训练迁移、项目介绍、证据矩阵和演示模板。
-- manifest.json：页面课程目录；VALIDATION.md：实际验证与限制。
+“检查热身函数”只运行原小函数案例；“领取本轮变体”冻结基线并生成公开任务族抽签；“读取独立验收”读取course/submissions中的本人记录。公开变体不自动等于未见题，复核者须检查是否提前练过。页面已阅读标记只存在本浏览器，不能记课程完成。
+
+完整作者示范有单独入口，默认只显示说明，须主动展开。它是帮助理解与事后对照的材料，不能冒认本人独立实现。部署、作品集与综合验收需要实际操作与人工复核；JSON/哈希检查不证明语义、运行真实性或招聘资格。
+
+保存作业后无需依赖后台自动重载；如改自己的API路由/服务结构，按DEPLOYMENT.md启动或重启服务。课程作者校验运行scripts/check_course_revision.py、check_course_package.py、check_course_http.py，不会填写本人完成记录。
 
 ## 环境边界
 

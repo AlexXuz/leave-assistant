@@ -45,3 +45,12 @@ Keep .env files, credentials, virtual environments, model weights, installers,
 editor settings, temporary previews and generated vector indexes out of Git.
 Retain safe example configuration, teaching fixtures, code and evaluation reports.
 Do not change global Git identity or credential settings for this project.
+
+## Independent delivery assessment (Day12–Day26 revision)
+
+Core function checks are warmups, never course completion. Independent briefs and
+project starters are separate; learner evidence lives in course/submissions.
+Keep runtime examples in app/course/examples and learner-facing solutions as
+hints. Do not fill learner projects, certify novelty from public random variants,
+or mark progress from author checks. Day19/24/26 require evidence and recorded
+review of all critical criteria. Reading later material remains allowed.

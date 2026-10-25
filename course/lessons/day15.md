@@ -2,6 +2,8 @@
 
 目标：把已有只读统计能力封装为一个可发现、按需加载、可验证执行结果的Skill。理解Skill、MCP与工作流各管什么。
 
+**完成口径：** 下方小函数和运行观察是热身；整课以文末链接的独立任务、本人证据和关键项复核为准。
+
 ## 先看实际请求
 
 用户说“给我一份本部门待审批请假汇总”。数据库能返回数值，但还需要确定统计口径、选择模板、组织输出。Skill保存这套任务方法；MCP可提供查询能力；LangGraph可组织多步过程。三者可以协作，不能互相替代。
@@ -23,7 +25,7 @@ scripts/render_report.py      已审阅的只读报告脚本
 
 `PENDING_APPROVAL`天数是申请天数，不是批准天数。模板必须保留状态口径。没有申请时写0笔、0天，不让模型编造趋势和原因。页面展示的报告来自真实SQL与脚本，不是先写好的一张成功截图。
 
-## 作业
+## 热身与示范观察（不代表整课完成）
 
 先实现 `select_skill(name, metadata)`，只精确选择唯一匹配的元数据，未知或重复时拒绝。然后阅读参考运行器 `app/course/skill_runtime.py`：它选择唯一leave-report目录，读取指定资源，再执行固定的render_report.py。
 
@@ -37,4 +39,16 @@ scripts/render_report.py      已审阅的只读报告脚本
 
 验收：加载列表与实际资源一致，SQL统计可复核，正文保留待审批口径，权限不由文档扩大。若迁移到其他Agent宿主，仍需验证该宿主如何发现、加载和执行，不能假定目录放好就自动运行。
 
-来源：[Agent Skills规范](https://agentskills.io/specification)。参考选择函数在 `course/solutions/skill_selection.py`，完整Skill与脚本已交付。
+来源：[Agent Skills规范](https://agentskills.io/specification)。参考选择函数在 `course/solutions/skill_selection.md`，完整Skill与脚本已交付。
+
+## 独立任务与完成条件（修订版）
+
+原核心函数保留为热身。完整任务：[任务书](../tasks/department_report_skill.md)；在IDE直接打开 `course/projects/department_report_skill.py`。必须独立运行正常流程、需求变体和失败/恢复，保存本人证据。自动热身通过只说明函数契约通过，不能勾选整课完成。
+
+本人记录：`course/submissions/department_report_skill.json`；结构和哈希可由页面检查，独立性/语义与新需求须复核。公开变体不是保密题，练过应另换需求。详见[证据规则](../EVIDENCE_PROTOCOL.md)。
+
+## 生产还差什么，以及下一步
+
+固定审阅脚本白名单并不是运行任意Skill代码的安全沙箱。
+
+下一步：建立Skill变更审查与版本记录；确有不可信执行需求时再完成选修沙箱的文件、网络、CPU/内存限制验收。

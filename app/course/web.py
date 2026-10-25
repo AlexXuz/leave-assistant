@@ -12,6 +12,7 @@ import sys
 from threading import Lock
 import time
 from uuid import uuid4
+from urllib.parse import urlencode, urlsplit, unquote
 
 from fastapi import HTTPException, Request
 from fastapi.responses import FileResponse, HTMLResponse, StreamingResponse
@@ -22,13 +23,14 @@ from psycopg.errors import UndefinedColumn, UndefinedTable, SyntaxError as SQLSy
 from app.course.analytics import SqlPlan, execute_query, sql_messages
 from app.course.memory import preference
 from app.course import jobs
+from app.course.assessment import assess_day, issue_challenge
 from app.course.mcp_client import run_sync as mcp_client
 from app.course.skill_runtime import execute_report
 from app.course.state_graph import graph_operation
 from app.leave_web_accounts import account_balance
 from app.pgvector_store import PROJECT_ROOT, connect_database
 from app.permission_service import TrustedAccessContext
-from course.solutions.context_selection import select_context
+from app.course.examples.context_selection import select_context
 from scripts.ask_pdf_rag import tracked_model_call
 
 COURSE=PROJECT_ROOT/'course'
@@ -36,12 +38,12 @@ _md=MarkdownIt('commonmark',{'html':False}).enable('table')
 _training_gate=Lock()
 
 
-def assignment_target(item):
+def assignment_target(item,field='assignment'):
     """Expose the existing homework file, without importing or rewriting learner code."""
-    path=(PROJECT_ROOT/item['assignment']).resolve()
+    path=(PROJECT_ROOT/item[field]).resolve()
     if not path.is_relative_to(PROJECT_ROOT) or not path.is_file():
         raise HTTPException(404,'作业文件不存在')
-    target={'relative_path':item['assignment'],'absolute_path':str(path),
+    target={'relative_path':item[field],'absolute_path':str(path),
             'kind':'python' if path.suffix=='.py' else 'document','functions':[]}
     if path.suffix=='.py':
         try:
@@ -125,7 +127,34 @@ def mount_course(app,user,owned,run_id,ensure_ready,model_guard):
         if not path.is_relative_to(PROJECT_ROOT) or not path.is_file():
             raise HTTPException(404,'课程文件不存在')
         source=path.read_text(encoding='utf-8-sig')
-        return _md.render(source) if path.suffix=='.md' else '<pre><code>'+html.escape(source)+'</code></pre>'
+        if path.suffix!='.md':
+            return '<pre><code>'+html.escape(source)+'</code></pre>'
+        tokens=_md.parse(source)
+        for token in tokens:
+            for child in token.children or []:
+                if child.type!='link_open':continue
+                href=child.attrGet('href') or ''
+                parsed=urlsplit(href)
+                if parsed.scheme or parsed.netloc or not parsed.path:continue
+                destination=(path.parent/unquote(parsed.path)).resolve()
+                if destination in allowed_files():
+                    target='/api/course/files?'+urlencode({'path':destination.relative_to(PROJECT_ROOT).as_posix()})
+                    if parsed.fragment:target+='#'+parsed.fragment
+                    child.attrSet('href',target)
+        return _md.renderer.render(tokens,_md.options,{})
+
+    def allowed_files():
+        paths={PROJECT_ROOT/item[key] for item in entries() for key in ('lesson','assignment','solution','reference','task','project')}
+        paths.update(COURSE.glob('*.md'));paths.update((COURSE/'portfolio').glob('*.md'))
+        paths.add(COURSE/'projects/README.md')
+        return {path.resolve() for path in paths}
+
+    @app.get('/api/course/files',response_class=HTMLResponse)
+    def linked_file(path:str):
+        target=(PROJECT_ROOT/path).resolve()
+        if target not in allowed_files():
+            raise HTTPException(404,'课程文件不在公开阅读目录')
+        return '<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>'+html.escape(target.stem)+'</title><link rel="stylesheet" href="/assets/course.css"></head><body class="document-page"><main><article><a href="/course">← 返回课程</a>'+render_file(path)+'</article></main></body></html>'
 
     @app.get('/course')
     def course_page():
@@ -133,15 +162,29 @@ def mount_course(app,user,owned,run_id,ensure_ready,model_guard):
 
     @app.get('/api/course')
     def course_manifest():
-        lessons=[dict(item,assignment_target=assignment_target(item)) for item in entries()]
+        lessons=[dict(item,assignment_target=assignment_target(item),project_target=assignment_target(item,'project')) for item in entries()]
         return {'lessons':lessons,'authoring_status':'ready_for_self_study','learner_completion':'Day1-11_only','practice_base':'/','reference_answers_separate':True}
 
     @app.get('/api/course/{day}/content/{artifact}',response_class=HTMLResponse)
     def content(day:int,artifact:str):
         item=entry(day)
-        if artifact not in {'lesson','assignment','solution'}:
+        if artifact not in {'lesson','assignment','solution','reference','warmup','project'}:
             raise HTTPException(404,'课件类型不存在')
-        return render_file(item[artifact])
+        field={'assignment':'task','warmup':'assignment'}.get(artifact,artifact)
+        return render_file(item[field])
+
+    @app.get('/api/course/{day}/assessment')
+    def assessment(day:int,request:Request):
+        person(request);entry(day)
+        return assess_day(day)
+
+    @app.post('/api/course/{day}/challenge')
+    def challenge(day:int,request:Request):
+        value=person(request);entry(day)
+        try:
+            return issue_challenge(day,value['user_id'])
+        except (ValueError,OSError,subprocess.SubprocessError) as error:
+            raise HTTPException(422,'挑战领取失败：先在本机Git检出中提交基线；课程镜像不发放本机作业。') from error
 
     @app.post('/api/course/{day}/check')
     def check(day:int,body:Choice,request:Request):

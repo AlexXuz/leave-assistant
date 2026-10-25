@@ -2,6 +2,8 @@
 
 目标：对同一个用户问题选择正确数据源，把制度、实时业务数据与写流程分开，再理解何时需要有限Agent循环。
 
+**完成口径：** 下方小函数和运行观察是热身；整课以文末链接的独立任务、本人证据和关键项复核为准。
+
 ## 为什么“我还剩几天，休四天谁批”不是一次文档问答
 
 余额是当前用户的实时业务事实，必须查询账号账户；审批规则是知识库证据，需要检索；真正提交则需要草稿、明确确认和事务。即使模型在一段回答里同时提到三者，后端也不能把它们混成一个可任意执行的工具。
@@ -24,7 +26,7 @@
 
 若最后一步没有产生答案，就返回停止原因，不能把上轮临时文本当成“已完成”。无权工具不能因为模型再次请求而放行。工具错误必须作为事实反馈，不把接口错误变成0余额。
 
-## 作业
+## 热身与示范观察（不代表整课完成）
 
 实现merge_evidence，合并一个余额结果和一组制度命中。余额仅在status=ok时保留数值，not_found保留None。制度sources只能来自本轮实际命中的片段ID，顺序去重。输出can_submit永远是false，因为查询结果本身没有确认或授权意义。
 
@@ -32,4 +34,16 @@
 
 验收：数据源正确、引用可追溯、工具调用ID成对、循环有界、未知工具拒绝、没有写工具暴露。有限Agent的答案文本仍需人工核对，模型说“批准”不会写出真实批准记录。
 
-参考 `course/solutions/evidence_merging.py`、`app/course/bounded_agent.py`。来源：[Building effective agents](https://www.anthropic.com/engineering/building-effective-agents)、[LangGraph graph API](https://docs.langchain.com/oss/python/langgraph/graph-api)。
+参考 `course/solutions/evidence_merging.md`、`app/course/bounded_agent.py`。来源：[Building effective agents](https://www.anthropic.com/engineering/building-effective-agents)、[LangGraph graph API](https://docs.langchain.com/oss/python/langgraph/graph-api)。
+
+## 独立任务与完成条件（修订版）
+
+原核心函数保留为热身。完整任务：[任务书](../tasks/office_assistant_integration.md)；在IDE直接打开 `course/projects/office_assistant_integration.py`。必须独立运行正常流程、需求变体和失败/恢复，保存本人证据。这是Day19/24/26硬验收门之一，关键项失败不得记为完成。
+
+本人记录：`course/submissions/office_assistant_integration.json`；结构和哈希可由页面检查，独立性/语义与新需求须复核。公开变体不是保密题，练过应另换需求。详见[证据规则](../EVIDENCE_PROTOCOL.md)。
+
+## 生产还差什么，以及下一步
+
+教学身份、少量制度和有限只读Agent不是完整企业助理或生产审批系统。
+
+下一步：选择一个目标岗位的真实集成边界，在隔离环境对接认证/外部业务沙箱，冻结攻击与回归集，再报告可交付范围。
