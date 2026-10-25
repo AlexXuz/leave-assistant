@@ -34,6 +34,9 @@ def main():
         frozen=json.loads((root/'data/retrieval_lab_v2/freeze.json').read_text(encoding='utf-8'))
         for filename,expected in frozen['files_sha256'].items():
             assert hashlib.sha256((root/'data/retrieval_lab_v2'/filename).read_bytes()).hexdigest()==expected,filename
+        candidate=json.loads((root/'data/retrieval_lab_v2/rerank_candidate_v1.json').read_text(encoding='utf-8'))
+        assert candidate['freeze']==frozen
+        assert hashlib.sha256((root/candidate['development_report']).read_bytes()).hexdigest()==candidate['development_report_sha256']
         for row in manifest['lessons']:
             record=json.loads((root/row['submission']).read_text(encoding='utf-8'))
             assert record['status']=='not_started' and record['review']['status']=='pending'

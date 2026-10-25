@@ -3,7 +3,7 @@
   "status": "candidate_for_reserved_evaluation_only",
   "fixed_date": "2026-10-18",
   "development_report": "reports/examples/reranker-eval-20261018-164228-388687.json",
-  "development_report_sha256": "71bc92352bb7834ac8f80699930a6b537c48bbb8f05f1e0a90791e76ebf7e2fa",
+  "development_report_sha256": "fce557fc73f3e62ab4f73b84fed21a93ffc1fabdc43802fc2f5d4ed3ef0c96e2",
   "corpus_sha256": "49d753cc5193a8cd84bfd72c50a5a7313f87e659bd72545f23cef899cfb1fd15",
   "freeze": {
     "experiment_version": "retrieval-lab-v2",
@@ -54,5 +54,6 @@
     "device": "cpu",
     "batch_size": 8
   },
-  "note": "Experimental candidate fixed after dev evaluation and before reserved evaluation; main application default unchanged. Reserved queries share domain and some fact families with dev; not external independent generalization. This is an explicit author benchmark, not the current learner result."
+  "note": "Experimental candidate fixed after dev evaluation and before reserved evaluation; main application default unchanged. Reserved queries share domain and some fact families with dev; not external independent generalization. This is an explicit author benchmark, not the current learner result. Public report line endings use LF; metric values are unchanged and the original raw hash is retained for history.",
+  "original_development_report_sha256": "71bc92352bb7834ac8f80699930a6b537c48bbb8f05f1e0a90791e76ebf7e2fa"
 }
