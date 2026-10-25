@@ -1,0 +1,81 @@
+{
+  "modules": {
+    "exercises": [
+      "build_messages",
+      "call_model",
+      "parse_model_output",
+      "validate_date_range"
+    ],
+    "policy_qa": [
+      "build_policy_messages"
+    ],
+    "retrieval": [
+      "split_policy_document",
+      "rank_chunks"
+    ],
+    "rag_qa": [
+      "prepare_rag_request"
+    ],
+    "indexing": [
+      "build_policy_index"
+    ],
+    "pgvector_retrieval": [
+      "search_pgvector"
+    ],
+    "langchain_rag": [
+      "hits_to_documents",
+      "build_prepare_chain"
+    ],
+    "retrieval_metrics": [
+      "evaluate_evidence"
+    ],
+    "hybrid_retrieval": [
+      "fuse_rrf"
+    ],
+    "reranking": [
+      "rerank_candidates"
+    ],
+    "document_sync": [
+      "plan_document_sync"
+    ],
+    "document_sync_execution": [
+      "apply_sync_batch"
+    ],
+    "permission_retrieval": [
+      "search_visible_chunks"
+    ],
+    "permission_rag": [
+      "prepare_authorized_rag_request"
+    ],
+    "pdf_ingestion": [
+      "read_pdf_pages"
+    ],
+    "located_chunking": [
+      "split_located_pages"
+    ],
+    "source_citations": [
+      "resolve_citations"
+    ],
+    "docx_ingestion": [
+      "read_docx_blocks"
+    ],
+    "docx_chunking": [
+      "build_docx_chunks"
+    ],
+    "leave_balance_tool": [
+      "execute_balance_tool"
+    ],
+    "office_tools": [
+      "execute_office_tool"
+    ],
+    "leave_draft": [
+      "assess_leave_draft"
+    ],
+    "leave_confirmation": [
+      "confirm_leave_draft"
+    ],
+    "leave_submission": [
+      "submit_leave"
+    ]
+  }
+}

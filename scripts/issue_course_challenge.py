@@ -5,7 +5,7 @@ from app.course.assessment import issue_challenge
 
 def main():
     parser=argparse.ArgumentParser()
-    parser.add_argument('--day',type=int,required=True,choices=range(12,27))
+    parser.add_argument('--day',type=int,required=True,choices=range(1,27))
     args=parser.parse_args()
     print(json.dumps(issue_challenge(args.day),ensure_ascii=False,indent=2))
 

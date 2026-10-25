@@ -2,7 +2,7 @@
   "date": "2026-10-25",
   "image_id": "sha256:802f2461b5a88929b9b3bcf1e4c5ee72d2da60de8876fae4abd33a2b4d3a6b20",
   "base_digest": "sha256:b7a9e5f6a93d6d4a31f129bbd4bdee69efccb6ded0fb230d78aafaf37af98377",
-  "dependency_lock": "requirements-course.lock.txt",
+  "dependency_lock": "requirements/course.lock.txt",
   "linux_http_report": "course-http-linux-20261025.json",
   "public_cloud_deployed": false
 }

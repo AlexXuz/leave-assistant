@@ -12,6 +12,9 @@ def check_day(day: int, mode: str='reference') -> dict:
 
 
 def _check_warmup(day: int, mode: str='reference') -> dict:
+    if 1<=day<=11:
+        from app.course.foundations import check_foundation
+        return check_foundation(day,mode)
     if day in (16,25,26):
         return {'day':day,'mode':mode,'status':'manual_review_required','message':'本课按课件的真实操作/证据评分，不用函数断言替代部署或面试。'}
     if mode not in {'reference','exercise'}:

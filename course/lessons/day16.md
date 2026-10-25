@@ -8,13 +8,13 @@
 
 应用进程需要Python依赖、数据库连接配置、持久化检查点目录、可选模型API配置。数据库需要数据卷。RAG另需本地Embedding权重；只有请假、MCP、报告、ChatBI的课程镜像不必加载这些大模型，不能把某页能打开理解成所有RAG链路已就绪。
 
-仓库提供 `Dockerfile.course`、`.dockerignore`、`compose.course.yaml` 和独立 `requirements-course-runtime.txt`。镜像不复制.env、.models、tmp或个人报告。容器内数据库host是postgres，不是127.0.0.1；127.0.0.1指容器自己。主机浏览器仍访问映射到回环地址的端口。
+仓库提供 `deployment/Dockerfile.course`、`.dockerignore`、`deployment/compose.course.yaml` 和独立 `requirements/course-runtime.txt`。镜像不复制.env、.models、tmp或个人报告。容器内数据库host是postgres，不是127.0.0.1；127.0.0.1指容器自己。主机浏览器仍访问映射到回环地址的端口。
 
 ## 启动前先读配置
 
 数据库配置继续使用本机.env.pgvector，由Compose注入，不写进镜像层。模型配置通过.env注入应用，不能把密钥烘焙到静态JS。检查点存容器挂载的tmp/course，重建容器仍保留。镜像运行非root账号，数据库端口不对公网暴露。
 
-启动步骤见仓库根目录的 `DEPLOYMENT.md`。课程环境与已有本机数据库使用不同Compose项目/端口，避免覆盖你正在使用的数据卷。不要为了“清理”执行down -v，除非明确知道卷中是什么。
+启动步骤见仓库根目录的 `docs/deployment.md`。课程环境与已有本机数据库使用不同Compose项目/端口，避免覆盖你正在使用的数据卷。不要为了“清理”执行down -v，除非明确知道卷中是什么。
 
 ## 健康检查到底证明了什么
 

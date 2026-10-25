@@ -7,3 +7,5 @@
 #assessment-summary{margin-top:18px;padding:18px;background:#f4f7f0;border:1px solid #dce6d8;border-radius:9px}#assessment-summary h3{font-size:16px;margin:0 0 12px}#assessment-summary li{font-size:13px;line-height:1.9;color:#607858}
 
 .document-page main{margin:0}.document-page article{padding-top:35px}.document-page article>h1{display:block}#assignment-details{margin:12px 0 0;font-size:12px}#assignment-details summary{cursor:pointer;color:#3c7657}
+
+.resource-nav{margin:14px 0 10px;font-size:11px;max-height:180px;overflow:auto}.resource-nav a{display:block;padding:6px 4px;text-decoration:none;color:#698160}.brand{font-size:23px;letter-spacing:2px}.brand span{font-size:9px;letter-spacing:1px}

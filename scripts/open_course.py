@@ -13,7 +13,7 @@ URL='http://127.0.0.1:8012'
 def ready():
     try:
         r=httpx.get(URL+'/api/course',timeout=1,trust_env=False)
-        return r.status_code==200 and len(r.json().get('lessons',[]))==15
+        return r.status_code==200 and len(r.json().get('lessons',[]))==26
     except (httpx.HTTPError,ValueError):
         return False
 
@@ -30,7 +30,7 @@ def main():
             if process.poll() is not None:break
             time.sleep(0.25)
     if not ready():
-        print('课程服务未启动，请检查tmp/course-launch.log和requirements-course-runtime.txt。未停止其他进程。')
+        print('课程服务未启动，请检查tmp/course-launch.log和requirements/course-runtime.txt。未停止其他进程。')
         return 1
     webbrowser.open(URL+'/course')
     print('课程已打开。业务实验还需要Docker/PostgreSQL启动。')

@@ -1,0 +1,27 @@
+{
+  "schema_version": 2,
+  "day": 1,
+  "status": "not_started",
+  "producer": "learner",
+  "implementation_commit": null,
+  "challenge_file": null,
+  "challenge_sha256": null,
+  "independent_before_reference": null,
+  "assistance_used": [],
+  "design_notes": null,
+  "reproduction_steps": [],
+  "artifacts": [],
+  "review": {
+    "status": "pending",
+    "reviewer": null,
+    "reviewed_at": null,
+    "notes": null,
+    "novel_requirement_confirmed": false,
+    "critical_checks": {
+      "D1-C1": false,
+      "D1-C2": false,
+      "D1-C3": false
+    },
+    "critical_violations": []
+  }
+}

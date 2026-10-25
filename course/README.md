@@ -1,6 +1,6 @@
-# 从这里开始自学 Day12–Day26
+# LLM Engineer Lab · Day1–Day26网页课堂
 
-这是完整的后半程课程包：15份讲解、逐课作业、分开的参考答案、浏览器实验和实际验证记录。**课程已备好不等于你已经学完**；个人进度保留在LEARNER_PROGRESS.md。
+这是完整的26单元课程：26份讲解、逐课作业、分开的参考答案、浏览器实验和实际验证记录。**课程已备好不等于你已经学完**；个人进度保留在LEARNER_PROGRESS.md。
 
 ## 最省事的入口
 
@@ -23,6 +23,17 @@
 
 | Day | 讲解 | 独立任务书 | 在IDE写入的文件 |
 |---|---|---|---|
+| 1 | [Python与模型调用：从消息到结构化结果](lessons/day01.md) | [任务/变体/失败/标准](tasks/model_request_pipeline.md) | [model_request_pipeline.py](projects/model_request_pipeline.py) |
+| 2 | [Pydantic与评测：建立可执行的数据契约](lessons/day02.md) | [任务/变体/失败/标准](tasks/validated_output_pipeline.md) | [validated_output_pipeline.py](projects/validated_output_pipeline.py) |
+| 3 | [错误分层与有依据问答：从提取走向制度](lessons/day03.md) | [任务/变体/失败/标准](tasks/grounded_answer_service.md) | [grounded_answer_service.py](projects/grounded_answer_service.py) |
+| 4 | [最小RAG：切分、向量、排序与请求组装](lessons/day04.md) | [任务/变体/失败/标准](tasks/retrieval_pipeline.md) | [retrieval_pipeline.py](projects/retrieval_pipeline.py) |
+| 5 | [pgvector与LangChain：持久检索和编排](lessons/day05.md) | [任务/变体/失败/标准](tasks/persistent_rag_pipeline.md) | [persistent_rag_pipeline.py](projects/persistent_rag_pipeline.py) |
+| 6 | [混合检索与重排：用证据评价优化](lessons/day06.md) | [任务/变体/失败/标准](tasks/retrieval_experiment.md) | [retrieval_experiment.py](projects/retrieval_experiment.py) |
+| 7 | [知识生命周期与权限：快照、事务和授权检索](lessons/day07.md) | [任务/变体/失败/标准](tasks/knowledge_sync_pipeline.md) | [knowledge_sync_pipeline.py](projects/knowledge_sync_pipeline.py) |
+| 8 | [PDF与来源定位：从页面到可核验引用](lessons/day08.md) | [任务/变体/失败/标准](tasks/pdf_evidence_pipeline.md) | [pdf_evidence_pipeline.py](projects/pdf_evidence_pipeline.py) |
+| 9 | [Word、表格与OCR：保留结构和质量边界](lessons/day09.md) | [任务/变体/失败/标准](tasks/structured_document_pipeline.md) | [structured_document_pipeline.py](projects/structured_document_pipeline.py) |
+| 10 | [Tool Calling：让模型查询真实业务事实](lessons/day10.md) | [任务/变体/失败/标准](tasks/business_tool_pipeline.md) | [business_tool_pipeline.py](projects/business_tool_pipeline.py) |
+| 11 | [业务工作流：预检、明确确认与幂等提交](lessons/day11.md) | [任务/变体/失败/标准](tasks/confirmed_application_workflow.md) | [confirmed_application_workflow.py](projects/confirmed_application_workflow.py) |
 | 12 | [LangGraph：状态、暂停与恢复](lessons/day12.md) | [任务/变体/失败/标准](tasks/graph_recovery_workflow.md) | [graph_recovery_workflow.py](projects/graph_recovery_workflow.py) |
 | 13 | [上下文工程与用户记忆](lessons/day13.md) | [任务/变体/失败/标准](tasks/conversation_context_pipeline.md) | [conversation_context_pipeline.py](projects/conversation_context_pipeline.py) |
 | 14 | [MCP：独立客户端调用业务工具](lessons/day14.md) | [任务/变体/失败/标准](tasks/mcp_business_client.md) | [mcp_business_client.py](projects/mcp_business_client.py) |

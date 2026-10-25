@@ -1,9 +1,9 @@
 <!doctype html>
 <html lang="zh-CN">
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>轻舟 · 办公助手</title><link rel="stylesheet" href="/assets/style.css"><script src="/assets/app.js" defer></script></head>
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>LLM Engineer Lab · 办公助手</title><link rel="stylesheet" href="/assets/style.css"><script src="/assets/app.js" defer></script></head>
 <body>
 <section id="login-screen" class="login-screen">
-  <div class="login-intro"><a class="brand" href="/">轻舟<span>OFFICE ASSISTANT</span></a><div class="eyebrow">YOUR WORKSPACE</div><h1>从你的账号，开始安排。</h1><p>每位员工有自己的年假额度和申请记录。<br>提交后预占额度，退出再登录也会保留。</p><div class="login-footnote">本机演示环境 · 使用虚构员工与额度</div></div>
+  <div class="login-intro"><a class="brand" href="/">LLM LAB<span>OFFICE ASSISTANT</span></a><div class="eyebrow">YOUR WORKSPACE</div><h1>从你的账号，开始安排。</h1><p>每位员工有自己的年假额度和申请记录。<br>提交后预占额度，退出再登录也会保留。</p><div class="login-footnote">本机演示环境 · 使用虚构员工与额度</div></div>
   <div class="login-card"><h2>登录办公助手</h2><p class="login-subtitle">选择一个演示账号，或输入下方账号密码。 <a href="/course">阅读完整自学课件 →</a></p><div id="demo-accounts" class="demo-accounts"></div><p id="demo-password" class="login-subtitle"></p>
     <form id="login-form"><label for="username">账号</label><input id="username" name="username" autocomplete="username" required placeholder="例如：zhangsan"><label for="password">密码</label><input id="password" name="password" type="password" autocomplete="current-password" required placeholder="演示密码"><button id="login" type="submit" class="primary">登录</button></form>
     <div id="login-notice" class="notice" role="status" hidden></div>
@@ -11,7 +11,7 @@
 </section>
 <div id="workspace-ui" class="workspace-ui" hidden>
 <aside class="sidebar">
-  <a class="brand" href="/">轻舟<span>OFFICE ASSISTANT</span></a>
+  <a class="brand" href="/">LLM LAB<span>OFFICE ASSISTANT</span></a>
   <div class="workspace">个人工作台</div><div class="nav active">↗　请假申请</div><a href="/course" class="switch-account">自学课程 · Day12–26 →</a>
   <div class="history-title">最近申请 <button id="reload" class="icon" aria-label="刷新最近申请">↻</button></div>
   <div id="history" class="history"><p class="muted">暂无申请</p></div>

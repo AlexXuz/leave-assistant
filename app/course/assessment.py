@@ -9,6 +9,7 @@ import subprocess
 from uuid import uuid4
 
 from app.pgvector_store import PROJECT_ROOT
+from app.course.profile import read_profile
 
 COURSE=PROJECT_ROOT/'course'
 GATES=(19,24,26)
@@ -192,7 +193,10 @@ def assess_day(day):
     except (OSError,ValueError,TypeError) as error:
         value={'day':day,'status':'invalid_evidence','completion_eligible':False,'issues':[str(error)],'hard_gate':item['hard_gate']}
     previous=[gate for gate in GATES if gate<day]
-    if day==19:previous+=list(range(12,19))
+    if day==19:
+        profile=read_profile()
+        historical=set(profile.get('completed_stages',[])) if profile.get('track')=='alexstudy' else set()
+        previous+=[stage for stage in range(1,19) if stage not in historical]
     if day==24:previous+=list(range(20,24))
     if day==26:previous.append(25)
     blocked=[other for other in sorted(set(previous)) if not assess_day(other)['completion_eligible']]

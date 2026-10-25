@@ -1,0 +1,79 @@
+{
+  "resources": [
+    {
+      "title": "架构与分支职责",
+      "path": "docs/architecture.md",
+      "kind": "guide"
+    },
+    {
+      "title": "贡献指南",
+      "path": "docs/contributing.md",
+      "kind": "guide"
+    },
+    {
+      "title": "课程路线与范围",
+      "path": "docs/curriculum.md",
+      "kind": "guide"
+    },
+    {
+      "title": "安装与部署",
+      "path": "docs/deployment.md",
+      "kind": "guide"
+    },
+    {
+      "title": "安全与数据说明",
+      "path": "docs/security.md",
+      "kind": "guide"
+    },
+    {
+      "title": "评测入门",
+      "path": "course/reading/evaluation.md",
+      "kind": "guide"
+    },
+    {
+      "title": "RAG · chunking",
+      "path": "course/reading/rag-chunking.md",
+      "kind": "guide"
+    },
+    {
+      "title": "RAG · embedding",
+      "path": "course/reading/rag-embedding.md",
+      "kind": "guide"
+    },
+    {
+      "title": "RAG · evaluation",
+      "path": "course/reading/rag-evaluation.md",
+      "kind": "guide"
+    },
+    {
+      "title": "RAG · hybrid",
+      "path": "course/reading/rag-hybrid.md",
+      "kind": "guide"
+    },
+    {
+      "title": "RAG · index",
+      "path": "course/reading/rag-index.md",
+      "kind": "guide"
+    },
+    {
+      "title": "RAG · intro",
+      "path": "course/reading/rag-intro.md",
+      "kind": "guide"
+    },
+    {
+      "title": "RAG · langchain",
+      "path": "course/reading/rag-langchain.md",
+      "kind": "guide"
+    },
+    {
+      "title": "RAG · pgvector",
+      "path": "course/reading/rag-pgvector.md",
+      "kind": "guide"
+    },
+    {
+      "title": "RAG · reranking",
+      "path": "course/reading/rag-reranking.md",
+      "kind": "guide"
+    }
+  ]
+}

@@ -12,7 +12,7 @@ from app.pgvector_store import PROJECT_ROOT
 
 def main():
     docker=shutil.which('docker') or str(Path(os.environ['LOCALAPPDATA'])/'Programs/DockerDesktop/resources/bin/docker.exe')
-    base=[docker,'compose','--env-file','.env.pgvector','-f','compose.course.yaml']
+    base=[docker,'compose','--env-file','.env.pgvector','-f','deployment/compose.course.yaml']
     marker='course-container-smoke-v1'
     seed='''import json
 from app.leave_web_accounts import WEB_RUN_ID,initialize_accounts,create_account_draft,web_view

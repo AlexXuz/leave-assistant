@@ -1,0 +1,20 @@
+name: Bug report / 问题反馈
+description: 使用合成数据提供可复现问题
+body:
+  - type: input
+    id: lesson
+    attributes:
+      label: 受影响的Day或模块
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: 环境、复现步骤、预期与实际结果
+      description: 不要上传Key、Cookie、真实员工数据或内部材料。
+    validations:
+      required: true
+  - type: textarea
+    id: checks
+    attributes:
+      label: 已执行的检查及结果

@@ -1,141 +1,134 @@
-# 企业办公 AI 助手 · Python AI 应用开发学习项目
+# LLM Engineer Lab
 
-面向有 Java 后端经验的开发者，通过项目练习 Python、结构化模型调用、RAG、pgvector、文档导入与 Agent 应用开发。
+**大模型应用开发工程师实战课：从第一条模型请求，到能独立交付、评测和排障的企业 AI 应用。**
 
-本人学习进度：Day 1–Day 11 已完成阶段验收。**Day12–Day26完整自学课程包已备好**：讲解、作业、分开的参考答案、页面实验、部署文件与验证记录都在 [course/README.md](course/README.md)。课程准备完成不等于本人已学完，个人进度见 [course/LEARNER_PROGRESS.md](course/LEARNER_PROGRESS.md)。
+[![Course checks](https://github.com/AlexXuz/llm-engineer-lab/actions/workflows/course.yml/badge.svg)](https://github.com/AlexXuz/llm-engineer-lab/actions/workflows/course.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![Python 3.11](https://img.shields.io/badge/Python-3.11-blue.svg)](https://www.python.org/)
 
-双击根目录 `start-course.cmd`，或打开 http://127.0.0.1:8012/course 开始学习。讲解可直接阅读，业务实验先登录演示账号。新环境安装/容器部署见 [DEPLOYMENT.md](DEPLOYMENT.md)，真实验证范围见 [course/VALIDATION.md](course/VALIDATION.md)。
+26个学习单元，一套本地网页课堂，一个贯穿课程的办公AI助手。适合有后端开发基础、希望转向大模型应用工程的开发者；Java经验可以直接迁移到权限、事务、幂等和排障，不必从零重学通用后端。
 
-## 浏览器体验入口
+## 从哪里开始
 
-启动本机Docker/PostgreSQL后，运行：
+- **新学员使用 `main`**：练习骨架与学习进度从未学习状态开始，完整示范单独呈现。
+- **`alexstudy` 是作者的个人学习分支**：保留已有实现、阶段记录与进度，可事后对照，不要当作自己的默认作业。
+- 课程在网页阅读；作业 `.py` 文件已经创建，在IDE里直接写，保存后回到页面检查。
+- 不以看完、参考实现通过或复制代码计完成。每课有独立任务、需求变体、失败恢复与证据要求；Day19、24、26是阶段验收门。
 
-```powershell
-.\.venv\Scripts\python.exe -X utf8 -m uvicorn app.leave_web:app --host 127.0.0.1 --port 8012 --reload
-```
+## 五分钟打开网页课堂
 
-打开 http://127.0.0.1:8012 ，体验自然语言生成草稿、核对、明确确认、提交待审批和历史状态查看。页面复用已验收业务函数；员工与额度是隔离的教学数据。Day12路由作业和后续LangGraph接入边界见 [DAY12.md](DAY12.md)。
+已验证 Python 3.11。先安装课程运行依赖；阅读课件和运行离线检查不需要模型Key，也不需要先启动数据库。
 
-演示账号：zhangsan/张三（初始可用年假9天）、lisi/李四（3天）、wangwu/王五（0天）、zhaoliu/赵六（15天），密码均为`demo123`。同一账号的多份申请共享持久的2026年假账户；刷新、重新登录和重启不重置额度。当前支持年假，事假/病假明确提示暂不支持。
-
-每完成一个 Day 的验收与复核，更新学习记录、提交并推送 GitHub。仓库不包含本机密钥、虚拟环境、模型权重及临时渲染文件；完整同步约定见 [AGENTS.md](AGENTS.md)。
-
-以下保留 Day 1 的入门说明。项目最初以练习骨架起步，未实现模型调用时接口曾返回 HTTP 501；当前实现及进度请结合各 Day 文档查看。
-
-整体节奏与验收以 [修订后的学习计划](LEARNING_PLAN.md) 为准。首日先用 20–30 分钟诊断 Python 基础，已掌握内容可直接跳过。
-
-完成基础任务后继续 [输出校验与自动评测](DAY2.md)，按实际进度推进。
-
-输出校验通过后进入 [自动检查与模型评测](AUTOMATED_EVALUATION.md)。
-
-## 今天的目标
-
-理解并实现：用户输入 → 构造消息 → 模型调用 → 读取助手内容 → JSON 解析 → 返回草稿。
-先用 SDK 或 HTTP 客户端调用模型；完成结构化提取基线后，在 RAG 阶段按需引入 LangChain。
-
-## 环境与启动（PowerShell）
+**Windows / PowerShell**
 
 ```powershell
-Set-Location C:\agentengineer\leave-assistant
+git clone https://github.com/AlexXuz/llm-engineer-lab.git
+cd llm-engineer-lab
 python -m venv .venv
-.\.venv\Scripts\python.exe -m pip install -r requirements.lock.txt
-.\.venv\Scripts\python.exe scripts\python_basics.py
-.\.venv\Scripts\python.exe -m uvicorn app.main:app --reload --host 127.0.0.1 --port 8000
+.\.venv\Scripts\python.exe -m pip install -c requirements/course.lock.txt -r requirements/course-runtime.txt
+.\.venv\Scripts\python.exe -m scripts.open_course
 ```
 
-如果 .venv 和依赖已由助教准备好，跳过创建与安装两行。
-直接使用虚拟环境解释器，无需修改 PowerShell 执行策略。
+**macOS / Linux**
 
-- 健康检查：http://127.0.0.1:8000/health
-- 接口文档：http://127.0.0.1:8000/docs
-- 虚拟环境相当于本项目专用的解释器和第三方包目录，避免与其他项目冲突。
-- `python -m uvicorn app.main:app` 中，app.main 是模块路径，冒号后的 app 是应用对象。
-
-## Java 到 Python 的必要迁移
-
-| 熟悉的概念 | Python |
-| --- | --- |
-| 方法 | def；普通函数不必放进 class |
-| Map / List | dict / list |
-| null | None；JSON 中仍然是 null |
-| 花括号代码块 | 缩进，统一四个空格 |
-| try/catch | try/except |
-| 字符串拼接 | f-string 或序列化；不要手工拼 JSON |
-
-`text: str` 和 `-> dict` 是类型注解，本身不进行运行时校验。
-main.py 的请求类继承 Pydantic BaseModel，FastAPI 使用它处理请求体并验证输入。
-Python 字典与 JSON 文本是两个不同对象：json.dumps 编码，json.loads 解码。
-
-## 消息、Token 与上下文
-
-- system：本练习的任务规则；user：本轮待提取数据。实际字段与角色以供应商 API 文档为准。
-- Token 是模型处理文本的单位，不等于字符，也不总等于一个词。
-- 输入的规则、用户文本、历史消息都占用上下文；本课先做单轮。
-- 模型输出可能遗漏、编造或格式不合法；Prompt 不能替代服务端校验。
-- assistant 内容通常嵌在 API 响应对象内部，需要先读取它，再解析它里面的 JSON。
-
-## 实现顺序
-
-1. 阅读 main.py，运行 /health 和 /docs，观察 /api/leave/parse 的 501 状态。
-2. 实现 build_messages。先在 Python 中查看构造结果，避免输出真实敏感数据。
-3. 选择供应商后，复制 .env.example 为 .env，在本机填写配置。
-4. 根据供应商文档实现 call_model，返回内容字符串而非整个 HTTP 响应。
-5. 实现 parse_model_output：json.loads 后检查顶层为 dict。
-6. 在 /docs 中逐条输入 data/day1_cases.json 的 input，记录实际结果。
-
-## 本练习规则
-
-leaveType / startDate / endDate / reason 四项为必填业务信息。
-支持 ANNUAL、SICK、PERSONAL；缺失或有歧义的字段为 null，并列入 missingFields。
-明确的相对日期按 referenceTime 解释，不推断未明确给出的时长、理由或类型。
-首日样例只覆盖整天请假，结束日期为包含当天的日期：明确说“一天”时，开始与结束日期相同。
-只给出开始日期、没有结束日期或时长时，endDate 保持 null。Day 2 增加 referenceTime 的时区约束和跨日期边界测试。
-missingFields 的顺序不影响语义；理由允许忠实原意的措辞差异。
-当前只做草稿提取，不提交申请，不计算工作日或请假额度。
-
-## 今天提交什么
-
-- app/exercises.py 的实现。
-- 四条样例的实际输出；即使失败，也保留实际结果。
-- 每次调用的模型名、Prompt 版本、耗时、finish_reason 和接口提供的 Token 用量。
-- 自己新增一个用例；把参考时间后移一天，检查明确相对日期是否按预期变化。
-- 一个失败案例：输入、实际输出、你认为失败在哪一层、准备怎样验证。
-- 简短解释：HTTP 响应对象、助手内容字符串、解析后的 dict 各是什么？
-
-Day 2 完善输出 Schema、日期顺序、错误映射和 12 条自动评测，并由服务端计算或核验 missingFields。能返回 dict 只是 Day 1 通路验收。
-
-## DeepSeek 调用提示（2026-10-13 核对）
-
-本课程按 DeepSeek 官方直连 API 配置。若实际使用代理平台，以该平台的地址和模型名为准。
-
-```powershell
-Copy-Item -LiteralPath .env.example -Destination .env
+```bash
+git clone https://github.com/AlexXuz/llm-engineer-lab.git
+cd llm-engineer-lab
+python3 -m venv .venv
+.venv/bin/python -m pip install -c requirements/course.lock.txt -r requirements/course-runtime.txt
+.venv/bin/python -m scripts.open_course
 ```
 
-只在 .env 中填写自己的 LLM_API_KEY；示例已填写 base URL 与 deepseek-flash 模型名。
-不要重复执行复制命令覆盖已填写的 .env。
+打开 **http://127.0.0.1:8012/course**。Windows安装完成后也可以双击 `start-course.cmd`。如果环境不便自动打开浏览器，手动访问该地址即可。
 
-- POST https://api.deepseek.com/chat/completions
-- Authorization: Bearer <API Key>
-- 请求体带 model、messages、stream=false。
-- 本课使用 thinking={"type":"disabled"}，max_tokens=512。
-- response_format={"type":"json_object"}；消息中仍须明确要求 JSON 并给出结构。
-- 读取 choices[0].message.content；finish_reason 为 length 时不要当作完整成功。
-- 本课先调用四条模拟数据；调用会计入你的 API 用量。
-- 助教已验证本地骨架，尚未进行真实模型调用。
+### 运行业务实验
 
-写 call_model 时的顺序：load_dotenv → 检查配置 → httpx.Client(timeout=...) → post(json=...) → raise_for_status → response.json → 检查结束原因和 content → 返回 content。
+1. 将 `.env.example` 与 `.env.pgvector.example` 分别复制为本机 `.env`、`.env.pgvector`，填写自己的配置；不要覆盖已配置文件。
+2. 按网页“学习指南与拓展阅读”中的部署指南启动PostgreSQL，或参考 [部署说明](docs/deployment.md)。
+3. 模型调用、本地Embedding、OCR、CPU训练按相应课程安装额外依赖；先看前置检查和资源边界，再下载。
+4. 打开办公助手页面登录教学账号，观察真实业务状态。教学账号不能直接用于公网部署。
 
-官方参考：
-- https://api-docs.deepseek.com/api/create-chat-completion/
-- https://api-docs.deepseek.com/guides/json_mode/
-- https://api-docs.deepseek.com/quick_start/pricing/
+| 账号 | 部门 | 初始可用年假 |
+|---|---|---:|
+| zhangsan | 研发 | 9天 |
+| lisi | 财务 | 3天 |
+| wangwu | 运营 | 0天 |
+| zhaoliu | 产品 | 15天 |
 
-## 已准备的环境
+教学密码均为 `demo123`，数据采用固定2026年度的模拟案例。刷新、重登和重启不重置额度；生产身份、真实HR、实际审批引擎需单独集成。
 
-助教已创建 .venv 并安装依赖，requirements.lock.txt 记录已安装版本。
-需要重建同样环境时使用：
+## 你会完成什么
 
-```powershell
-.\.venv\Scripts\python.exe -m pip install -r requirements.lock.txt
+| 单元 | 能力与交付 |
+|---|---|
+| [Day1–3](course/lessons/day01.md) | Python必要迁移、SDK/HTTP模型调用、Pydantic、评测、错误分层、有依据问答 |
+| [Day4–6](course/lessons/day04.md) | 切分、Embedding、最小RAG、pgvector、LangChain、混合检索与重排对照 |
+| [Day7](course/lessons/day07.md) | 文档快照、更新/删除、版本、事务和检索前权限 |
+| [Day8–9](course/lessons/day08.md) | PDF/Word与表格、来源定位、引用、OCR质量和审核边界 |
+| [Day10–11](course/lessons/day10.md) | Tool Calling、实时业务查询、草稿预检、明确确认、事务和幂等提交 |
+| [Day12–15](course/lessons/day12.md) | LangGraph暂停恢复、上下文/记忆、MCP、按需加载Skill |
+| [Day16–19](course/lessons/day16.md) | 可复现部署、SSE、排障、成本延迟、有限Agent与独立整合验收 |
+| [Day20–21](course/lessons/day20.md) | 优化实验、数据划分、SFT/LoRA机制和真实预训练微调迁移条件 |
+| [Day22–23](course/lessons/day22.md) | 受控ChatBI、SQL AST/数据库权限、数值溯源和图表 |
+| [Day24–26](course/lessons/day24.md) | 独立需求迁移、真实岗位证据映射、作品集、故障恢复与综合验收 |
+
+学习单元不等于必须一天学完。主线优先完成可核验交付，选修按目标岗位选择，不以框架数量或刷完课件作为能力证明。
+
+## 学习方式
+
+1. 阅读讲解，先用固定样例理解输入、输出和调用链。
+2. 在IDE完成热身，再独立设计并实现本课任务；原有脚手架负责通用基础设施。
+3. 卡住时看分级提示，记录自己的尝试之后再展开完整作者示范。
+4. 从自己的页面/API/脚本运行正常、变体与失败恢复，留下本人证据。
+5. 关键项复核通过后再更新学习进度。公开变体不是秘密留出题，已练过的需求应另换一题验证迁移。
+
+[证据与验收规则](course/EVIDENCE_PROTOCOL.md) · [学习进度](course/LEARNER_PROGRESS.md) · [选修路线](course/OPTIONAL_PATHS.md) · [求职补强](course/portfolio/APPLICATION_READINESS.md)
+
+## 项目结构
+
+```text
+app/                 业务服务、课程网站与教学基础设施
+  course/examples/   明确标注的完整参考实现
+  web/               网页课堂与办公助手界面
+course/
+  lessons/           Day1–26讲解，网页直接读取
+  tasks/             独立任务、变体、失败与验收标准
+  projects/          已创建的独立任务Python文件与HTTP脚手架
+  assignments/       后半程热身；基础练习入口见每课映射
+  solutions/         分级提示与验收讨论
+  submissions/       未完成的本人证据模板
+  portfolio/         岗位映射、项目证据与演示模板
+docs/                部署、架构、贡献和安全说明
+deployment/          Dockerfile与Compose
+requirements/        按运行/实验模块拆分的固定依赖
+infra/               教学SQL与约束
+data/                明确标注的合成资料和评测样例
+scripts/             启动、实验、维护与回归入口
+tests/               自动化测试
 ```
+
+默认项目提供可运行示范和服务端口，学员代码保持待实现；作者示范通过不代表本人作业通过。架构和分支职责见 [架构说明](docs/architecture.md)。
+
+## 验证与边界
+
+- 课程结构、参考契约、真实教学SQL、检查点、MCP/Skill、SSE和HTTP回归分开验证；CI不使用真实模型Key。
+- CPU LoRA是随机微型模型的训练机制实验，不冒称业务大模型微调效果。
+- 本机Docker不冒称云生产、SSO或多实例高可用；ChatBI限定少量模拟表与受控查询。
+- 数据、接口和权限是教学范围。真实云部署、提示注入与成本延迟评估、失败恢复演示按任务逐项补证。
+
+维护检查：
+
+```bash
+python -m scripts.check_public_project
+python -m scripts.check_course_revision
+python -m scripts.check_course_package
+python -m scripts.check_course_http
+```
+
+后面两项需要教学PostgreSQL。具体实际执行范围见网页验证说明，不能将作者报告复制成本人结果。
+
+## 参与与许可
+
+欢迎改进解释、任务、失败案例、可复现性和基础设施；提交PR前请阅读 [贡献指南](docs/contributing.md) 和 [安全说明](docs/security.md)。新功能应带验证依据，不将个人学习答案直接合并进默认骨架。
+
+代码和原创课程材料采用 [MIT License](LICENSE)。第三方依赖、模型与字体遵循各自许可证；仓库不包含API Key、虚拟环境、模型权重或真实员工数据。

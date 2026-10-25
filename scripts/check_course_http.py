@@ -17,7 +17,7 @@ def main():
     try:
         with TestClient(create_app(run_id,write_reports=False)) as client:
             assert client.get('/course').status_code==200
-            manifest=client.get('/api/course').json();assert len(manifest['lessons'])==15
+            manifest=client.get('/api/course').json();assert len(manifest['lessons'])==26
             for item in manifest['lessons']:
                 target=item['assignment_target']
                 assert item['project_target']['relative_path']==item['project']
@@ -61,7 +61,7 @@ def main():
             assert client.post('/api/course/labs/memory',headers=origin,json={'tone':'concise'}).json()['stored']
             assert not client.post('/api/course/labs/memory',headers=origin,json={'delete':True}).json()['stored']
             assert client.post('/api/course/labs/context',headers=origin,json={'question':'当前余额','turns':[],'budget_chars':1600}).status_code==200
-            report['checks'].append('15 warmup/project targets, 90 content pages, separate hints/examples, explicit non-completing warmup checks, authenticated evidence gate and document link allowlist')
+            report['checks'].append('26 warmup/project targets, 156 content pages, separate hints/examples, explicit non-completing warmup checks, authenticated evidence gate and document link allowlist')
             payload=json.dumps({'leaveType':'ANNUAL','startDate':'2026-11-02','endDate':'2026-11-05','reason':'课程HTTP验收'})
             with patch('app.leave_web.tracked_model_call',return_value=payload):
                 draft=client.post('/api/drafts',headers=origin,json={'text':'四天年假'}).json()

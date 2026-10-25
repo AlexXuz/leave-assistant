@@ -47,7 +47,7 @@ class RevisionRequest(BaseModel):
 def create_app(run_id: str = WEB_RUN_ID, *, write_reports: bool = True) -> FastAPI:
     guard = RLock()
     ready = False
-    app = FastAPI(title="企业办公助手 · 演示账号版")
+    app = FastAPI(title="LLM Engineer Lab · 办公助手示范")
     app.add_middleware(TrustedHostMiddleware, allowed_hosts=["127.0.0.1", "localhost", "testserver"])
     app.mount("/assets", StaticFiles(directory=STATIC), name="assets")
 
@@ -56,10 +56,13 @@ def create_app(run_id: str = WEB_RUN_ID, *, write_reports: bool = True) -> FastA
         if not ready:
             with guard:
                 if not ready:
-                    with connect_database() as connection:
-                        initialize_accounts(connection, run_id)
-                        with connection.transaction():
-                            connection.execute((PROJECT_ROOT / 'infra/course_schema.sql').read_text(encoding='utf-8'),prepare=False)
+                    try:
+                        with connect_database() as connection:
+                            initialize_accounts(connection, run_id)
+                            with connection.transaction():
+                                connection.execute((PROJECT_ROOT / 'infra/course_schema.sql').read_text(encoding='utf-8'),prepare=False)
+                    except ValueError as error:
+                        raise HTTPException(503,'业务实验需要先配置数据库并启动PostgreSQL；课程阅读可以直接使用。') from error
                     ready = True
 
     @app.middleware("http")
@@ -74,6 +77,8 @@ def create_app(run_id: str = WEB_RUN_ID, *, write_reports: bool = True) -> FastA
         return response
 
     def user(request: Request) -> dict:
+        if not request.cookies.get(COOKIE):
+            raise HTTPException(401,'请先登录演示账号。')
         ensure_ready()
         with connect_database() as connection:
             row = current_user(connection, run_id, request.cookies.get(COOKIE, ""))
@@ -107,6 +112,10 @@ def create_app(run_id: str = WEB_RUN_ID, *, write_reports: bool = True) -> FastA
     @app.exception_handler(APIConnectionError)
     async def model_connection_error(request, error):
         return JSONResponse({"detail": "模型连接失败，尚未生成草稿。请稍后重试。"}, status_code=503)
+
+    @app.exception_handler(NotImplementedError)
+    async def exercise_pending(request,error):
+        return JSONResponse({'detail':'独立任务尚未实现，请先在IDE接好本课流程；示范通过不算本人完成。'},status_code=501)
 
     @app.exception_handler(APITimeoutError)
     async def model_timeout(request, error):

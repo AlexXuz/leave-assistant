@@ -3,12 +3,18 @@ from datetime import datetime
 from json import JSONDecodeError
 
 from fastapi import FastAPI, HTTPException
+from fastapi.responses import JSONResponse
 from pydantic import BaseModel, Field, ValidationError
 
 from app.exercises import build_messages, call_model, parse_model_output
 from openai import APITimeoutError
 
 app = FastAPI(title="企业办公 AI 助手 · Day 1")
+
+
+@app.exception_handler(NotImplementedError)
+async def exercise_pending(request,error):
+    return JSONResponse({'detail':'当前学员函数尚未实现；请先在IDE完成本课练习。'},status_code=501)
 
 
 class LeaveParseRequest(BaseModel):

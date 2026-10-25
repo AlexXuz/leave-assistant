@@ -19,7 +19,7 @@ def main():
     report={'kind':'author_rule_validation','learner_completed':False,'checks':[]}
     manifest=json.loads((PROJECT_ROOT/'course/manifest.json').read_text(encoding='utf-8'))
     items=manifest['lessons']
-    assert [x['day'] for x in items]==list(range(12,27))
+    assert [x['day'] for x in items]==list(range(1,27))
     assert [x['day'] for x in items if x['hard_gate']]==[19,24,26]
     before={item['submission']:assessment.digest(PROJECT_ROOT/item['submission']) for item in items}
     for item in items:
@@ -36,7 +36,7 @@ def main():
         record=json.loads((PROJECT_ROOT/item['submission']).read_text(encoding='utf-8'))
         if record.get('status')=='not_started':
             assert assessment.assess_day(item['day'])['completion_eligible'] is False
-    report['checks'].append('15 task files, separate hints/examples, concrete boundaries and non-completing author/warmup checks')
+    report['checks'].append('26 task files, separate hints/examples, concrete boundaries and non-completing author/warmup checks')
     artifact_root=PROJECT_ROOT/'course/learner_artifacts';artifact_root.mkdir(exist_ok=True)
     issued_root=PROJECT_ROOT/'course/challenges/issued';issued_root.mkdir(parents=True,exist_ok=True)
     with TemporaryDirectory(prefix='rule-fixture-',dir=artifact_root) as artifacts, TemporaryDirectory(prefix='rule-fixture-',dir=issued_root) as issued:

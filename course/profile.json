@@ -1,0 +1,20 @@
+{
+  "track": "alexstudy",
+  "display_name": "Alex的学习分支",
+  "completed_stages": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11
+  ],
+  "next_day": 12,
+  "initialized": false,
+  "note": "Day1–Day11保留历史阶段验收；新版独立任务如需复验另留证据，不伪造新任务通过。"
+}

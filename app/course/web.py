@@ -24,6 +24,7 @@ from app.course.analytics import SqlPlan, execute_query, sql_messages
 from app.course.memory import preference
 from app.course import jobs
 from app.course.assessment import assess_day, issue_challenge
+from app.course.profile import read_profile
 from app.course.mcp_client import run_sync as mcp_client
 from app.course.skill_runtime import execute_report
 from app.course.state_graph import graph_operation
@@ -147,6 +148,8 @@ def mount_course(app,user,owned,run_id,ensure_ready,model_guard):
         paths={PROJECT_ROOT/item[key] for item in entries() for key in ('lesson','assignment','solution','reference','task','project')}
         paths.update(COURSE.glob('*.md'));paths.update((COURSE/'portfolio').glob('*.md'))
         paths.add(COURSE/'projects/README.md')
+        resources=json.loads((COURSE/'resources.json').read_text(encoding='utf-8'))['resources']
+        paths.update(PROJECT_ROOT/resource['path'] for resource in resources)
         return {path.resolve() for path in paths}
 
     @app.get('/api/course/files',response_class=HTMLResponse)
@@ -162,8 +165,10 @@ def mount_course(app,user,owned,run_id,ensure_ready,model_guard):
 
     @app.get('/api/course')
     def course_manifest():
-        lessons=[dict(item,assignment_target=assignment_target(item),project_target=assignment_target(item,'project')) for item in entries()]
-        return {'lessons':lessons,'authoring_status':'ready_for_self_study','learner_completion':'Day1-11_only','practice_base':'/','reference_answers_separate':True}
+        profile=read_profile()
+        lessons=[dict(item,assignment_target=assignment_target(item),project_target=assignment_target(item,'project'),historical_stage_accepted=item['day'] in profile.get('completed_stages',[])) for item in entries()]
+        resources=json.loads((COURSE/'resources.json').read_text(encoding='utf-8'))['resources']
+        return {'lessons':lessons,'profile':profile,'resources':resources,'authoring_status':'ready_for_self_study','learner_completion':'profile_and_evidence_only','practice_base':'/','reference_answers_separate':True}
 
     @app.get('/api/course/{day}/content/{artifact}',response_class=HTMLResponse)
     def content(day:int,artifact:str):
@@ -345,7 +350,7 @@ def mount_course(app,user,owned,run_id,ensure_ready,model_guard):
             code="import json; from scripts.train_tiny_lora import run; print(json.dumps(run(60)[0]))"
             result=subprocess.run([sys.executable,'-X','utf8','-c',code],cwd=PROJECT_ROOT,capture_output=True,text=True,encoding='utf-8',timeout=180)
             if result.returncode:
-                raise HTTPException(503,'CPU训练失败，请检查requirements-training.txt依赖和本机日志')
+                raise HTTPException(503,'CPU训练失败，请检查requirements/training.txt依赖和本机日志')
             return json.loads(result.stdout)
         finally:
             _training_gate.release()
