@@ -35,8 +35,8 @@ question = '现在提交了吗？'
 
 登录张三，保存“简短”；运行上下文实验，观察可信快照里带入偏好。切换李四，应该没有张三的偏好。切回张三删除，再运行，stored应为false。把预算从1600降到400，比较保留轮次，但当前问题和业务快照必须还在。
 
-作业：实现 `course/assignments/day13.py`。输出messages、characters、budget_chars、kept_turns、dropped_turns、budget_unit。禁止修改输入。先实现“必要部分是否放得下”，再实现倒序选择轮次，最后恢复原时间顺序。
+作业：实现 `course/assignments/context_selection.py`。输出messages、characters、budget_chars、kept_turns、dropped_turns、budget_unit。禁止修改输入。先实现“必要部分是否放得下”，再实现倒序选择轮次，最后恢复原时间顺序。
 
 验收：修改前后输入相同；消息顺序正确；字符总量不超预算；不同账号互不可见；删除后不再注入。拓展题是写一个摘要，但必须保留修改时间与来源，不能让摘要重写数据库的最新字段。
 
-来源：[LangGraph persistence](https://docs.langchain.com/oss/python/langgraph/persistence)、[Memory](https://docs.langchain.com/oss/python/langgraph/add-memory)。参考答案与服务分别在 `course/solutions/day13.py` 和 `app/course/memory.py`。
+来源：[LangGraph persistence](https://docs.langchain.com/oss/python/langgraph/persistence)、[Memory](https://docs.langchain.com/oss/python/langgraph/add-memory)。参考答案与服务分别在 `course/solutions/context_selection.py` 和 `app/course/memory.py`。

@@ -32,4 +32,4 @@
 
 验收：数据源正确、引用可追溯、工具调用ID成对、循环有界、未知工具拒绝、没有写工具暴露。有限Agent的答案文本仍需人工核对，模型说“批准”不会写出真实批准记录。
 
-参考 `course/solutions/day19.py`、`app/course/bounded_agent.py`。来源：[Building effective agents](https://www.anthropic.com/engineering/building-effective-agents)、[LangGraph graph API](https://docs.langchain.com/oss/python/langgraph/graph-api)。
+参考 `course/solutions/evidence_merging.py`、`app/course/bounded_agent.py`。来源：[Building effective agents](https://www.anthropic.com/engineering/building-effective-agents)、[LangGraph graph API](https://docs.langchain.com/oss/python/langgraph/graph-api)。

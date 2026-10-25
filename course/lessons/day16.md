@@ -22,8 +22,8 @@
 
 ## 作业与验收
 
-本课作业是操作文档 `course/assignments/day16.md`，不是重复写健康检查函数。你需要从新目录/镜像启动，登录演示账号，生成草稿并提交，再重启应用读取相同申请编号。提交自己的命令、镜像标识、端口、脱敏日志与持久化结果。
+本课作业是操作文档 `course/assignments/deployment_verification.md`，不是重复写健康检查函数。你需要从新目录/镜像启动，登录演示账号，生成草稿并提交，再重启应用读取相同申请编号。提交自己的命令、镜像标识、端口、脱敏日志与持久化结果。
 
 失败时按层排查：镜像依赖失败看requirements；连接被拒绝看服务地址和网络；账号表不存在看初始化；重启丢图看挂载；模型失败看配置与网络。不要把全部问题归成“Docker不好用”。
 
-参考文档 `course/solutions/day16.md` 给出判断依据，而非一份预先声称成功的运行记录。来源：[Docker Compose](https://docs.docker.com/compose/)、[FastAPI deployment](https://fastapi.tiangolo.com/deployment/)。
+参考文档 `course/solutions/deployment_verification.md` 给出判断依据，而非一份预先声称成功的运行记录。来源：[Docker Compose](https://docs.docker.com/compose/)、[FastAPI deployment](https://fastapi.tiangolo.com/deployment/)。

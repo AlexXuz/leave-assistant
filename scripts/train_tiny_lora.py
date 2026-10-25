@@ -10,8 +10,8 @@ from transformers import GPT2Config, GPT2LMHeadModel
 from peft import LoraConfig, PeftModel, get_peft_model
 
 from app.pgvector_store import PROJECT_ROOT
-from course.solutions.day20 import validate_splits
-from course.solutions.day21 import build_labels
+from course.solutions.optimization_strategy import validate_splits
+from course.solutions.sft_labels import build_labels
 
 ALPHABET='\n '+''.join(chr(i) for i in range(33,127))
 VOCAB={char:i+1 for i,char in enumerate(ALPHABET)}

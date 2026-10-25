@@ -5,8 +5,8 @@ from psycopg import sql as psql
 from pydantic import BaseModel, ConfigDict, model_validator
 
 from app.pgvector_store import PROJECT_ROOT, connect_database
-from course.solutions.day22 import validate_readonly_sql
-from course.solutions.day23 import chart_spec
+from course.solutions.readonly_sql import validate_readonly_sql
+from course.solutions.chart_spec import chart_spec
 
 _lock=RLock()
 _ready=False

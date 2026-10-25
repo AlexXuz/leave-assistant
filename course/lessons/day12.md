@@ -48,6 +48,6 @@ inspect → wait_confirmation → wait_submit → submit → show_result
 
 常见排查：总是从头开始，检查thread_id和检查点路径；恢复时重复写，检查副作用位置和key；能读取别人的图，检查服务端归属校验；一直提示作业未实现，检查保存文件和服务热重载。
 
-参考答案：`course/solutions/day12.py`。实际图：`app/course/state_graph.py`。范围是本机SQLite检查点与教学PostgreSQL，不是多实例高可用。
+参考答案：`course/solutions/leave_graph_routing.py`。实际图：`app/course/state_graph.py`。范围是本机SQLite检查点与教学PostgreSQL，不是多实例高可用。
 
 来源：[Graph API](https://docs.langchain.com/oss/python/langgraph/graph-api)、[Interrupts](https://docs.langchain.com/oss/python/langgraph/interrupts)。本包锁定langgraph 1.2.17，升级先复验恢复行为。

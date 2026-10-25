@@ -28,7 +28,7 @@ from app.course.state_graph import graph_operation
 from app.leave_web_accounts import account_balance
 from app.pgvector_store import PROJECT_ROOT, connect_database
 from app.permission_service import TrustedAccessContext
-from course.solutions.day13 import select_context
+from course.solutions.context_selection import select_context
 from scripts.ask_pdf_rag import tracked_model_call
 
 COURSE=PROJECT_ROOT/'course'

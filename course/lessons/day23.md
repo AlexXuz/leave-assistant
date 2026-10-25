@@ -26,4 +26,4 @@ APPROVED申请天数、PENDING_APPROVAL申请天数、个人可用余额是三�
 
 验收：表格与图数值一致、单位正确、范围清楚、空结果有解释、错误不变成空图。最终回答应写“研发部在2026年10月已批准年假共X天，来源为模拟历史表”，而不是声称公司生产数据。
 
-参考答案 `course/solutions/day23.py`。数据库执行与图表来源在 `app/course/analytics.py`。来源：[PostgreSQL aggregate functions](https://www.postgresql.org/docs/17/functions-aggregate.html)、[SQLGlot](https://github.com/tobymao/sqlglot)。
+参考答案 `course/solutions/chart_spec.py`。数据库执行与图表来源在 `app/course/analytics.py`。来源：[PostgreSQL aggregate functions](https://www.postgresql.org/docs/17/functions-aggregate.html)、[SQLGlot](https://github.com/tobymao/sqlglot)。

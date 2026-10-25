@@ -37,4 +37,4 @@ scripts/render_report.py      已审阅的只读报告脚本
 
 验收：加载列表与实际资源一致，SQL统计可复核，正文保留待审批口径，权限不由文档扩大。若迁移到其他Agent宿主，仍需验证该宿主如何发现、加载和执行，不能假定目录放好就自动运行。
 
-来源：[Agent Skills规范](https://agentskills.io/specification)。参考选择函数在 `course/solutions/day15.py`，完整Skill与脚本已交付。
+来源：[Agent Skills规范](https://agentskills.io/specification)。参考选择函数在 `course/solutions/skill_selection.py`，完整Skill与脚本已交付。

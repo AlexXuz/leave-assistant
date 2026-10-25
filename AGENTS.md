@@ -21,6 +21,8 @@ materials live in course/. The default reference labs may run complete examples;
 do not copy reference answers into the learner's assignment functions or mark the
 learner as having completed later Days merely because the package checks pass.
 Keep authoring/verification status separate from course/LEARNER_PROGRESS.md.
+Name assignment and solution Python modules after their responsibility in
+snake_case, not Day numbers. Keep lesson-to-file mappings in course/manifest.json.
 
 ## GitHub synchronization
 

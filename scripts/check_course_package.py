@@ -66,7 +66,7 @@ def main():
         report['integrations'].append('User-scoped preference write/read/delete')
         mcp=run_sync('zhangsan',2026,run_id)
         assert mcp['extra_identity_rejected']
-        from course.solutions.day14 import decode_tool_result
+        from course.solutions.mcp_result_parser import decode_tool_result
         assert decode_tool_result(mcp['result'])['status']=='ok'
         report['integrations'].append('Independent MCP stdio process discovery/call and extra identity rejection')
         skill=execute_report(run_id,access.user_id)

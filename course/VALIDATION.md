@@ -9,6 +9,8 @@
 | 参考函数与组件联调 | [报告](../reports/course-package-20261025-123951.json) |
 | 课程页面/API/SSE | [报告](../reports/course-http-20261025-124001.json) |
 | IDE作业文件入口与HTTP回归 | [报告](../reports/course-http-20261025-125919.json) |
+| 职责命名后的组件联调 | [报告](../reports/course-package-20261025-153854.json) |
+| 职责命名后的文件入口与HTTP回归 | [报告](../reports/course-http-20261025-153910.json) |
 | 真实模型ChatBI与只读Agent | [报告](../reports/course-real-model-20261025-122109.json) |
 | 真实授权RAG与引用 | [报告](../reports/course-policy-20261025-123105.json) |
 | CPU LoRA训练与重载 | [报告](../reports/course-lora-20261025-115947.json) |
@@ -35,6 +37,8 @@ Docker使用独立leave-course项目、数据库卷和8013端口；实际构建�
 浏览器实际查看讲解、作业与参考答案切换，并以产品部演示账号执行SQL，真实结果与柱状图均为产品部6天。截图在本机tmp/course-bi-proof.png与tmp/course-overview.png，不上传用户浏览器临时状态。
 
 作业入口已补充现有文件绝对路径、待实现函数与行号，以及保存后直接检查。浏览器验证Day12、Day13代码作业与Day16文档作业；Day12检查真实返回not_implemented，没有把参考实现替换进学习者代码。截图在tmp/course-assignment-entry.png。新的HTTP回归覆盖全部15个文件入口并通过，临时SQL数据已清理。
+
+作业/参考文件已改为职责名称，课程序号仅保留在课件与导航。14份被重命名的学习者作业逐字节核对一致，原Day12入口未改；导入、课件、manifest与检查器同步更新。12项参考函数检查和真实组件联调通过，3项仍为人工验收；全部作业导入与训练脚本导入通过。浏览器实际打开context_selection.py对应页面并运行作业检查，截图在tmp/course-semantic-module-names.png。
 
 ## 未冒认完成
 

@@ -1,12 +1,21 @@
 """浏览器自测：同一组输入分别调用作业或参考函数；不自动填答案。"""
 from copy import deepcopy
 import importlib
+import json
+from pathlib import Path
 
 
 def check_day(day: int, mode: str='reference') -> dict:
     if day in (16,25,26):
         return {'day':day,'mode':mode,'status':'manual_review_required','message':'本课按课件的真实操作/证据评分，不用函数断言替代部署或面试。'}
-    path='app.leave_graph_routing' if day==12 and mode=='exercise' else f"course.{'solutions' if mode=='reference' else 'assignments'}.day{day:02d}"
+    if mode not in {'reference','exercise'}:
+        raise ValueError('只支持reference/exercise')
+    manifest=Path(__file__).resolve().parents[2]/'course/manifest.json'
+    item=next((item for item in json.loads(manifest.read_text(encoding='utf-8'))['lessons'] if item['day']==day),None)
+    if item is None:
+        raise ValueError('课程不存在')
+    source=item['solution' if mode=='reference' else 'assignment']
+    path=Path(source).with_suffix('').as_posix().replace('/','.')
     importlib.invalidate_caches()
     try:
         module=importlib.reload(importlib.import_module(path))  # 保存作业后可直接从页面复验。

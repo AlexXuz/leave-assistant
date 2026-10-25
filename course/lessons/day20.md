@@ -28,4 +28,4 @@
 
 拒答/澄清不能统一算错误。业务问题要求查工具时，“语言看上去正确”也不等于执行成功。训练损失下降只是优化目标下降，必须另外检查独立数据和实际任务表现。
 
-验收交付：数据卡、场景划分表、一份冻结基线、一个只改一项的实验计划，以及不适合微调的失败例子。参考 `course/solutions/day20.py`。来源：[Hugging Face PEFT](https://huggingface.co/docs/peft/quicktour)、[Datasets splitting](https://huggingface.co/docs/datasets/process#split)。
+验收交付：数据卡、场景划分表、一份冻结基线、一个只改一项的实验计划，以及不适合微调的失败例子。参考 `course/solutions/optimization_strategy.py`。来源：[Hugging Face PEFT](https://huggingface.co/docs/peft/quicktour)、[Datasets splitting](https://huggingface.co/docs/datasets/process#split)。

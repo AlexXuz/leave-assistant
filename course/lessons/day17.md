@@ -33,4 +33,4 @@ data: {"step": 3, "message": "整理汇总结果"}
 
 验收：格式正确、事件序号连续、终态明确、他人job不可读、取消不伪造成功、同步I/O未堵住主事件循环。输出接口耗时和最终job耗时分开记录。
 
-来源：[MDN SSE](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events)、[Python asyncio](https://docs.python.org/3.11/library/asyncio-task.html)。参考答案 `course/solutions/day17.py`。
+来源：[MDN SSE](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events)、[Python asyncio](https://docs.python.org/3.11/library/asyncio-task.html)。参考答案 `course/solutions/sse_events.py`。

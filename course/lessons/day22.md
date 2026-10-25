@@ -12,7 +12,7 @@
 
 SELECT可以调用副作用函数、读系统表、用子查询绕过表名检查，甚至拼第二条语句。禁止关键字黑名单也覆盖不了SQL语法。本课使用sqlglot解析PostgreSQL AST，刻意只支持单个授权视图上的简单聚合。
 
-允许的表达式集合在 `course/solutions/day22.py`：Select/From/Table/Column/Identifier/Literal、SUM/COUNT/COALESCE、别名、WHERE的比较/逻辑、GROUP BY、ORDER BY、LIMIT和基本算术。拒绝CTE、子查询、JOIN、UNION、任意函数、系统表、基表和`SELECT *`。`COUNT(*)`可用。末尾强制LIMIT 100。新增语法先设计权限语义与资源边界，再扩白名单。
+允许的表达式集合在 `course/solutions/readonly_sql.py`：Select/From/Table/Column/Identifier/Literal、SUM/COUNT/COALESCE、别名、WHERE的比较/逻辑、GROUP BY、ORDER BY、LIMIT和基本算术。拒绝CTE、子查询、JOIN、UNION、任意函数、系统表、基表和`SELECT *`。`COUNT(*)`可用。末尾强制LIMIT 100。新增语法先设计权限语义与资源边界，再扩白名单。
 
 ## 数据库还要再拦一次
 

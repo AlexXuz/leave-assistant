@@ -20,7 +20,7 @@ Day10中，模型生成工具名和参数，你的后端执行Python函数。MCP
 
 工具发现返回inputSchema。工具调用返回可能含structuredContent或文本content，也有isError。协议调用成功不代表业务有记录：status=not_found仍是业务上的“查无记录”，不能改为0。isError=true更不能被包装成余额查询成功。
 
-作业函数 `decode_tool_result(result)`：先检查isError；优先structuredContent；否则只拼接text类型的内容并解析JSON；最后验证status只可能ok/not_found。输入结构和输出契约在 `course/assignments/day14.py`。
+作业函数 `decode_tool_result(result)`：先检查isError；优先structuredContent；否则只拼接text类型的内容并解析JSON；最后验证status只可能ok/not_found。输入结构和输出契约在 `course/assignments/mcp_result_parser.py`。
 
 ## 实际遇到的SDK细节
 
@@ -32,4 +32,4 @@ Day10中，模型生成工具名和参数，你的后端执行Python函数。MCP
 
 验收记录必须包含独立进程发现/调用结果，不能只是本地直接调用同名Python函数。失败排查：初始化失败先看进程环境和解释器；JSON解析失败先区分协议content和业务JSON；返回他人数据查身份绑定；超时应停止并清理子进程，不无限重启。
 
-来源：[MCP Python SDK v1](https://github.com/modelcontextprotocol/python-sdk/tree/v1.x)。参考解码函数在 `course/solutions/day14.py`，客户端和服务端已可运行。
+来源：[MCP Python SDK v1](https://github.com/modelcontextprotocol/python-sdk/tree/v1.x)。参考解码函数在 `course/solutions/mcp_result_parser.py`，客户端和服务端已可运行。

@@ -28,4 +28,4 @@ request_id追踪一次HTTP请求，draft_id追踪业务草稿，application_id�
 
 实现分类函数；写一页故障复盘：症状、证据、根因、修改、复验、剩余限制。必须区分“自动检查通过”和“模型答案语义人工核对通过”。不能把模拟响应性能写成真实模型性能。
 
-验收重点是你能沿着request_id→业务编号→数据库状态解释失败，而非堆一套监控产品名称。参考 `course/solutions/day18.py`。来源：[FastAPI middleware](https://fastapi.tiangolo.com/tutorial/middleware/)、[PostgreSQL monitoring](https://www.postgresql.org/docs/17/monitoring-stats.html)。
+验收重点是你能沿着request_id→业务编号→数据库状态解释失败，而非堆一套监控产品名称。参考 `course/solutions/failure_classification.py`。来源：[FastAPI middleware](https://fastapi.tiangolo.com/tutorial/middleware/)、[PostgreSQL monitoring](https://www.postgresql.org/docs/17/monitoring-stats.html)。
