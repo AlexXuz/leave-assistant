@@ -5,6 +5,8 @@ COPY requirements ./requirements
 RUN pip install --no-cache-dir -c requirements/course.lock.txt -r requirements/course-runtime.txt && useradd --create-home course
 COPY app ./app
 COPY course ./course
+COPY docs ./docs
+COPY README.md LICENSE pyproject.toml ./
 COPY scripts ./scripts
 COPY infra ./infra
 COPY data ./data
