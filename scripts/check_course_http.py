@@ -17,6 +17,14 @@ def main():
             assert client.get('/course').status_code==200
             manifest=client.get('/api/course').json();assert len(manifest['lessons'])==15
             for item in manifest['lessons']:
+                target=item['assignment_target']
+                assert target['relative_path']==item['assignment']
+                assert target['absolute_path']==str((PROJECT_ROOT/item['assignment']).resolve())
+                if item['assignment'].endswith('.py'):
+                    assert target['kind']=='python' and target['functions']
+                    assert all(f['line']>0 and f['name'] for f in target['functions'])
+                else:
+                    assert target['kind']=='document'
                 for artifact in ('lesson','assignment','solution'):
                     response=client.get(f"/api/course/{item['day']}/content/{artifact}")
                     assert response.status_code==200 and len(response.text)>100
@@ -28,7 +36,7 @@ def main():
             assert client.post('/api/course/labs/memory',headers=origin,json={'tone':'concise'}).json()['stored']
             assert not client.post('/api/course/labs/memory',headers=origin,json={'delete':True}).json()['stored']
             assert client.post('/api/course/labs/context',headers=origin,json={'question':'当前余额','turns':[],'budget_chars':1600}).status_code==200
-            report['checks'].append('45 lesson/assignment/answer pages, explicit reference vs learner modes, authenticated memory/context')
+            report['checks'].append('15 existing IDE homework targets and callable lines, 45 content pages, explicit reference vs learner modes, authenticated memory/context')
             payload=json.dumps({'leaveType':'ANNUAL','startDate':'2026-11-02','endDate':'2026-11-05','reason':'课程HTTP验收'})
             with patch('app.leave_web.tracked_model_call',return_value=payload):
                 draft=client.post('/api/drafts',headers=origin,json={'text':'四天年假'}).json()

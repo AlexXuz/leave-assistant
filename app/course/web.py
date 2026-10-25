@@ -1,4 +1,5 @@
 """课程阅读页与固定实验路由。身份复用现有登录会话，课程源码不由浏览器上传执行。"""
+import ast
 import asyncio
 from collections import deque
 from datetime import datetime
@@ -33,6 +34,23 @@ from scripts.ask_pdf_rag import tracked_model_call
 COURSE=PROJECT_ROOT/'course'
 _md=MarkdownIt('commonmark',{'html':False}).enable('table')
 _training_gate=Lock()
+
+
+def assignment_target(item):
+    """Expose the existing homework file, without importing or rewriting learner code."""
+    path=(PROJECT_ROOT/item['assignment']).resolve()
+    if not path.is_relative_to(PROJECT_ROOT) or not path.is_file():
+        raise HTTPException(404,'作业文件不存在')
+    target={'relative_path':item['assignment'],'absolute_path':str(path),
+            'kind':'python' if path.suffix=='.py' else 'document','functions':[]}
+    if path.suffix=='.py':
+        try:
+            tree=ast.parse(path.read_text(encoding='utf-8-sig'))
+            target['functions']=[{'name':node.name,'line':node.lineno} for node in tree.body
+                                 if isinstance(node,(ast.FunctionDef,ast.AsyncFunctionDef))]
+        except SyntaxError as error:
+            target['syntax_error']={'line':error.lineno,'message':error.msg}
+    return target
 
 
 class Choice(BaseModel):
@@ -115,7 +133,8 @@ def mount_course(app,user,owned,run_id,ensure_ready,model_guard):
 
     @app.get('/api/course')
     def course_manifest():
-        return {'lessons':entries(),'authoring_status':'ready_for_self_study','learner_completion':'Day1-11_only','practice_base':'/','reference_answers_separate':True}
+        lessons=[dict(item,assignment_target=assignment_target(item)) for item in entries()]
+        return {'lessons':lessons,'authoring_status':'ready_for_self_study','learner_completion':'Day1-11_only','practice_base':'/','reference_answers_separate':True}
 
     @app.get('/api/course/{day}/content/{artifact}',response_class=HTMLResponse)
     def content(day:int,artifact:str):

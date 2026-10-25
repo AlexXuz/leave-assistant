@@ -3,5 +3,11 @@
 <body><aside><a class="brand" href="/">轻舟<span>学习工作台</span></a><p>DAY 12 — 26</p><nav id="lessons"></nav><a class="back" href="/">← 返回办公助手 / 登录</a></aside>
 <main><header><span>项目课 · 自学课程包</span><span id="account">实验需要登录演示账号</span></header><section class="hero"><div class="eyebrow">BUILD · UNDERSTAND · VERIFY</div><h1 id="title">加载课程…</h1><p>课件与参考实现已备好；阅读、作业、运行证据分别记录。参考通过不等于本人已掌握。</p></section>
 <div class="tabs"><button data-tab="lesson" class="active">讲解课件</button><button data-tab="assignment">我的作业</button><button data-tab="solution">参考答案</button><button data-tab="lab">动手实验</button><button id="read">标记已阅读</button></div>
-<div id="notice" role="status" hidden></div><article id="article"></article><section id="lab" hidden><div class="lab-heading"><h2>从页面观察真实数据流</h2><p>先在办公助手登录。参考模式运行已完成的参考代码，作业模式运行你自己的函数。</p><div class="check-row"><button id="check-exercise">检查我的作业</button><button id="check-reference" class="secondary">检查参考实现</button></div></div><div id="lab-controls"></div><pre id="output">选择实验后，结果会显示在这里。</pre><div id="chart"></div><details><summary>运行范围</summary><p>数据库、LangGraph、MCP和Skill实验使用实际组件；CPU训练为随机小模型机制实验；报告SSE流的是阶段事件。真实模型调用按钮会使用本机配置。没有进行云生产部署。</p></details></section>
+<div id="notice" role="status" hidden></div>
+<section id="assignment-guide" hidden aria-labelledby="assignment-title">
+<h2 id="assignment-title">在 IDE 中完成作业</h2><p id="assignment-instructions"></p>
+<label for="assignment-path">已创建的作业文件</label><input id="assignment-path" readonly spellcheck="false">
+<p id="assignment-functions"></p><div class="check-row"><button id="copy-assignment" class="secondary">复制文件路径</button><button id="check-assignment">保存后检查这个文件</button><button id="assignment-lab" class="secondary">进入动手实验</button></div>
+<p id="assignment-scope"></p><pre id="assignment-result" role="status" hidden></pre></section>
+<article id="article"></article><section id="lab" hidden><div class="lab-heading"><h2>从页面观察真实数据流</h2><p>先在办公助手登录。参考模式运行已完成的参考代码，作业模式运行你自己的函数。</p><div class="check-row"><button id="check-exercise">检查我的作业</button><button id="check-reference" class="secondary">检查参考实现</button></div></div><div id="lab-controls"></div><pre id="output">选择实验后，结果会显示在这里。</pre><div id="chart"></div><details><summary>运行范围</summary><p>数据库、LangGraph、MCP和Skill实验使用实际组件；CPU训练为随机小模型机制实验；报告SSE流的是阶段事件。真实模型调用按钮会使用本机配置。没有进行云生产部署。</p></details></section>
 <footer>继续学习时按Day顺序阅读。不会的地方先看输入输出与调用链，再看提示，最后对照参考答案。</footer></main></body></html>
