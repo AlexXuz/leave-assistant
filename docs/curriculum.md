@@ -1,38 +1,90 @@
-# 课程路线与能力范围
+# Python 大模型应用工程课程路线
 
-主线按Day1–Day26推进。每课讲解、任务书、提示与Python入口都能在网页打开；序号表示学习顺序，不要求一天完成一课。
+更新：2026-10-26。定位：让有 Java 等后端开发经验的工程师转向 Python，独立设计、开发、评测、部署和维护大模型应用。Java 是已有经验，不是交付技术栈；不增加 Java 服务集成或 Java AI 框架必修。
 
-| 单元 | 主题 | 任务 |
+## 毕业能力与范围
+
+毕业交付是一套 Python 服务、一个模型自主选择步骤的客服调查 Agent、一次跨领域迁移及可复现评测与恢复记录。能从业务需求确定数据来源、工具、状态、权限、成功条件与成本预算，能定位失败并验证修复。课程不承诺覆盖所有 AI 岗位或保证录用；算法训练、推理优化和多模态等按岗位继续深入。
+
+主技术栈是 Python 3.11、FastAPI、Pydantic、asyncio、LangGraph、PostgreSQL/pgvector、MCP、测试与 Docker。先理解直接模型调用和工具循环，再选择框架。模型供应商按实际环境配置，不以一个 SDK 的接口等同于所有模型能力。
+
+保留 Day1–26 顺序。单元不是自然日；Day16/17/19/24可分多次完成，新增工程与迁移任务后不沿用原156–208小时作为固定工期。以实际交付和复核为准。
+
+## 三段学习路线
+
+| 阶段 | 学什么 | 必须由本人交付 |
 |---|---|---|
-| Day1 | [Python与模型调用：从消息到结构化结果](../course/lessons/day01.md) | [独立交付](../course/tasks/model_request_pipeline.md) |
-| Day2 | [Pydantic与评测：建立可执行的数据契约](../course/lessons/day02.md) | [独立交付](../course/tasks/validated_output_pipeline.md) |
-| Day3 | [错误分层与有依据问答：从提取走向制度](../course/lessons/day03.md) | [独立交付](../course/tasks/grounded_answer_service.md) |
-| Day4 | [最小RAG：切分、向量、排序与请求组装](../course/lessons/day04.md) | [独立交付](../course/tasks/retrieval_pipeline.md) |
-| Day5 | [pgvector与LangChain：持久检索和编排](../course/lessons/day05.md) | [独立交付](../course/tasks/persistent_rag_pipeline.md) |
-| Day6 | [混合检索与重排：用证据评价优化](../course/lessons/day06.md) | [独立交付](../course/tasks/retrieval_experiment.md) |
-| Day7 | [知识生命周期与权限：快照、事务和授权检索](../course/lessons/day07.md) | [独立交付](../course/tasks/knowledge_sync_pipeline.md) |
-| Day8 | [PDF与来源定位：从页面到可核验引用](../course/lessons/day08.md) | [独立交付](../course/tasks/pdf_evidence_pipeline.md) |
-| Day9 | [Word、表格与OCR：保留结构和质量边界](../course/lessons/day09.md) | [独立交付](../course/tasks/structured_document_pipeline.md) |
-| Day10 | [Tool Calling：让模型查询真实业务事实](../course/lessons/day10.md) | [独立交付](../course/tasks/business_tool_pipeline.md) |
-| Day11 | [业务工作流：预检、明确确认与幂等提交](../course/lessons/day11.md) | [独立交付](../course/tasks/confirmed_application_workflow.md) |
-| Day12 | [LangGraph：状态、暂停与恢复](../course/lessons/day12.md) | [独立交付](../course/tasks/graph_recovery_workflow.md) |
-| Day13 | [上下文工程与用户记忆](../course/lessons/day13.md) | [独立交付](../course/tasks/conversation_context_pipeline.md) |
-| Day14 | [MCP：独立客户端调用业务工具](../course/lessons/day14.md) | [独立交付](../course/tasks/mcp_business_client.md) |
-| Day15 | [Skills：按需加载部门报告能力](../course/lessons/day15.md) | [独立交付](../course/tasks/department_report_skill.md) |
-| Day16 | [可复现部署与配置边界](../course/lessons/day16.md) | [独立交付](../course/tasks/deployment_verification.md) |
-| Day17 | [异步任务、SSE与取消](../course/lessons/day17.md) | [独立交付](../course/tasks/resumable_report_stream.md) |
-| Day18 | [调用链、延迟与故障定位](../course/lessons/day18.md) | [独立交付](../course/tasks/failure_recovery_diagnostics.md) |
-| Day19 | [把制度、业务与工作流串成产品](../course/lessons/day19.md) | [独立交付](../course/tasks/office_assistant_integration.md) |
-| Day20 | [优化决策、评测与训练数据划分](../course/lessons/day20.md) | [独立交付](../course/tasks/optimization_experiment.md) |
-| Day21 | [SFT与LoRA：一次真实CPU机制实验](../course/lessons/day21.md) | [独立交付](../course/tasks/lora_experiment_workflow.md) |
-| Day22 | [ChatBI：自然语言到受控SQL](../course/lessons/day22.md) | [独立交付](../course/tasks/authorized_query_service.md) |
-| Day23 | [从查询结果到图表与解释](../course/lessons/day23.md) | [独立交付](../course/tasks/query_result_presentation.md) |
-| Day24 | [独立需求迁移：部门申请上限](../course/lessons/day24.md) | [独立交付](../course/tasks/department_policy_integration.md) |
-| Day25 | [项目证据与作品集](../course/lessons/day25.md) | [独立交付](../course/tasks/job_evidence_portfolio.md) |
-| Day26 | [综合验收与模拟面试](../course/lessons/day26.md) | [独立交付](../course/tasks/independent_final_demo.md) |
+| Day1–11：模型、数据与业务基础 | Python必要迁移、结构化输出、RAG、文档解析、工具调用、确认和事务 | 既有基础练习与独立任务；OA承担可控业务案例 |
+| Day12–20：Python服务与独立Agent | 状态与记忆、MCP/Skills、服务生命周期、异步并发、工具循环、观测和效果评测 | 自己的Python服务、客服调查Agent、同条件基线与失败驱动优化 |
+| Day21–26：专项基础与独立交付 | LoRA机制、受控ChatBI、跨领域迁移、作品集与部署恢复 | 新领域Agent、真实模型记录、部署/重启/回滚/任务恢复与现场变更 |
 
-主线从SDK与数据契约开始，逐步进入RAG、权限、业务工具、事务工作流、LangGraph、MCP、Skills、部署、观测、优化与受控ChatBI。Day19、24、26为硬验收门。
+## 逐单元安排
 
-[本人进度](../course/LEARNER_PROGRESS.md)初始为空；[验证记录](../course/VALIDATION.md)描述作者回归范围，不是学员能力证明。
+| Day | 核心主题 | 本人验收重点 |
+|---|---|---|
+| 1 | Python与模型调用 | 环境、消息、响应、异常与实际模型元数据 |
+| 2 | Pydantic与评测 | Schema和业务校验、固定案例与语义评测分开 |
+| 3 | 错误分层与有依据问答 | 可用性失败与答案错误分开、有据回答与拒答 |
+| 4 | 最小RAG | 切分、向量、排序、消息组装 |
+| 5 | 持久检索与LangChain | pgvector和授权查询、框架前后可解释 |
+| 6 | 混合检索与重排 | 冻结评估、单变量对照、失败分类 |
+| 7 | 知识生命周期与权限 | 更新、删除、版本、事务和检索前授权 |
+| 8 | PDF与来源定位 | 原文、页码、引用可追溯 |
+| 9 | Word、表格与OCR | 结构、低质量文档与人工审核边界 |
+| 10 | Tool Calling | 工具Schema、可信身份、结果回传 |
+| 11 | 确认与幂等工作流 | 明确动作、版本绑定、真实SQL事实 |
+| 12 | LangGraph暂停恢复 | 自己组图，区分业务账本与编排检查点 |
+| 13 | 上下文与记忆 | 完整工具消息组、状态优先、隔离和删除；向Agent迁移 |
+| 14 | MCP | 独立客户端/进程、发现、调用、错误及资源释放 |
+| 15 | Skills | 发现、按需加载和受控执行；与Agent宿主的职责区分 |
+| 16 | Python服务工程与部署 | 分层、配置、lifespan、依赖注入、健康/就绪、干净环境启动 |
+| 17 | 异步工具与SSE | 并发上限、总deadline、取消传播、真实事件与游标重连 |
+| 18 | Agent调用链与诊断 | 工具/模型阶段、usage未知、失败定位与成本延迟 |
+| 19 · 硬门 | 独立客服调查Agent | 模型依观察选步骤、错误反馈、追问、证据、预算及独立工具服务 |
+| 20 | Agent评测与优化 | 多场景重复运行、实际工具审计、任务结果人工复核、单变量回归 |
+| 21 | SFT/LoRA机制 | 保留随机微型CPU实验，不把机制运行写成业务微调效果 |
+| 22 | 受控ChatBI | 问题澄清、SQL AST、数据库授权和资源限制 |
+| 23 | 数值呈现与解释 | 结果、图表与结论可追溯 |
+| 24 · 硬门 | 跨领域Agent与恢复 | 新数据源/工具/成功标准、持久状态、人工决策、重启与幂等 |
+| 25 | Python/Agent岗位作品集 | 5–10个真实JD，主目标要求与本人代码/运行证据对应 |
+| 26 · 硬门 | 独立产品交付 | Python服务、真实模型评测、隔离部署、故障恢复和现场新需求 |
 
-选修按[岗位路线](../course/OPTIONAL_PATHS.md)选择。随机小模型LoRA、本机容器和模拟ChatBI分别只覆盖其教学范围；生产认证、云部署、高可用和真实微调效果需要额外证据。
+## Python工程训练怎样衔接
+
+Day1–3随任务补Python语法、类型和异常，避免重新讲通用CRUD。Day12–15开始接触异步协议和资源上下文；Day16统一服务结构与资源生命周期，Day17实做并发、超时、取消和流式事件，Day18建立调用追踪。详见[Python服务工程阅读](../course/reading/python_service_engineering.md)。
+
+已有后端的事务、身份、幂等和排障经验可直接迁移；必须重新实践的是Python运行时行为。例如同步网络调用不能因为写在async def里就变成非阻塞；取消协程不等于远端副作用已撤销；进程内任务不等于持久队列。
+
+## Agent主线怎样从基础变成独立交付
+
+Day10是工具调用，Day12是预定义工作流；Day19必须亲自实现模型根据工具观察选择下一步的循环。只调用作者的只读余额Agent、写固定if/else顺序，均不能抵扣独立Agent任务。
+
+客服调查练习使用[公开场景集](../course/fixtures/agent_cases.json)和只读工具沙箱，包含查无记录、缺信息、工具错误、证据冲突与提示注入。学员自己编写模型适配器和循环，沙箱不提供Agent答案。完成后接至少一个真实独立MCP或HTTP工具服务，证明协议、身份和失败边界。
+
+Day20使用[评测实验说明](../course/reading/agent_evaluation_lab.md)：公开教学集可调试，不能称秘密留出集；工具审计只证明观察到的调用和证据，任务语义仍需复核。真实模型费用与输出单列，offline不冒称live。
+
+Day24更换业务域，例如研发故障调查或资料研究。必须重新设计数据源、工具和完成标准，不能把请假改名为工单或只换额度数值。增加持久状态与人工决策，实际停止专用worker后恢复；效果评测也随新任务重新定义。
+
+## 交付与验收
+
+Day19验收独立单Agent，Day24验收跨领域和可恢复运行，Day26验收完整应用。所有关键项不可被总分抵消。新课程采用assessment_version=3；旧OA任务、已有完成记录与学员源码保留，不自动转换成新任务通过。详见[证据协议](../course/EVIDENCE_PROTOCOL.md)。
+
+模型工具调用、MCP、Skills、记忆和工作流应按业务需要组合，不为凑名词强制全部进入每次请求。毕业至少有一次独立工具服务调用、一次真实模型评测、一次独立部署小闭环（已有云或隔离Linux环境均可）和一次真实任务恢复。新学员需自己完成；作者基础设施自检不代替这些成果。
+
+每个核心模块按“局部原理→最小实验→独立接线→故障与变更→证据复核”学习。读过完整示范如实记录；陌生需求由复核者确认。不得为完成模板伪造报告、生产经历或自动填写accepted。
+
+## 岗位专项与边界
+
+先完成公共主线，再按目标选择复杂文档/多模态、浏览器自动化、代码沙箱、多Agent、真实预训练模型微调或推理部署。多Agent先做与单Agent同任务同预算对照，没有优势可以保留简单方案。选修路径见[OPTIONAL_PATHS](../course/OPTIONAL_PATHS.md)。
+
+LoRA机制与ChatBI仍在原序列，说明适用条件与局限，不继续扩张训练技术名词挤占Agent工程训练。专用GPU、Kubernetes、多实例HA不是所有应用岗位的统一毕业条件；没有实际运行的能力仍列为未验证。
+
+## 当前学习状态与参考
+
+main是新学员的干净起点：26课均未完成，默认从Day1开始，作业保留待实现骨架。个人分支alexstudy另行保留作者已有实现与历史记录，不计作新学员证据。课程准备、作者自检与本人学习分别记录；当前状态来自profile.json、LEARNER_PROGRESS和本人证据。
+
+- [Python asyncio](https://docs.python.org/3.11/library/asyncio-task.html)
+- [FastAPI lifespan](https://fastapi.tiangolo.com/advanced/events/)
+- [LangGraph工作流与Agent](https://docs.langchain.com/oss/python/langgraph/workflows-agents)
+- [Agent评测](https://www.anthropic.com/research/demystifying-evals-for-ai-agents)
+- [MCP架构](https://modelcontextprotocol.io/docs/learn/architecture)

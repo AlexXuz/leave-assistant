@@ -200,6 +200,17 @@ def mount_course(app,user,owned,run_id,ensure_ready,model_guard):
         from app.course.checks import check_day
         return check_day(day,body.mode)
 
+    @app.get('/api/course/labs/agent-suite')
+    def agent_suite_preview():
+        """Read public exercise inputs; never execute learner code or call a model."""
+        from app.course.agent_evaluation import load_suite
+        suite, checksum=load_suite(COURSE/'fixtures/agent_cases.json')
+        return {'kind':'public_agent_practice','suite_sha256':checksum,
+                'cases':[{'case_id':case['case_id'],'task':case['task'],
+                          'inputs':case.get('inputs',{})} for case in suite['cases']],
+                'model_called':False,'completion_eligible':False,
+                'notice':'公开合成练习，不是未见测试。请实现本人适配器；工具检查之后仍须语义复核。'}
+
     @app.get('/api/course/labs/diagnostics')
     def diagnostics(request:Request):
         person(request)

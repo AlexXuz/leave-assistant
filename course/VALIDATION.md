@@ -1,5 +1,15 @@
 # 开源课程验证记录
 
+## Python与Agent主线干净版本（2026-10-26）
+
+main在独立工作树合入课程v3，保留starter配置、26课零进度与空白本人证据。新增Python服务、异步工具、客服Agent、任务评测和跨领域恢复项目均为待实现骨架。另修复旧版漏清的`compare_result`、`classify_error`两道评测练习；初始化检查覆盖基础函数、图路由、评测脚本和全部项目/作业顶层入口，并保留检索素材哈希校验。
+
+本轮实际验证：`check_public_project`通过；unittest共30项，其中19项通过、11项因学员尚未实现输出处理而按设计跳过；`check_course_revision`与网页脚本语法检查通过。TestClient确认156个课件入口和23个资源入口可读，Day1–11练习检查全部返回`not_implemented`，两道评测练习调用也返回待实现。没有把示范通过或跳过测试记成学员完成。
+
+[本轮发布核对记录](../reports/examples/public-starter-v3-20261026.json)。本轮未重新执行真实模型、数据库业务链或Linux容器验收；下方历史报告按原日期和范围解读。alexstudy的学习代码和进度未修改。
+
+## 既有公开版本验证范围
+
 所有记录是作者的可重复回归，不能作为任何学员完成证明。main的26份本人记录初始not_started；基础热身函数保留NotImplementedError，完整示范单独运行。
 
 | 范围 | 已运行的检查 |

@@ -1,12 +1,12 @@
 # LLM Engineer Lab
 
-**大模型应用开发工程师实战课：从第一条模型请求，到能独立交付、评测和排障的企业 AI 应用。**
+**Python 大模型应用工程实战课：从后端经验出发，独立交付、评测和维护 RAG 与 Agent 应用。**
 
 [![Course checks](https://github.com/AlexXuz/llm-engineer-lab/actions/workflows/course.yml/badge.svg)](https://github.com/AlexXuz/llm-engineer-lab/actions/workflows/course.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 [![Python 3.11](https://img.shields.io/badge/Python-3.11-blue.svg)](https://www.python.org/)
 
-26个学习单元，一套本地网页课堂，一个贯穿课程的办公AI助手。适合有后端开发基础、希望转向大模型应用工程的开发者；Java经验可以直接迁移到权限、事务、幂等和排障，不必从零重学通用后端。
+26个学习单元，一套本地网页课堂。前半程用办公案例练模型、RAG和业务边界；后半程独立开发客服调查Agent，再迁移到研发调查或资料研究。适合有Java等后端经验、希望转向Python大模型应用开发的工程师；已有权限、事务和排障经验可直接迁移，不要求保留Java技术栈。
 
 ![LLM Engineer Lab网页课堂](docs/assets/classroom.png)
 
@@ -69,10 +69,12 @@ python3 -m venv .venv
 | [Day8–9](course/lessons/day08.md) | PDF/Word与表格、来源定位、引用、OCR质量和审核边界 |
 | [Day10–11](course/lessons/day10.md) | Tool Calling、实时业务查询、草稿预检、明确确认、事务和幂等提交 |
 | [Day12–15](course/lessons/day12.md) | LangGraph暂停恢复、上下文/记忆、MCP、按需加载Skill |
-| [Day16–19](course/lessons/day16.md) | 可复现部署、SSE、排障、成本延迟、有限Agent与独立整合验收 |
-| [Day20–21](course/lessons/day20.md) | 优化实验、数据划分、SFT/LoRA机制和真实预训练微调迁移条件 |
+| [Day16–19](course/lessons/day16.md) | Python服务工程、异步工具/SSE/取消、追踪与成本、独立客服调查Agent硬验收 |
+| [Day20–21](course/lessons/day20.md) | Agent逐任务重复评测与单变量优化、数据划分、SFT/LoRA机制与边界 |
 | [Day22–23](course/lessons/day22.md) | 受控ChatBI、SQL AST/数据库权限、数值溯源和图表 |
-| [Day24–26](course/lessons/day24.md) | 独立需求迁移、真实岗位证据映射、作品集、故障恢复与综合验收 |
+| [Day24–26](course/lessons/day24.md) | 跨领域Agent与持久恢复、Python岗位作品集、独立部署/回滚与产品交付 |
+
+Day19必须本人实现观察驱动的工具循环；Day24更换数据源、工具和成功标准；Day26交付自己的Python服务与真实评测/恢复记录。已有OA任务和学习代码保留，不能替代新版主任务。
 
 学习单元不等于必须一天学完。主线优先完成可核验交付，选修按目标岗位选择，不以框架数量或刷完课件作为能力证明。
 
@@ -109,7 +111,18 @@ scripts/             启动、实验、维护与回归入口
 tests/               自动化测试
 ```
 
-默认项目提供可运行示范和服务端口，学员代码保持待实现；作者示范通过不代表本人作业通过。架构和分支职责见 [架构说明](docs/architecture.md)。
+默认项目提供可运行基础示范、客服工具沙箱和评测器；独立Agent循环与应用由学员完成。作者示范通过不代表本人作业通过。架构和分支职责见 [架构说明](docs/architecture.md)。
+
+## Agent练习入口
+
+先读[任务书](course/tasks/single_agent_delivery.md)和[评测指南](course/reading/agent_evaluation_lab.md)，在`course/projects/support_agent_runtime.py`实现自己的模型适配与循环。
+
+```powershell
+.\.venv\Scripts\python.exe -m unittest tests.test_agent_evaluation -v
+.\.venv\Scripts\python.exe -m scripts.evaluate_agent --mode offline --repeats 3 --output reports/learner/agent-offline.json
+```
+
+第一条只自检基础设施；第二条在学员尚未实现时应失败。offline是运行标签，适配器须自行使用固定模型替身；不会自动替你接模型或证明真实模型执行。工具检查通过后仍需人工核对任务语义。
 
 ## 验证与边界
 

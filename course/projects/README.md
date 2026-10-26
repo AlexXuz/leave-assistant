@@ -1,6 +1,21 @@
 # 独立任务工作区
 
-这里的职责模块已经创建，待实现函数由你完成。contracts.py提供少量带类型的服务端口和输入结构，IDE可以跳转查看；它们不是业务实现，不会自动保证鉴权/事务。
+这里的职责模块已经创建，待实现函数由你完成。contracts.py提供早期OA练习的少量类型端口；新版Python/Agent项目有自己的入口与契约，不要求继续使用请假DTO。
+
+## Python与Agent主项目
+
+| Day | 文件 | 独立职责 |
+|---|---|---|
+| 16 | python_service_runtime.py | Python服务配置、生命周期、依赖与可复现部署 |
+| 17 | async_tool_runtime.py | 有界并发、deadline、取消与真实事件 |
+| 19 | support_agent_runtime.py | 客服调查模型循环和evaluate_case适配器 |
+| 20 | agent_evaluation_workflow.py | 冻结实验、逐任务对照与语义复核关联 |
+| 24 | cross_domain_agent.py | 新领域工具与持久任务/人工恢复 |
+| 26 | agent_product_delivery.md | 本人产品演示、部署与故障证据索引 |
+
+先读对应任务书；骨架故意抛NotImplementedError，不应直接通过。Day19工具契约和评测命令见[Agent实验](../reading/agent_evaluation_lab.md)。沙箱无需数据库或密钥；真实模型、独立工具进程和服务由本人显式接入。case_id不能用于硬编码答案，公开数据不能称留出集。
+
+新的服务可以在自己的项目目录与专用端口运行，身份由可信宿主提供。下面8014入口只供早期OA业务练习复用，不是已经接好的客服/研究Agent；旧office_assistant_integration、department_policy_integration等文件保留作补充，不替代新主任务。
 
 ## 接入自己的页面/API
 

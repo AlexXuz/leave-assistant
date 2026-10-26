@@ -19,18 +19,20 @@
 | Day13 | ☐ | ☐ | ☐ | ☐ | ☐ | [待填记录](submissions/conversation_context_pipeline.json) |
 | Day14 | ☐ | ☐ | ☐ | ☐ | ☐ | [待填记录](submissions/mcp_business_client.json) |
 | Day15 | ☐ | ☐ | ☐ | ☐ | ☐ | [待填记录](submissions/department_report_skill.json) |
-| Day16 | ☐ | ☐ | ☐ | ☐ | ☐ | [待填记录](submissions/deployment_verification.json) |
-| Day17 | ☐ | ☐ | ☐ | ☐ | ☐ | [待填记录](submissions/resumable_report_stream.json) |
+| Day16 | ☐ | ☐ | ☐ | ☐ | ☐ | [待填记录](submissions/python_service_delivery.json) |
+| Day17 | ☐ | ☐ | ☐ | ☐ | ☐ | [待填记录](submissions/async_agent_runtime.json) |
 | Day18 | ☐ | ☐ | ☐ | ☐ | ☐ | [待填记录](submissions/failure_recovery_diagnostics.json) |
-| Day19 · 硬门 | ☐ | ☐ | ☐ | ☐ | ☐ | [待填记录](submissions/office_assistant_integration.json) |
-| Day20 | ☐ | ☐ | ☐ | ☐ | ☐ | [待填记录](submissions/optimization_experiment.json) |
+| Day19 · 硬门 | ☐ | ☐ | ☐ | ☐ | ☐ | [待填记录](submissions/single_agent_delivery.json) |
+| Day20 | ☐ | ☐ | ☐ | ☐ | ☐ | [待填记录](submissions/agent_evaluation_workflow.json) |
 | Day21 | ☐ | ☐ | ☐ | ☐ | ☐ | [待填记录](submissions/lora_experiment_workflow.json) |
 | Day22 | ☐ | ☐ | ☐ | ☐ | ☐ | [待填记录](submissions/authorized_query_service.json) |
 | Day23 | ☐ | ☐ | ☐ | ☐ | ☐ | [待填记录](submissions/query_result_presentation.json) |
-| Day24 · 硬门 | ☐ | ☐ | ☐ | ☐ | ☐ | [待填记录](submissions/department_policy_integration.json) |
+| Day24 · 硬门 | ☐ | ☐ | ☐ | ☐ | ☐ | [待填记录](submissions/cross_domain_agent_delivery.json) |
 | Day25 | ☐ | ☐ | ☐ | ☐ | ☐ | [待填记录](submissions/job_evidence_portfolio.json) |
 | Day26 · 硬门 | ☐ | ☐ | ☐ | ☐ | ☐ | [待填记录](submissions/independent_final_demo.json) |
 
 每次勾选附本人commit、正常/变体/失败恢复结果和复核。Day19要求前18课，Day24要求前一门及Day20–23，Day26要求前两门及Day25。阅读始终开放。
 
 `alexstudy`保留作者历史学习实现和记录；不得复制为自己的完成证据。Day25按5–10个真实目标岗位建立要求、项目、证据和缺口映射；主目标必备缺口未补齐不计完成。
+
+新版Day16–20、24、26采用assessment_version=3，旧任务记录不能抵扣新任务。Day19需独立观察驱动Agent与工具服务；Day24需跨领域迁移和真实worker恢复；Day26需Python产品、真实模型评测、部署与现场新需求。三道门的所有关键项均待本人完成和复核。

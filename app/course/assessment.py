@@ -63,6 +63,8 @@ def issue_challenge(day,owner='local-learner'):
         raise ValueError('先在Git检出中提交基线，再领取挑战；轻量容器不用于发放本机作业')
     identifier='challenge-'+uuid4().hex
     value={'schema_version':2,'id':identifier,'day':day,'owner':owner,
+           'assessment_version':item.get('assessment_version',2),
+           'task_sha256':digest(PROJECT_ROOT/item['task']),
            'issued_at':datetime.now(timezone.utc).isoformat(),
            'baseline_commit':commit,'baseline_project_sha256':digest(PROJECT_ROOT/item['project']),
            'variant':random.SystemRandom().choice(spec['variants']),'failure':spec['failure'],
@@ -86,6 +88,9 @@ def evaluate_record(day,record):
         return result
     if record.get('schema_version')!=2 or record.get('day')!=day or record.get('producer')!='learner':
         issues.append('仅接受本课v2学习者记录，不能复用作者报告')
+    assessment_version=item.get('assessment_version',2)
+    if assessment_version>=3 and record.get('assessment_version')!=assessment_version:
+        issues.append('本课任务已修订，请按当前assessment_version留证；旧OA任务不自动抵新任务')
     commit=record.get('implementation_commit')
     if not isinstance(commit,str) or not HEX40.fullmatch(commit):
         issues.append('缺少40位实现commit')
@@ -103,6 +108,11 @@ def evaluate_record(day,record):
         if challenge.get('day')!=day or not str(challenge.get('id','')).startswith('challenge-'):
             issues.append('挑战编号/课程不匹配')
         if not HEX40.fullmatch(str(challenge.get('baseline_commit',''))):issues.append('挑战没有有效基线commit')
+        if assessment_version>=3:
+            if challenge.get('assessment_version')!=assessment_version:
+                issues.append('挑战属于旧版任务，请冻结当前任务后重新领取')
+            if challenge.get('task_sha256')!=digest(PROJECT_ROOT/item['task']):
+                issues.append('任务书在挑战发放后改变，须保留旧记录并重新冻结需求')
     except (OSError,ValueError,TypeError) as error:
         issues.append('挑战记录：'+str(error))
     kinds=set()

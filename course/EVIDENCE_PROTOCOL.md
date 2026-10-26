@@ -8,7 +8,17 @@
 2. **独立任务**：在新建的course/projects职责模块中实现自己的接线、适配器和必要界面，交付正常、变体、失败与恢复。
 3. **本人完成**：证据可复现、关键项逐项通过、独立性与结果经复核，再勾选LEARNER_PROGRESS。作者示范、作者报告和已阅读标记均不能替代。
 
-不按代码行数判能力。已有Java事务/权限/幂等经验可以通过复用和集中验收体现；需要独立实现的是AI链路新增的协调、状态、数据源与评估取舍。
+不按代码行数判能力。已有后端事务/权限/幂等经验可以通过复用和集中验收体现；交付技术栈转向Python，需要独立实现AI链路的协调、状态、数据源与评估取舍，并能解释异步I/O、超时和取消。
+
+## Python与Agent主线修订
+
+Day16–20、24、26采用assessment_version=3，记录格式仍为schema_version=2。新版以Python服务、独立客服Agent、跨领域恢复和产品交付为主。旧作业文件与记录保留，不能自动抵扣新任务。未开始的新版模板保持not_started；已提交的旧记录应另存保留，由复核者按新标准补证，不能清空或直接迁移为通过。
+
+新版挑战记录assessment_version和task_sha256。任务书在领取后改变，须保留旧挑战/证据并重新冻结；检查器拒绝旧版本或不同任务书的挑战。这个绑定仍不自动证明Git来源或运行真实性。
+
+Day19/24/26各有五个关键项，Day16/17/18/20各有四个，完整文本以网页和任务书为准。不是所有课都固定三项。旧OA整合/部门上限可以作为额外练习，不能替代观察驱动的Agent或真正跨领域迁移。
+
+Agent工具沙箱和评测器只检查实际工具调用、证据与结构；manual_review_required不能写成任务成功。mode=live只是操作者标签，必须另附真实模型调用记录；usage未知保留null。作者自检不更新本人submission。
 
 ## 如何领取和使用变体
 
@@ -29,6 +39,7 @@
 - design_notes与reproduction_steps：自己的设计和至少两步可以重现的操作。
 - artifacts：normal、variant、failure_recovery三类JSON产物，各自有path和sha256。原始失败应留档，恢复后的完整观察用于验收。
 - review：初始pending；复核后记录accepted/rejected、reviewer、reviewed_at、notes、novel_requirement_confirmed以及本课所有critical_checks。
+- assessment_version：新版任务填3，与manifest和挑战一致；不改变schema_version=2。
 
 可用 `python -c "import hashlib,pathlib; print(hashlib.sha256(pathlib.Path('相对路径').read_bytes()).hexdigest())"` 计算哈希；不要把API Key或Cookie复制进命令/产物。
 
@@ -69,9 +80,9 @@ kind分别为normal、variant或failure_recovery，与artifacts条目一致；�
 
 | 门 | 必须满足 | 阻断范围 |
 |---|---|---|
-| Day19 独立整合 | 基础至Day18本人验收（个人分支可沿用历史基础阶段）、自己的端到端链路、提示注入/预算、实际失败恢复 | 不通过不得记Day20及以后完成；允许继续阅读 |
-| Day24 需求迁移 | Day19及Day20–23本人验收、真正的新要求、政策/确认/事务/页面全链路 | 不通过不得记Day25及以后完成 |
-| Day26 综合验收 | 前两门、Day25材料、独立演示/追问/故障与新需求 | 不通过不标整个课程完成 |
+| Day19 独立Agent | 基础至Day18本人验收（个人分支可沿用历史基础阶段）、观察驱动循环、工具/身份/预算、有界纠错、MCP或HTTP独立联调、真实模型与简单基线 | 不通过不得记Day20及以后完成；允许继续阅读 |
+| Day24 跨领域与恢复 | Day19及Day20–23本人验收、新领域的数据源/工具/成功标准、持久状态、人工决定、实际worker恢复与幂等读回 | 不通过不得记Day25及以后完成 |
+| Day26 Python产品交付 | 前两门、Day25材料、Python服务、真实模型重复评测、独立部署/回滚/恢复、现场新需求 | 不通过不标整个课程完成 |
 
 越权、未确认写入、重复提交/占用、伪造成功、虚构证据等关键违规不能被总分抵消。失败后保留证据，修复、增加回归、换合适的新需求后再复核，不重置共享额度掩盖失败。
 

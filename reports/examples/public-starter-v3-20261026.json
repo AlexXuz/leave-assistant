@@ -1,0 +1,40 @@
+{
+  "kind": "author_starter_release_validation",
+  "recorded_at": "2026-10-26T19:30:52.610192+08:00",
+  "base_main": "16ea499a9a6bb2d9b1b929d8958cd079abc77853",
+  "curriculum_source": "c5d0176c05047972bb5860de2bca3a2b8c29f356",
+  "learner_completed": false,
+  "status": "passed",
+  "profile": {
+    "track": "starter",
+    "display_name": "新学员",
+    "initialized": true,
+    "completed_stages": [],
+    "next_day": 1,
+    "note": "所有练习从待实现开始；作者示范独立可运行，不能作为本人完成证据。"
+  },
+  "checks": {
+    "check_public_project": "passed",
+    "foundation_stub_count": 29,
+    "additional_routing_and_evaluation_stubs": 3,
+    "project_and_assignment_stubs": 72,
+    "empty_submission_count": 31,
+    "unittest": {
+      "total": 30,
+      "passed": 19,
+      "skipped": 11,
+      "skip_reason": "Learner output parsing is intentionally unimplemented"
+    },
+    "course_revision_rules": "passed",
+    "javascript_syntax": "passed",
+    "content_routes_http_200": 156,
+    "resource_routes_http_200": 23,
+    "foundation_exercise_checks_not_implemented": 11,
+    "evaluation_exercise_calls_not_implemented": 2
+  },
+  "not_run_this_release": [
+    "real model evaluation",
+    "database business integrations",
+    "Linux container acceptance"
+  ]
+}

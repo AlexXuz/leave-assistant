@@ -31,14 +31,7 @@ def compare_result(actual: dict, expected: dict) -> dict[str, bool]:
     理由非空时的语义不在此函数中自动评分，由人工复核。
     不修改 actual 和 expected。
     """
-    result = {
-        "leaveType": actual["leaveType"] == expected["leaveType"],
-        "startDate": actual["startDate"] == expected["startDate"],
-        "endDate": actual["endDate"] == expected["endDate"],
-        "reason_is_missing": (actual["reason"] is None) == (expected["reason"] is None),
-        "missingFields": set(actual["missingFields"]) == set(expected["missingFields"])
-    }
-    return result
+    raise NotImplementedError("实现五项客观检查，语义仍需人工复核")
 
 
 def classify_error(error: Exception, stage: str) -> str:
@@ -54,20 +47,7 @@ def classify_error(error: Exception, stage: str) -> str:
 
     注意 JSONDecodeError/ValidationError 都属于 ValueError，判断顺序要正确。
     """
-    message = "UNEXPECTED_ERROR"
-    if stage == "call":
-        message = "CALL_ERROR"
-    if stage == "parse":
-        if isinstance(error, json.JSONDecodeError):
-            message = "JSON_PARSE_ERROR"
-        elif isinstance(error, ValidationError):
-            message = "SCHEMA_ERROR"
-        elif isinstance(error, ValueError):
-            message = "BUSINESS_RULE_ERROR"
-
-
-
-    return message
+    raise NotImplementedError("按失败阶段和异常类型分类，注意判断顺序")
 
 
 # 以下是已提供的文件读取、批量执行、报告保存骨架。
