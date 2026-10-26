@@ -19,9 +19,11 @@
     "critical_checks": {
       "D18-C1": false,
       "D18-C2": false,
-      "D18-C3": false
+      "D18-C3": false,
+      "D18-C4": false
     },
     "critical_violations": []
   },
-  "challenge_sha256": null
+  "challenge_sha256": null,
+  "assessment_version": 3
 }

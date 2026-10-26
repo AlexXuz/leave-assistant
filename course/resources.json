@@ -74,6 +74,46 @@
       "title": "RAG · reranking",
       "path": "course/reading/rag-reranking.md",
       "kind": "guide"
+    },
+    {
+      "title": "Python服务工程与异步实践",
+      "path": "course/reading/python_service_engineering.md",
+      "kind": "guide"
+    },
+    {
+      "title": "Agent可执行评测与证据边界",
+      "path": "course/reading/agent_evaluation_lab.md",
+      "kind": "guide"
+    },
+    {
+      "title": "Agent公开合成场景集",
+      "path": "course/fixtures/agent_cases.json",
+      "kind": "guide"
+    },
+    {
+      "title": "Agent工具沙箱源码（基础设施）",
+      "path": "app/course/agent_lab.py",
+      "kind": "guide"
+    },
+    {
+      "title": "Agent评测器源码（基础设施）",
+      "path": "app/course/agent_evaluation.py",
+      "kind": "guide"
+    },
+    {
+      "title": "Agent评测命令入口",
+      "path": "scripts/evaluate_agent.py",
+      "kind": "guide"
+    },
+    {
+      "title": "Day19旧OA整合任务（补充）",
+      "path": "course/tasks/office_assistant_integration.md",
+      "kind": "guide"
+    },
+    {
+      "title": "Day24旧部门规则任务（补充）",
+      "path": "course/tasks/department_policy_integration.md",
+      "kind": "guide"
     }
   ]
 }

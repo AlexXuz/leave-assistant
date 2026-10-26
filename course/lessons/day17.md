@@ -1,50 +1,59 @@
-# Day17 · 长任务怎样让页面保持响应
+# Day17 · Python 异步工具执行、流式事件与取消
 
-目标：区分异步I/O、后台任务和流式传输；实现带持久事件序号的SSE，理解断线与取消的区别。
+目标：让多个耗时模型/工具调用在有限资源下工作，用户能看到实际进度，并能停止后续执行。分三阶段完成：有界并发与期限→取消→持久事件和浏览器重连。这里先实现执行层，模型如何选择工具在 Day19完成。
 
-**完成口径：** 下方小函数和运行观察是热身；整课以文末链接的独立任务、本人证据和关键项复核为准。
+## async 不会把阻塞函数自动变成异步
 
-## 一个真实的交互问题
+`async def` 内直接调用同步网络 SDK，仍可能堵住事件循环。网络依赖优先使用异步客户端；暂时使用同步驱动时可隔离到线程，但取消等待线程的协程不会自动杀死已运行线程，也不保证远端动作停止。CPU 密集解析应单独安排执行资源，不能靠增加 coroutine 解决。
 
-部门报告可能需要查询、汇总、整理。如果HTTP一直等最终结果，用户不知道是否卡住，刷新还可能重发。我们先创建job，立即返回job_id，再用SSE显示阶段进度；最终结果由job状态保存。这里流的是报告处理阶段，不是把固定文字逐字输出冒充LLM token。
+下面仅演示两个独立 I/O 的共同生命周期，不包含作业要求的预算、结果或安全校验：
 
-`app/course/jobs.py`用asyncio任务运行三个阶段，SQL通过asyncio.to_thread执行，避免同步数据库调用阻塞事件循环。阶段间0.7秒是明确的教学展示间隔。一个进程最多四个worker槽位，每账号最多两个进行中job，并有总时长与步骤限制。
+```python
+async with asyncio.TaskGroup() as group:
+    order = group.create_task(read_order())
+    delivery = group.create_task(read_delivery())
+# 离开上下文后，任务已结束或异常已向外传播。
+```
 
-## SSE是有格式的HTTP响应
+TaskGroup 中一个未处理的异常会取消其余任务并等待收尾。预期的“工具查无记录”或可恢复失败，可在工具包装层转为结构化结果；程序错误继续向上报。不要为了让任务全绿而吞掉所有异常。`CancelledError` 应在清理后继续传播。
+
+## 并发上限和总期限是两件事
+
+并发上限控制同时占用连接的数量；总期限限制一个任务从入场到结束允许等待的时间。只给每个工具设十秒超时，五轮可能仍花五十秒。使用事件循环的单调时钟计算本进程 deadline，每次排队、调用、重试都消耗同一剩余预算；总期限也要覆盖等信号量的时间。
+
+工具包装层应同时约束单次超时和剩余总时长。`asyncio.timeout_at(deadline)` 可约束协程等待，但阻塞 I/O 或不可取消的远端副作用仍需驱动/服务端时限与业务状态核对。跨进程保存恢复状态时不要保存单调时钟数值，持久任务的期限语义留到 Day24设计。
+
+可以并发查订单和物流，因为它们互不依赖；如果第二个工具的参数来自第一个结果，就必须先等待。并发也不替代供应商限流、连接池上限或账户预算。重试须有次数/总期限约束，仅对适合重试的错误使用退避，不重放未知结果的写操作。
+
+## 取消要传到实际工作
+
+明确区分：浏览器断线只是不再接收；用户请求取消才改变任务意图。本课采用“断线继续，显式取消停止”的约定。取消到达后停止排队和新模型/工具调用，取消可取消的在途 I/O，关闭响应流，保存实际终态。若远端写操作可能已发生，记录 outcome_unknown 并查业务状态，不能显示“全部撤销”。
+
+建立一个可控慢工具，用 Event/屏障确保它已经开始，再发取消。检查后续工具是否未启动、资源是否释放、是否只有一个终态。仅在业务函数里放 `sleep` 然后看到 cancelled 文案，不能证明真实 HTTP 连接被关闭；另跑本机 HTTP 工具服务验证 I/O 链路。
+
+## SSE 传输真实事件
+
+每条持久事件包含 job_id、递增 seq、event、payload。SSE 帧例如：
 
 ```text
-id: 3
-event: stage
-data: {"step": 3, "message": "整理汇总结果"}
+id: 7
+event: tool_finished
+data: {"tool_call_id":"call-2","status":"ok"}
 
 ```
 
-空行结束一帧。data必须是JSON编码后的单行，不能用Python字典字符串；event名不接受换行，防止事件注入。作业 `encode_sse` 负责这些格式和输入检查。
+先保存事件，再通知订阅者。重连时读取 `Last-Event-ID` 或 after 游标，只重放之后的事件；客户端仍按事件 ID 去重。事件中不能泄露工具密钥和原始个人信息，读取前必须验证 job 归属。最后一次读事件与读取终态之间可能发生完成，设计循环时要避免漏发最后的 done/error/cancelled。
 
-浏览器EventSource自动携带同源Cookie。服务器先确认job属于当前登录人，然后只返回该job事件。id按job递增，重连时使用Last-Event-ID或after游标读取缺失部分。不能因为客户端知道job_id就允许读取。
+Agent 执行阶段事件与模型文本增量分别命名。至少接一次真实异步模型请求；所选接口支持流式时展示实际返回的增量，接口不支持则明确只提供阶段事件。既有 `app/course/jobs.py` 的报告展示间隔可作 SSE 热身，不是模型流或 Agent 恢复证据。
 
-## 断开不是取消
+## 独立任务与完成条件
 
-用户关标签页，只是停止接收；报告可以继续完成。显式点击取消，才写cancel_requested，worker在下一检查点停止。取消到达时业务写入可能已经发生，因此真实提交任务必须先读业务状态，不能谎称“关闭页面已撤销申请”。本实验只读报告，不执行HR写操作。
+任务：[异步 Agent 执行层](../tasks/async_agent_runtime.md)，入口 `course/projects/async_tool_runtime.py`；提示：[并发与取消提示](../solutions/async_agent_runtime.md)。原 SSE 格式练习和报告项目保留作热身。
 
-任务和事件存PostgreSQL，worker调度在单进程内存。进程被杀时，旧running任务不会神奇恢复；过期任务如实转failed。这与Day12的持久图恢复是不同保证。生产环境再选择任务队列、租约与故障转移，本课不把asyncio.create_task包装成分布式调度系统。
-
-## 页面体验
-
-点击“启动报告任务”，观察三条stage和最终done。刷新课程页后，可用job_id读取已保存状态。再启动一次，立刻取消，应看到cancelled。接收事件时故意断开再用游标重连，不能从头重复渲染已接收序号。
-
-验收：格式正确、事件序号连续、终态明确、他人job不可读、取消不伪造成功、同步I/O未堵住主事件循环。输出接口耗时和最终job耗时分开记录。
-
-来源：[MDN SSE](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events)、[Python asyncio](https://docs.python.org/3.11/library/asyncio-task.html)。参考答案 `course/solutions/sse_events.md`。
-
-## 独立任务与完成条件（修订版）
-
-原核心函数保留为热身。完整任务：[任务书](../tasks/resumable_report_stream.md)；在IDE直接打开 `course/projects/resumable_report_stream.py`。必须独立运行正常流程、需求变体和失败/恢复，保存本人证据。自动热身通过只说明函数契约通过，不能勾选整课完成。
-
-本人记录：`course/submissions/resumable_report_stream.json`；结构和哈希可由页面检查，独立性/语义与新需求须复核。公开变体不是保密题，练过应另换需求。详见[证据规则](../EVIDENCE_PROTOCOL.md)。
+本人记录使用 `course/submissions/async_agent_runtime.json`。交付有界并发、总期限、显式取消、事件重连的实际记录，标清工具替身、本机 HTTP 和真实模型三类来源。按 [证据规则](../EVIDENCE_PROTOCOL.md)复核，公开变体不能自动算未见任务。
 
 ## 生产还差什么，以及下一步
 
-单进程asyncio任务不具备分布式队列、租约和跨实例接管保证。
+本课要求事件可读回，不要求在进程被杀后自动续跑 Agent。单进程 TaskGroup 也不是持久任务队列。Day24再设计任务所有权、检查点、重复投递与接管恢复；长连接容量和多实例广播按实际部署补证。
 
-下一步：用外部队列或持久任务租约做双worker实验，验证重复交付、超时接管和终态原子性。
+官方参考：[Python 3.11 TaskGroup、取消与超时](https://docs.python.org/3.11/library/asyncio-task.html)、[HTTPX async 与关闭流](https://www.python-httpx.org/async/)、[MDN SSE](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events)。

@@ -1,6 +1,10 @@
 # 架构与分支职责
 
-课程网站读取course/manifest.json、讲解、任务与提示；阅读不需要模型Key或数据库。业务演示才连接数据库、模型或本地Embedding。项目以办公助手为贯穿案例，主题是大模型应用工程。
+课程网站读取course/manifest.json、讲解、任务与提示；阅读不需要模型Key或数据库。业务演示才连接数据库、模型或本地Embedding。前半程OA案例提供可控的RAG/事务基础；后半程转向本人Python服务、客服调查Agent与跨领域恢复交付。
+
+新版Agent实验由三部分组成：course/projects中的学员适配器与循环、app/course/agent_lab.py中的合成工具宿主、agent_evaluation.py和scripts/evaluate_agent.py中的评测记录。工具宿主提供API契约和可控故障，不是任意代码安全沙箱；评测器不提供Agent答案，也不自动认证任务语义或真实模型调用。
+
+Day16/17/19/20/24有新的独立项目入口；旧学习源码保留。Day26用agent_product_delivery.md整理本人产品证据。课程网页的旧余额Agent、报告SSE和SQLite图是基础示范，不能代替新版项目。学员需要自己实现模型适配、独立MCP/HTTP工具集成、持久任务和部署。
 
 ```mermaid
 flowchart LR

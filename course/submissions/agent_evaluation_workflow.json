@@ -1,0 +1,29 @@
+{
+  "schema_version": 2,
+  "day": 20,
+  "status": "not_started",
+  "producer": "learner",
+  "implementation_commit": null,
+  "challenge_file": null,
+  "independent_before_reference": null,
+  "assistance_used": [],
+  "design_notes": null,
+  "reproduction_steps": [],
+  "artifacts": [],
+  "review": {
+    "status": "pending",
+    "reviewer": null,
+    "reviewed_at": null,
+    "notes": null,
+    "novel_requirement_confirmed": false,
+    "critical_checks": {
+      "D20-C1": false,
+      "D20-C2": false,
+      "D20-C3": false,
+      "D20-C4": false
+    },
+    "critical_violations": []
+  },
+  "challenge_sha256": null,
+  "assessment_version": 3
+}

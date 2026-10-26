@@ -21,23 +21,25 @@ Day1–Day11既有阶段验收保持。Day12–Day26课程材料已备好，不�
 | 13 | ☐ | ☐ | ☐ | ☐ | ☐ | submissions/conversation_context_pipeline.json（待填） |
 | 14 | ☐ | ☐ | ☐ | ☐ | ☐ | submissions/mcp_business_client.json（待填） |
 | 15 | ☐ | ☐ | ☐ | ☐ | ☐ | submissions/department_report_skill.json（待填） |
-| 16 | ☐ | ☐ | ☐ | ☐ | ☐ | submissions/deployment_verification.json（待填） |
-| 17 | ☐ | ☐ | ☐ | ☐ | ☐ | submissions/resumable_report_stream.json（待填） |
+| 16 | ☐ | ☐ | ☐ | ☐ | ☐ | submissions/python_service_delivery.json（待填） |
+| 17 | ☐ | ☐ | ☐ | ☐ | ☐ | submissions/async_agent_runtime.json（待填） |
 | 18 | ☐ | ☐ | ☐ | ☐ | ☐ | submissions/failure_recovery_diagnostics.json（待填） |
-| 19 · 硬门 | ☐ | ☐ | ☐ | ☐ | ☐ | submissions/office_assistant_integration.json（待填） |
-| 20 | ☐ | ☐ | ☐ | ☐ | ☐ | submissions/optimization_experiment.json（待填） |
+| 19 · 硬门 | ☐ | ☐ | ☐ | ☐ | ☐ | submissions/single_agent_delivery.json（待填） |
+| 20 | ☐ | ☐ | ☐ | ☐ | ☐ | submissions/agent_evaluation_workflow.json（待填） |
 | 21 | ☐ | ☐ | ☐ | ☐ | ☐ | submissions/lora_experiment_workflow.json（待填） |
 | 22 | ☐ | ☐ | ☐ | ☐ | ☐ | submissions/authorized_query_service.json（待填） |
 | 23 | ☐ | ☐ | ☐ | ☐ | ☐ | submissions/query_result_presentation.json（待填） |
-| 24 · 硬门 | ☐ | ☐ | ☐ | ☐ | ☐ | submissions/department_policy_integration.json（待填） |
+| 24 · 硬门 | ☐ | ☐ | ☐ | ☐ | ☐ | submissions/cross_domain_agent_delivery.json（待填） |
 | 25 | ☐ | ☐ | ☐ | ☐ | ☐ | submissions/job_evidence_portfolio.json（待填） |
 | 26 · 硬门 | ☐ | ☐ | ☐ | ☐ | ☐ | submissions/independent_final_demo.json（待填） |
 
 ## 硬验收门
 
-- Day19：Day1–18证据与复核完成（alexstudy的Day1–11沿用原阶段验收）；自己整合页面/API链路、注入/预算评估、实际失败恢复。未通过不记Day20以后完成。
-- Day24：Day19和Day20–23完成；自己把新政策接到预检、确认、提交和页面，并证明政策变化/并发/回滚/幂等。未通过不记Day25以后完成。
-- Day26：前两门与Day25完成；独立演示、实际故障定位、新需求和追问。权限、确认、重复占用、虚构证据等关键违规不能靠总分抵消。
+- Day19：Day1–18证据与复核完成（alexstudy的Day1–11沿用原阶段验收）；本人实现观察驱动单Agent、错误反馈、独立工具联调及真实模型基线对照。未通过不记Day20以后完成。
+- Day24：Day19和Day20–23完成；新领域数据源/工具/成功标准、持久状态、人工决定、真实worker恢复与幂等读回。未通过不记Day25以后完成。
+- Day26：前两门与Day25完成；本人Python产品、真实模型重复评测、独立部署/回滚/恢复、现场新需求。关键违规不能靠总分抵消。
+
+新版Day16–20、24、26采用assessment_version=3；旧任务与原记录保留，不能自动抵新任务。三道门各五项关键标准，所有勾选仍待本人完成和复核。
 
 可继续阅读后续课件，不以关页面/封锁文件代替学习管理。未见需求由复核者确认，公开抽签和提前看过的变体不自动满足。
 
@@ -45,9 +47,9 @@ Day1–Day11既有阶段验收保持。Day12–Day26课程材料已备好，不�
 
 ☐ 5–10个真实目标岗位，来源/日期、要求→项目→本人证据→缺口映射；至少一个主目标，主目标核心要求有证据，加分项可列具体计划。
 
-☐ 简历用十年Java后端权限、事务、幂等与排障经验解释AI能力迁移，区分本人实现、参考/AI辅助和未完成部分。
+☐ 用已有后端经验解释转向Python的能力迁移，展示自己的Python服务/Agent/评测与恢复实现；区分参考/AI辅助和未完成部分。
 
-☐ 真实云环境最小闭环（隔离教学数据、TLS/访问控制、密钥、日志、重启/回滚）：待本人执行，不因本机Docker标完成。
+☐ 独立部署闭环（隔离数据、访问控制、密钥、日志、重启/回滚）：待本人执行；实际环境写清，本机Docker不冒称云生产，目标岗位需要云时另补云实操。
 
 ☐ 提示注入与成本延迟评估：待本人运行；仅有GET健康检查报告不替代模型链路评估。
 

@@ -1,43 +1,52 @@
-# Day16 · 让别人从一个干净环境启动项目
+# Day16 · 独立交付一个可部署的 Python AI 服务
 
-目标：把本机可运行变成可复现启动。部署是交付能力，不是把服务器命令背下来；本课不重复训练Java后端已经熟悉的HTTP概念。
+目标：把已有后端经验迁移到 Python 的模块、类型、资源生命周期和部署方式。课后能从空的服务入口组织 API、模型/工具适配器与配置，并由另一个环境启动。已有 HTTP、事务和权限知识直接复用；本课不增加 Java 集成。
 
-**完成口径：** 下方小函数和运行观察是热身；整课以文末链接的独立任务、本人证据和关键项复核为准。
+本单元分为“服务结构→生命周期→容器验证”三个小阶段，可跨多次学习完成。阅读和作者镜像可运行都不代表本人服务完成。
 
-## 这个项目依赖什么
+## 从函数到服务，新增了哪些责任
 
-应用进程需要Python依赖、数据库连接配置、持久化检查点目录、可选模型API配置。数据库需要数据卷。RAG另需本地Embedding权重；只有请假、MCP、报告、ChatBI的课程镜像不必加载这些大模型，不能把某页能打开理解成所有RAG链路已就绪。
+Day1 的 `call_model(messages)` 只关心一次调用；服务还要决定配置什么时候校验、连接什么时候建立、同时来了多少请求、退出时如何释放资源。建议依赖方向为 `API/schema → application service → model/tool/store ports → adapters`。请求类型可以用 Pydantic，内部状态可用 dataclass/TypedDict，外部依赖用 Protocol 描述；类型注解不会自动完成运行时校验。
 
-仓库提供 `deployment/Dockerfile.course`、`.dockerignore`、`deployment/compose.course.yaml` 和独立 `requirements/course-runtime.txt`。镜像不复制.env、.models、tmp或个人报告。容器内数据库host是postgres，不是127.0.0.1；127.0.0.1指容器自己。主机浏览器仍访问映射到回环地址的端口。
+不要在模块导入时联网、连接数据库或创建后台任务。导入应能用于离线测试；启动失败应在有明确日志的位置发生。配置从显式环境映射读取，必填值缺失或超时/并发配置非法时拒绝启动，不悄悄退回生产地址。日志只报告缺哪个配置，不能打印其密钥值。
 
-## 启动前先读配置
+## 连接由谁创建，谁关闭
 
-数据库配置继续使用本机.env.pgvector，由Compose注入，不写进镜像层。模型配置通过.env注入应用，不能把密钥烘焙到静态JS。检查点存容器挂载的tmp/course，重建容器仍保留。镜像运行非root账号，数据库端口不对公网暴露。
+FastAPI 的 lifespan 适合管理应用级连接。下面只演示资源生命周期，不是本课完整服务答案：
 
-启动步骤见仓库根目录的 `docs/deployment.md`。课程环境与已有本机数据库使用不同Compose项目/端口，避免覆盖你正在使用的数据卷。不要为了“清理”执行down -v，除非明确知道卷中是什么。
+```python
+from contextlib import asynccontextmanager
+import httpx
 
-## 健康检查到底证明了什么
+@asynccontextmanager
+async def lifespan(app):
+    async with httpx.AsyncClient(timeout=5.0) as client:
+        app.state.upstream = client
+        yield
+```
 
-/health只能证明HTTP进程存活。课程诊断页分别检查web、数据库和身份来源；模型网络标为not_probed，因为不能靠配置存在就宣称真实API可用。一次模型请求失败不等于数据库失败。需要依赖就绪检查时，读取数据库SELECT 1，并为外部调用设置超时。
+`yield` 前建立资源，之后退出上下文负责关闭。创建应用时传入 lifespan；请求处理通过服务端依赖取得资源。实际任务须支持注入替身、数据库资源和启动失败清理，不能照抄这一小段便记完成。不要每次循环新建 HTTP client，也不要把请求身份保存在全局可变变量中。同步驱动不得直接阻塞 async 路由，具体处理在 Day17 验证。
 
-镜像构建通过、容器启动通过、接口可访问、真实模型可调用是四份不同证据。最终交付的验证清单会逐项标注；未执行的云部署不能写成已上线。
+## 存活、就绪与外部模型可用性
 
-## 热身与示范观察（不代表整课完成）
+`/health/live` 说明进程能响应；`/health/ready` 用有时限的轻量探测说明本服务的必要依赖就绪。模型 Key 已配置不等于模型可调用，也不应每次健康检查都付费生成。单独提供一次受控真实请求证据，记录供应商、模型、时间、usage 或 unknown。依赖不可用时应返回明确的未就绪/降级状态，不把异常伪装成正常答案。
 
-本课作业是操作文档 `course/assignments/deployment_verification.md`，不是重复写健康检查函数。你需要从新目录/镜像启动，登录演示账号，生成草稿并提交，再重启应用读取相同申请编号。提交自己的命令、镜像标识、端口、脱敏日志与持久化结果。
+设计一条最小业务 API：校验请求，取得可信身份，调用模型或工具适配器，返回可解释结果及 request_id。可以暂用固定模型响应验证契约，再单独运行真实 API。测试替身必须标 `model_called=false`，不能冒称真实效果评测。
 
-失败时按层排查：镜像依赖失败看requirements；连接被拒绝看服务地址和网络；账号表不存在看初始化；重启丢图看挂载；模型失败看配置与网络。不要把全部问题归成“Docker不好用”。
+## 从干净环境复现
 
-参考文档 `course/solutions/deployment_verification.md` 给出判断依据，而非一份预先声称成功的运行记录。来源：[Docker Compose](https://docs.docker.com/compose/)、[FastAPI deployment](https://fastapi.tiangolo.com/deployment/)。
+沿用仓库的锁定依赖，先说明新增依赖的理由，再变更锁文件。本课不要求追最新版本。独立服务可单独创建 Dockerfile，使用非 root 用户、显式模块启动入口和环境注入；镜像不包含 `.env`、权重、个人报告或数据库文件。
 
-## 独立任务与完成条件（修订版）
+现有 `deployment/Dockerfile.course` 和 [部署说明](../../docs/deployment.md)是教学参考。你要验证自己的入口、API和资源关闭：新镜像启动→请求成功→依赖失效→恢复→重启→读回持久数据。只看到课程网页不算本人 Python 服务部署成功。使用独立 Compose 项目和卷，不清空现有学习数据库。
 
-原核心函数保留为热身。完整任务：[任务书](../tasks/deployment_verification.md)；在IDE直接打开 `course/assignments/deployment_verification.md`。必须独立运行正常流程、需求变体和失败/恢复，保存本人证据。自动热身通过只说明函数契约通过，不能勾选整课完成。
+## 独立任务与完成条件
 
-本人记录：`course/submissions/deployment_verification.json`；结构和哈希可由页面检查，独立性/语义与新需求须复核。公开变体不是保密题，练过应另换需求。详见[证据规则](../EVIDENCE_PROTOCOL.md)。
+打开 [任务书](../tasks/python_service_delivery.md)和 `course/projects/python_service_runtime.py`。本课新增服务工程任务，原 `course/assignments/deployment_verification.md` 保留作操作记录参考。分级提示：[服务交付提示](../solutions/python_service_delivery.md)；补充阅读：[Python 服务工程](../reading/python_service_engineering.md)。
+
+本人记录使用 `course/submissions/python_service_delivery.json`。正常、公开变体、失败恢复分别保存实际证据，按 [证据规则](../EVIDENCE_PROTOCOL.md)复核；不能把作者镜像报告复制过来。
 
 ## 生产还差什么，以及下一步
 
-本机Docker不代表云生产、SSO、多实例高可用、备份恢复与运维值班能力。
+本机 Docker 与一个服务实例不能证明云访问控制、备份恢复或多实例可靠性。Day17补异步执行和取消，Day24补 Agent 恢复，Day26实际交付隔离部署环境的访问控制、重启与回滚。云测试环境仍不等于真实企业生产经验。
 
-下一步：按APPLICATION_READINESS.md完成一次隔离云环境的TLS、最小访问控制、密钥注入、日志、重启和回滚闭环；SSO/HA按目标岗位另列。
+官方参考：[FastAPI lifespan](https://fastapi.tiangolo.com/advanced/events/)、[HTTPX async client](https://www.python-httpx.org/async/)、[Docker Compose](https://docs.docker.com/compose/)。
