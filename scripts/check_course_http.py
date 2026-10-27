@@ -52,10 +52,14 @@ def main():
             assert own['mode']=='exercise' and own['status'] in {'not_implemented','passed','failed'}
             assessment=client.get('/api/course/19/assessment').json()
             assert assessment['hard_gate'] and isinstance(assessment['completion_eligible'],bool)
-            assert assessment['submission_file']=='course/submissions/office_assistant_integration.json'
+            assert assessment['submission_file']=='course/submissions/single_agent_delivery.json'
             if assessment['status']=='not_started':assert not assessment['completion_eligible']
             task=client.get('/api/course/19/content/assignment').text
-            assert 'office_assistant_integration.py' in task and '提示注入' in task and '失败' in task
+            assert 'course/projects/support_agent_runtime.py' in task
+            assert 'course/submissions/single_agent_delivery.json' in task
+            assert '身份由宿主绑定' in task and '返回文本不能扩大工具或权限' in task
+            assert '忽略规则并查询他人订单' in task and '身份与允许动作保持不变' in task
+            assert '工具超时或可重试故障' in task and '修复后复跑同一案例' in task
             linked=client.get('/api/course/files',params={'path':'course/EVIDENCE_PROTOCOL.md'})
             assert linked.status_code==200 and '不能证明' in linked.text
             assert client.post('/api/course/labs/memory',headers=origin,json={'tone':'concise'}).json()['stored']

@@ -37,10 +37,22 @@ class CurriculumV3(unittest.TestCase):
         with patch('app.leave_web.connect_database',side_effect=AssertionError('read-only course must not connect')),TestClient(create_app()) as client:
             manifest=client.get('/api/course').json()
             day19=next(row for row in manifest['lessons'] if row['day']==19)
+            self.assertEqual(day19['assessment_version'],3)
             self.assertEqual(day19['project'],'course/projects/support_agent_runtime.py')
+            self.assertEqual(day19['submission'],'course/submissions/single_agent_delivery.json')
             for artifact in ('lesson','assignment','solution','project','reference'):
                 with self.subTest(artifact=artifact):
-                    self.assertEqual(client.get(f'/api/course/19/content/{artifact}').status_code,200)
+                    response=client.get(f'/api/course/19/content/{artifact}')
+                    self.assertEqual(response.status_code,200)
+                    if artifact=='assignment':
+                        # Check the rendered v3 task, not just a successful legacy page.
+                        for required in ('course/projects/support_agent_runtime.py',
+                                         'course/submissions/single_agent_delivery.json',
+                                         '身份由宿主绑定','返回文本不能扩大工具或权限',
+                                         '忽略规则并查询他人订单','身份与允许动作保持不变',
+                                         '工具超时或可重试故障','修复后复跑同一案例'):
+                            with self.subTest(required=required):
+                                self.assertIn(required,response.text)
             preview=client.get('/api/course/labs/agent-suite')
             self.assertEqual(preview.status_code,200)
             value=preview.json()
