@@ -52,10 +52,12 @@ def main():
             assert own['mode']=='exercise' and own['status'] in {'not_implemented','passed','failed'}
             assessment=client.get('/api/course/19/assessment').json()
             assert assessment['hard_gate'] and isinstance(assessment['completion_eligible'],bool)
-            assert assessment['submission_file']=='course/submissions/office_assistant_integration.json'
+            gate=next(item for item in manifest['lessons'] if item['day']==19)
+            assert gate['assessment_version']==3 and gate['project']=='course/projects/support_agent_runtime.py'
+            assert assessment['submission_file']==gate['submission']=='course/submissions/single_agent_delivery.json'
             if assessment['status']=='not_started':assert not assessment['completion_eligible']
             task=client.get('/api/course/19/content/assignment').text
-            assert 'office_assistant_integration.py' in task and '提示注入' in task and '失败' in task
+            assert 'support_agent_runtime.py' in task and 'get_shipment' in task and 'D19-C5' in task and '失败' in task
             linked=client.get('/api/course/files',params={'path':'course/EVIDENCE_PROTOCOL.md'})
             assert linked.status_code==200 and '不能证明' in linked.text
             assert client.post('/api/course/labs/memory',headers=origin,json={'tone':'concise'}).json()['stored']
