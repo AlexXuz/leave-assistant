@@ -17,9 +17,24 @@
 - 课程在网页阅读；作业 `.py` 文件已经创建，在IDE里直接写，保存后回到页面检查。
 - 不以看完、参考实现通过或复制代码计完成。每课有独立任务、需求变体、失败恢复与证据要求；Day19、24、26是阶段验收门。
 
-## 五分钟打开网页课堂
+## 完整启动（推荐：本机 Python + Docker 数据库）
 
-已验证 Python 3.11。先安装课程运行依赖；阅读课件和运行离线检查不需要模型Key，也不需要先启动数据库。
+**下面的步骤必须依次完成。只运行 `scripts.open_course` 会打开网页，不会启动 Docker 或数据库；登录、查看余额和网页实验仍需要 PostgreSQL。** 本机运行 Python 方便在 IDE 修改作业，Docker 负责运行 PostgreSQL + pgvector。
+
+### 1. 安装并启动 Docker
+
+准备 Python 3.11、Git 和 Docker。Windows/macOS 使用 [Docker Desktop](https://docs.docker.com/desktop/)，Windows 安装步骤见[官方说明](https://docs.docker.com/desktop/setup/install/windows-install/)；Linux 可使用 Docker Engine + Compose 插件。本项目使用 **Linux 容器**。
+
+打开 Docker Desktop，等待显示 **Engine running**，然后在终端确认：
+
+```bash
+docker info
+docker compose version
+```
+
+两条都成功后再继续。`docker --version` 只能证明命令行已安装，不能证明引擎已启动；出现 `dockerDesktopLinuxEngine` / `Cannot connect to the Docker daemon` 时先启动引擎。首次安装后若提示 WSL/重启，按 Docker 安装向导完成后重试。
+
+### 2. 克隆项目并安装 Python 依赖
 
 **Windows / PowerShell**
 
@@ -28,7 +43,6 @@ git clone https://github.com/AlexXuz/llm-engineer-lab.git
 cd llm-engineer-lab
 python -m venv .venv
 .\.venv\Scripts\python.exe -m pip install -c requirements/course.lock.txt -r requirements/course-runtime.txt
-.\.venv\Scripts\python.exe -m scripts.open_course
 ```
 
 **macOS / Linux**
@@ -38,17 +52,56 @@ git clone https://github.com/AlexXuz/llm-engineer-lab.git
 cd llm-engineer-lab
 python3 -m venv .venv
 .venv/bin/python -m pip install -c requirements/course.lock.txt -r requirements/course-runtime.txt
+```
+
+### 3. 创建本机配置
+
+以下命令在**项目根目录**执行，仅创建缺失文件，已有配置不会覆盖。
+
+**Windows / PowerShell**
+
+```powershell
+if (-not (Test-Path .env)) { Copy-Item .env.example .env }
+if (-not (Test-Path .env.pgvector)) { Copy-Item .env.pgvector.example .env.pgvector }
+notepad .env.pgvector
+```
+
+**macOS / Linux**
+
+```bash
+test -f .env || cp .env.example .env
+test -f .env.pgvector || cp .env.pgvector.example .env.pgvector
+# 使用编辑器打开 .env.pgvector。
+```
+
+把 `.env.pgvector` 中 `PGPASSWORD=replace-with-a-local-password` 改成自己的本地数据库密码。首次运行保持其余默认项：`PGHOST=127.0.0.1`、`PGPORT=55432`、`PGDATABASE=leave_assistant_lab`、`PGUSER=leave_lab`。Compose 建库与 Python 连接读取同一个文件，不需要再建一个不同密码的数据库。
+
+`.env` 中的 `LLM_API_KEY`、`LLM_BASE_URL`、`LLM_MODEL` 用于真实模型请求。**登录和固定参考检查可先留空 Key；要在办公助手里生成自然语言请假草稿，必须配置有效的模型服务。** 两个环境文件都只留本机，不提交 Git。
+
+### 4. 先启动数据库，再启动网页
+
+```bash
+docker compose --env-file .env.pgvector -f deployment/compose.pgvector.yaml up -d --wait
+docker compose --env-file .env.pgvector -f deployment/compose.pgvector.yaml ps
+```
+
+首次执行会下载 `pgvector/pgvector:0.8.7-pg17` 镜像，等待 `postgres` 显示 **healthy**。此配置将数据库绑定到本机 `55432`，数据库内部端口是 `5432`；不要将 Python 的 `PGPORT` 改成 `5432`。
+
+**Windows / PowerShell**
+
+```powershell
+.\.venv\Scripts\python.exe -m scripts.open_course
+```
+
+**macOS / Linux**
+
+```bash
 .venv/bin/python -m scripts.open_course
 ```
 
-打开 **http://127.0.0.1:8012/course**。Windows安装完成后也可以双击 `start-course.cmd`。如果环境不便自动打开浏览器，手动访问该地址即可。
+课件入口：**http://127.0.0.1:8012/course**；办公助手/登录入口：**http://127.0.0.1:8012/**。Windows 也可在数据库启动后双击 `start-course.cmd`。登录后会自动初始化教学表与账号，无需先运行 RAG 建索引脚本。
 
-### 运行业务实验
-
-1. 将 `.env.example` 与 `.env.pgvector.example` 分别复制为本机 `.env`、`.env.pgvector`，填写自己的配置；不要覆盖已配置文件。
-2. 按网页“学习指南与拓展阅读”中的部署指南启动PostgreSQL，或参考 [部署说明](docs/deployment.md)。
-3. 模型调用、本地Embedding、OCR、CPU训练按相应课程安装额外依赖；先看前置检查和资源边界，再下载。
-4. 打开办公助手页面登录教学账号，观察真实业务状态。教学账号不能直接用于公网部署。
+### 5. 登录并确认可用
 
 | 账号 | 部门 | 初始可用年假 |
 |---|---|---:|
@@ -58,6 +111,21 @@ python3 -m venv .venv
 | zhaoliu | 产品 | 15天 |
 
 教学密码均为 `demo123`，数据采用固定2026年度的模拟案例。刷新、重登和重启不重置额度；生产身份、真实HR、实际审批引擎需单独集成。
+
+先登录 `zhangsan`，确认页面能读到年假余额；新数据库初始为 9 天。在课程页选择“作者示范/检查参考函数”可做固定检查。已配置模型后，可输入“2026年11月2日至5日请四天年假，处理家事”体验生成、确认与提交；提交会真实预占教学额度，不是重置按钮。
+
+| 想做什么 | 需要什么 |
+|---|---|
+| 只读课件、在 IDE 写代码 | Python 运行依赖；可跳过 Docker 和配置步骤，直接运行 `scripts.open_course` |
+| 登录、余额、网页热身检查、固定参考实验 | Docker 引擎运行、数据库 healthy、正确的 `.env.pgvector` |
+| 自然语言草稿、真实 Agent/模型回答 | 上述环境 + `.env` 中有效的模型配置；本人 Agent 入口仍需按课程实现 |
+| 向量检索、OCR、CPU 训练 | 按对应课程另装依赖/模型并准备索引，不是数据库启动后自动具备 |
+
+### 以后每天怎么启动
+
+先打开 Docker Desktop，再在项目根目录重跑第 4 步。无需重新克隆、安装依赖或复制配置。网页已运行时启动器会复用现有服务；余额和历史保存在数据库卷中。
+
+需要“Web + 数据库全部用 Docker”的方式，或遇到登录失败、端口占用、密码不匹配，请看[完整部署与排障](docs/deployment.md)。全容器方式使用 **8013**，与推荐开发方式的 **8012** 不同；选一种方式使用。
 
 ## 你会完成什么
 

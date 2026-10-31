@@ -33,7 +33,10 @@ def main():
         print('课程服务未启动，请检查tmp/course-launch.log和requirements/course-runtime.txt。未停止其他进程。')
         return 1
     webbrowser.open(URL+'/course')
-    print('课程已打开。业务实验还需要Docker/PostgreSQL启动。')
+    print('课件已打开：'+URL+'/course；登录入口：'+URL+'/')
+    print('启动器不会启动Docker。登录/网页实验前，请确认Docker引擎运行，并在项目根目录执行：')
+    print('docker compose --env-file .env.pgvector -f deployment/compose.pgvector.yaml up -d --wait')
+    print('首次配置、全容器8013模式与排障见README.md和docs/deployment.md。')
     return 0
 
 
