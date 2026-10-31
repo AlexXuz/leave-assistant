@@ -1,0 +1,35 @@
+{
+  "kind": "author_onboarding_validation",
+  "date": "2026-10-31",
+  "status": "passed",
+  "mode": "host_python_with_docker_postgres",
+  "docker_project": "llm-onboarding-20261031",
+  "fresh_database": true,
+  "port": 55432,
+  "http_port": 8012,
+  "model_key_configured": false,
+  "real_model_called": false,
+  "learner_completed": false,
+  "checks": [
+    "Clean main: 26 lessons, starter profile, no learner progress",
+    "zhangsan: real HTTP login and initial annual balance 9",
+    "lisi: real HTTP login and initial annual balance 3",
+    "wangwu: real HTTP login and initial annual balance 0",
+    "zhaoliu: real HTTP login and initial annual balance 15",
+    "Authenticated fixed reference check works with an empty model Key",
+    "Browser deployment documentation renders complete Docker instructions"
+  ],
+  "container_mode": {
+    "status": "passed",
+    "docker_project": "llm-onboarding-docker-20261031",
+    "http_port": 8013,
+    "fresh_database": true,
+    "checks": [
+      "up -d --build --wait: web and postgres healthy",
+      "Actual HTTP login, initial balance 9, 26 lessons and updated Docker instructions"
+    ],
+    "image": "sha256:b52218ffdd6940237f9c55ff3ada3e3ab5726a33641305fbc6b17de02308886f"
+  },
+  "scope": "Author environment/onboarding acceptance, not learner completion or real model quality.",
+  "isolation": "Fresh project names used to preserve the personal database volumes; Compose files and documented ports were unchanged."
+}
